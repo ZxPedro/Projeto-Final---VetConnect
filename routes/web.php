@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\UsersController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,6 +15,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [AuthController::class, 'viewLoginPage']);
+Route::post('/', [AuthController::class, 'postAuthenticate'])->name('login');
+ROute::get('/logout', [AuthController::class, 'getLogout'])->name('logout');
+
+Route::get('/users', [UsersController::class, 'viewListUsers'])->middleware('auth')->name('user-list');
+Route::get('/users/delete/{id}', [UsersController::class, 'deleteUser'])->middleware('auth')->name('user-delete');
+
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware('auth');
