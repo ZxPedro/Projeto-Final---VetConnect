@@ -4,5 +4,5 @@
 
 @section('content')
 
-<p>teste</p>
+<p>logado!</p>
 @endsection

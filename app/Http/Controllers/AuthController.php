@@ -27,4 +27,11 @@ class AuthController extends Controller
 
         return redirect('/dashboard');
     }
+
+    public function getLogout()
+    {
+        Auth::logout();
+
+        return redirect('/');
+    }
 }
