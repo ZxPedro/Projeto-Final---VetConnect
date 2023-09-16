@@ -20,9 +20,8 @@ class UserSeeder extends Seeder
 
 
         User::create([
-            'login' => 'admin',
             'name' => 'Administrator',
-            'email' => 'admin@vetcoonect.com.br',
+            'email' => 'admin@vetconnect.com.br',
             'password' => Hash::make('admin')
         ]);
     }

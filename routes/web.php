@@ -19,8 +19,15 @@ Route::get('/', [AuthController::class, 'viewLoginPage']);
 Route::post('/', [AuthController::class, 'postAuthenticate'])->name('login');
 ROute::get('/logout', [AuthController::class, 'getLogout'])->name('logout');
 
-Route::get('/users', [UsersController::class, 'viewListUsers'])->middleware('auth')->name('user-list');
-Route::get('/users/delete/{id}', [UsersController::class, 'deleteUser'])->middleware('auth')->name('user-delete');
+
+Route::prefix('users')->group(function () {
+
+    Route::get('/', [UsersController::class, 'viewListUsers'])->middleware('auth')->name('user-list');
+    Route::get('/create', [UsersController::class, 'viewCreateUser'])->middleware('auth')->name('view-user-create');
+    Route::post('/create', [UsersController::class, 'postCreateUser'])->middleware('auth')->name('user-create');
+    Route::get('/delete/{id}', [UsersController::class, 'deleteUser'])->middleware('auth')->name('user-delete');
+});
+
 
 Route::get('/dashboard', function () {
     return view('dashboard');

@@ -23,7 +23,7 @@
                             @endforeach
                             @endif
 
-                            <h2 class="fw-bold mb-2 text-white text-uppercase text-center">VetCoonect</h2>
+                            <h2 class="fw-bold mb-2 text-white text-uppercase text-center">VetConnect</h2>
                             <p class=" mb-5 text-white text-center">Por favor insira seu login e senha!</p>
 
                             <div class="form-outline form-white mb-4">

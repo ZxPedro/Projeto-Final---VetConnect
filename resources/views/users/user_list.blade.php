@@ -16,7 +16,7 @@
             </div>
         </div>
         <div class="col-4 text-end">
-            <a href="{route('user-delete', ['id'=> $user->id])}}" class="btn btn-primary"><i class="fa-solid fa-plus pe-2"></i>Cadastrar</a>
+            <a href="{{ route('view-user-create') }}" class="btn btn-primary"><i class="fa-solid fa-plus pe-2"></i>Cadastrar</a>
         </div>
     </div>
     <div class="row">
