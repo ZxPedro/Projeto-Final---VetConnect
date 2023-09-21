@@ -7,16 +7,16 @@
 <div class="row justify-content-center ">
     <div class="row mt-3">
         <div class="col-4">
-            <h4>Lista de Usuários</h4>
+            <h4>Lista de Clientes</h4>
         </div>
         <div class="col-4 text-center">
             <div class="input-group mb-3">
-                <input type="text" class="form-control" placeholder="Usuário" aria-label=" Usuário" aria-describedby="button-addon2">
+                <input type="text" class="form-control" placeholder="Cliente" aria-label=" Usuário" aria-describedby="button-addon2">
                 <button class="btn btn-primary" type="button" id="button-addon2"><i class="fa-solid fa-magnifying-glass"></i></button>
             </div>
         </div>
         <div class="col-4 text-end">
-            <a href="{{ route('view-user-create') }}" class="btn btn-primary"><i class="fa-solid fa-plus pe-2"></i>Cadastrar</a>
+            <a href="{{ route('view-customer-create') }}" class="btn btn-primary"><i class="fa-solid fa-plus pe-2"></i>Cadastrar</a>
         </div>
     </div>
     <div class="row">
@@ -28,19 +28,22 @@
                     <tr>
                         <th scope="col">Nome</th>
                         <th scope="col">E-mail</th>
-                        <th scope="col">Data de Cadastro</th>
-                        <th scope="col">Ação</th>
+                        <th scope="col">Data de Nascimento</th>
+                        <th scope="col">CPF</th>
+                        <th scope="col">Telefone</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach($users as $user)
+                    @foreach($customers as $customer)
                     <tr>
-                        <td>{{ $user->name }}</td>
-                        <td>{{ $user->email }}</td>
-                        <td>{{ $user->created_at }}</td>
+                        <td>{{ $customer->name }}</td>
+                        <td>{{ $customer->email }}</td>
+                        <td>{{ $customer->data_nascimento }}</td>
+                        <td>{{ $customer->cpf }}</td>
+                        <td>{{ $customer->telefone }}</td>
                         <td>
                             <a href="#" class="btn btn-success"><i class="fa-solid fa-eye"></i></a>
-                            <a href="{{route('user-delete', ['id'=> $user->id])}}" class="btn btn-danger"><i class="fa-solid fa-trash"></i></a>
+                            <a href="#" class="btn btn-danger"><i class="fa-solid fa-trash"></i></a>
                         </td>
                     </tr>
                     @endforeach
@@ -50,7 +53,7 @@
         <div class="row mt-2">
             <div class="col pagination justify-content-end">
 
-                {{$users->links()}}
+                {{$customers->links()}}
             </div>
         </div>
     </div>

@@ -41,8 +41,6 @@ class UsersController extends Controller
 
     public function deleteUser(User $id)
     {
-
-
         $id->delete();
         return back();
     }

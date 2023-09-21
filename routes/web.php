@@ -1,7 +1,9 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CustomersController;
 use App\Http\Controllers\UsersController;
+use App\Models\Customer;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -19,16 +21,23 @@ Route::get('/', [AuthController::class, 'viewLoginPage']);
 Route::post('/', [AuthController::class, 'postAuthenticate'])->name('login');
 ROute::get('/logout', [AuthController::class, 'getLogout'])->name('logout');
 
-
-Route::prefix('users')->group(function () {
-
-    Route::get('/', [UsersController::class, 'viewListUsers'])->middleware('auth')->name('user-list');
-    Route::get('/create', [UsersController::class, 'viewCreateUser'])->middleware('auth')->name('view-user-create');
-    Route::post('/create', [UsersController::class, 'postCreateUser'])->middleware('auth')->name('user-create');
-    Route::get('/delete/{id}', [UsersController::class, 'deleteUser'])->middleware('auth')->name('user-delete');
-});
-
-
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware('auth');
+
+Route::prefix('users')->middleware('auth')->group(function () {
+
+    Route::get('/', [UsersController::class, 'viewListUsers'])->name('user-list');
+    Route::get('/create', [UsersController::class, 'viewCreateUser'])->name('view-user-create');
+    Route::post('/create', [UsersController::class, 'postCreateUser'])->name('user-create');
+    Route::get('/delete/{id}', [UsersController::class, 'deleteUser'])->name('user-delete');
+});
+
+Route::prefix('customer')->middleware('auth')->group(function () {
+    Route::get('/', [CustomersController::class, 'viewListCustomers'])->name('customer-list');
+    Route::get('/create', [CustomersController::class, 'viewCreateCustomers'])->name('view-customer-create');
+    Route::post('/create', [CustomersController::class, 'postCreateCustomer'])->name('customer-create');
+    Route::get('/profile', function () {
+        return view('customers.profile');
+    });
+});
