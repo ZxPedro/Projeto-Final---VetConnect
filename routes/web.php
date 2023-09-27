@@ -23,7 +23,7 @@ ROute::get('/logout', [AuthController::class, 'getLogout'])->name('logout');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
-})->middleware('auth');
+})->middleware('auth')->name('dashboard');
 
 Route::prefix('users')->middleware('auth')->group(function () {
 
@@ -37,7 +37,7 @@ Route::prefix('customer')->middleware('auth')->group(function () {
     Route::get('/', [CustomersController::class, 'viewListCustomers'])->name('customer-list');
     Route::get('/create', [CustomersController::class, 'viewCreateCustomers'])->name('view-customer-create');
     Route::post('/create', [CustomersController::class, 'postCreateCustomer'])->name('customer-create');
-    Route::get('/profile', function () {
-        return view('customers.profile');
-    });
+    Route::get('/profile/{id}', [CustomersController::class, 'viewProfile'])->name('view-profile');
+    Route::post('/profile/{id}', [CustomersController::class, 'editProfile'])->name('edit-profile');
+    Route::get('/delete/{id}', [CustomersController::class, 'deleteProfile'])->name('customer-delete');
 });

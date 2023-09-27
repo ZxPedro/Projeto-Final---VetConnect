@@ -19,6 +19,13 @@
             <a href="{{ route('view-customer-create') }}" class="btn btn-primary"><i class="fa-solid fa-plus pe-2"></i>Cadastrar</a>
         </div>
     </div>
+    @if($errors->any())
+    @foreach($errors->all() as $error)
+    <div class="alert alert-warning">
+        {{ $error }}
+    </div>
+    @endforeach
+    @endif
     <div class="row">
         <div class="col-12">
 
@@ -42,8 +49,8 @@
                         <td>{{ $customer->cpf }}</td>
                         <td>{{ $customer->telefone }}</td>
                         <td>
-                            <a href="#" class="btn btn-success"><i class="fa-solid fa-eye"></i></a>
-                            <a href="#" class="btn btn-danger"><i class="fa-solid fa-trash"></i></a>
+                            <a href="{{ route('view-profile', ['id' => $customer->id ]) }}" class="btn btn-success"><i class="fa-solid fa-eye"></i></a>
+                            <a href="{{ route('customer-delete', ['id'=> $customer->id]) }}" class="btn btn-danger"><i class="fa-solid fa-trash"></i></a>
                         </td>
                     </tr>
                     @endforeach
