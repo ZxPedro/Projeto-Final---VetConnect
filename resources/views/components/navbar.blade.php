@@ -10,7 +10,7 @@
                     <a class="nav-link active" href="#">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Clientes</a>
+                    <a class="nav-link" href="{{ route('customer-list') }}">Clientes</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">Produtos</a>
