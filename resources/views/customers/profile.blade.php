@@ -28,50 +28,54 @@
                         </div>
                         @endforeach
                         @endif
-                        <form method="post" action="">
+
+                        @if($profile)
+
+                        <p>Criado em: {{ $profile->created_at}}</p>
+                        <p>Editado em: {{ $profile->updated_at}}</p>
+                        <form method="post" action="{{route('edit-profile', ['id' => $profile->id ]) }}">
                             @csrf
-                            <div class="form-group col-6">
+                            <div class="form-group">
                                 <label for="name" class="form-label mt-4">Nome</label>
-                                <input type="text" class="form-control" name="name" id="name" placeholder="Digite seu nome">
+                                <input type="text" class="form-control" name="name" id="name" placeholder="Digite seu nome" value="{{$profile->name}}">
                             </div>
-                            <div class="form-group col-6">
+                            <div class="form-group">
                                 <label for="email" class="form-label mt-4">E-mail</label>
-                                <input type="email" class="form-control" name="email" id="email" aria-describedby="emailHelp" placeholder="Digite seu e-mail">
+                                <input type="email" class="form-control" name="email" id="email" aria-describedby="emailHelp" value="{{$profile->email}}">
                             </div>
                             <div class="form-group">
-                                <label for="email" class="form-label mt-4">CPF</label>
-                                <input type="text" class="form-control" name="email" id="email" aria-describedby="emailHelp" placeholder="Digite seu e-mail">
+                                <label for="cpf" class="form-label mt-4">CPF</label>
+                                <input type="text" class="form-control" name="cpf" id="cpf" aria-describedby="cpfHelp" value="{{$profile->cpf}}">
                             </div>
                             <div class="form-group">
-                                <label for="email" class="form-label mt-4">Data de Nascimento</label>
-                                <input type="text" class="form-control" name="email" id="email" aria-describedby="emailHelp" placeholder="Digite seu e-mail">
+                                <label for="data_nascimento" class="form-label mt-4">Data de Nascimento</label>
+                                <input type="date" class="form-control" name="data_nascimento" id="data_nascimento" aria-describedby="data_nascimentoHelp" value="{{$profile->data_nascimento}}">
                             </div>
                             <div class="form-group">
-                                <label for="email" class="form-label mt-4">Telefone</label>
-                                <input type="text" class="form-control" name="email" id="email" aria-describedby="emailHelp" placeholder="Digite seu e-mail">
+                                <label for="telefone" class="form-label mt-4">Telefone</label>
+                                <input type="text" class="form-control" name="telefone" id="telefone" aria-describedby="telefoneHelp" value="{{$profile->telefone}}">
                             </div>
                             <div class="form-group">
                                 <label for="genero" class="form-label mt-4">Gênero</label>
-                                <select class="form-select" id="genero">
-                                    <option>Masculino</option>
-                                    <option>Feminino</option>
-                                    <option>Outros</option>
+                                <select class="form-select" id="genero" name="genero">
+                                    <option value="M">Masculino</option>
+                                    <option value="F">Feminino</option>
+                                    <option value="O">Outros</option>
                                 </select>
                             </div>
-
+                            <button type="submit" class="btn btn-primary mt-2">Salvar</button>
                         </form>
-
+                        @endif
 
                     </div>
                 </div>
             </div>
             <div class="tab-pane fade" id="teste" role="tabpanel">
-                <p>Food truck fixie locavore, accusamus mcsweeney's marfa nulla single-origin coffee squid. Exercitation +1 labore velit, blog sartorial PBR leggings next level wes anderson artisan four loko farm-to-table craft beer twee. Qui photo booth letterpress, commodo enim craft beer mlkshk aliquip jean shorts ullamco ad vinyl cillum PBR. Homo nostrud organic, assumenda labore aesthetic magna delectus mollit.</p>
+
+                <p>Aqui vai ter os pets do cliente!</p>
+
+
             </div>
         </div>
 
-
-    </div>
-</div>
-
-@endsection
+        @endsection
