@@ -11,7 +11,7 @@
         </div>
         <div class="col-4 text-center">
             <div class="input-group mb-3">
-                <input type="text" class="form-control" placeholder="Cliente" aria-label=" Usuário" aria-describedby="button-addon2">
+                <input type="text" class="form-control" placeholder="Cliente" aria-label=" Usuário" aria-describedby="button-addon2" id="searchCustomer">
                 <button class="btn btn-primary" type="button" id="button-addon2"><i class="fa-solid fa-magnifying-glass"></i></button>
             </div>
         </div>
@@ -30,7 +30,7 @@
         <div class="col-12">
 
 
-            <table class="table table-hover mt-3 text-center">
+            <table class="table table-hover mt-3 text-center" id="resultTableCustomer">
                 <thead>
                     <tr>
                         <th scope="col">Nome</th>

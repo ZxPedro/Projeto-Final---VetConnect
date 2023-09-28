@@ -19,4 +19,9 @@ class Customer extends Model
         'genero',
 
     ];
+
+    public function animais()
+    {
+        return $this->hasMany(Animal::class);
+    }
 }

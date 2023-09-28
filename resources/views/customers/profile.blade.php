@@ -71,9 +71,33 @@
                 </div>
             </div>
             <div class="tab-pane fade" id="teste" role="tabpanel">
+                <div class="row">
+                    <div class="col">
+                        @if(count($profile['pets']) > 0)
+                        <table class="table table-hover mt-3 text-center">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Nome</th>
+                                    <th scope="col">Espécie</th>
+                                    <th scope="col">Data de Nascimento</th>
+                                </tr>
+                            </thead>
+                            <tbody>
 
-                <p>Aqui vai ter os pets do cliente!</p>
-
+                                @foreach($profile['pets'] as $pet)
+                                <tr>
+                                    <td>{{ $pet->name }}</td>
+                                    <td>{{ $pet->especie }}</td>
+                                    <td>{{ $pet->data_nascimento }}</td>
+                                </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                        @else
+                        <p class="mt-2">Esse cliente não possui nenhum animal cadastro!</p>
+                        @endif
+                    </div>
+                </div>
 
             </div>
         </div>
