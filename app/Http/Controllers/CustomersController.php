@@ -49,6 +49,8 @@ class CustomersController extends Controller
             return redirect()->route('customer-list')->withErrors(['invalid-profile' => 'Perfil não localizado']);
         }
 
+        $profile['pets'] = $profile->animais;
+
         return view('customers.profile', compact('profile'));
     }
 
@@ -89,5 +91,14 @@ class CustomersController extends Controller
         $profile->delete();
 
         return back()->withErrors(['success-delete' => 'Perfil deletado com sucesso!']);
+    }
+
+    public function search(Request $request)
+    {
+        $query = $request->input('query');
+
+        $customer = Customer::where('name', 'like', "%$query%")->get();
+
+        return response()->json($customer);
     }
 }

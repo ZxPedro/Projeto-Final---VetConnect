@@ -40,4 +40,5 @@ Route::prefix('customer')->middleware('auth')->group(function () {
     Route::get('/profile/{id}', [CustomersController::class, 'viewProfile'])->name('view-profile');
     Route::post('/profile/{id}', [CustomersController::class, 'editProfile'])->name('edit-profile');
     Route::get('/delete/{id}', [CustomersController::class, 'deleteProfile'])->name('customer-delete');
+    Route::get('/search', [CustomersController::class, 'search']);
 });
