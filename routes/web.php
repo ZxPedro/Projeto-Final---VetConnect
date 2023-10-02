@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CustomersAddressController;
 use App\Http\Controllers\CustomersController;
 use App\Http\Controllers\UsersController;
 use App\Models\Customer;
@@ -35,10 +36,20 @@ Route::prefix('users')->middleware('auth')->group(function () {
 
 Route::prefix('customer')->middleware('auth')->group(function () {
     Route::get('/', [CustomersController::class, 'viewListCustomers'])->name('customer-list');
+
     Route::get('/create', [CustomersController::class, 'viewCreateCustomers'])->name('view-customer-create');
     Route::post('/create', [CustomersController::class, 'postCreateCustomer'])->name('customer-create');
+
     Route::get('/profile/{id}', [CustomersController::class, 'viewProfile'])->name('view-profile');
     Route::post('/profile/{id}', [CustomersController::class, 'editProfile'])->name('edit-profile');
+
     Route::get('/delete/{id}', [CustomersController::class, 'deleteProfile'])->name('customer-delete');
+
     Route::get('/search', [CustomersController::class, 'search']);
+
+    Route::post('/address', [CustomersAddressController::class, 'postCreateAddress'])->name('create-address');
+
+    Route::get('/address/delete/{id}', [CustomersAddressController::class, 'deleteAddress'])->name('delete-address');
 });
+
+Route::get('/address/edit/{id}', [CustomersAddressController::class, 'searchAddress']);

@@ -11,7 +11,10 @@
                 <a class="nav-link active" data-bs-toggle="tab" href="#profile" aria-selected="true" role="tab">Cadastro</a>
             </li>
             <li class="nav-item" role="presentation">
-                <a class="nav-link" data-bs-toggle="tab" href="#teste" aria-selected="false" tabindex="-1" role="tab">Pets</a>
+                <a class="nav-link" data-bs-toggle="tab" href="#enderecos" aria-selected="false" tabindex="-1" role="tab">Endereços</a>
+            </li>
+            <li class="nav-item" role="presentation">
+                <a class="nav-link" data-bs-toggle="tab" href="#pets" aria-selected="false" tabindex="-1" role="tab">Pets</a>
             </li>
             <li class="nav-item" role="presentation">
                 <a class="nav-link" data-bs-toggle="tab" href="#teste" aria-selected="false" tabindex="-1" role="tab">Agendamentos</a>
@@ -31,8 +34,7 @@
 
                         @if($profile)
 
-                        <p>Criado em: {{ $profile->created_at}}</p>
-                        <p>Editado em: {{ $profile->updated_at}}</p>
+                        <p>Criado em: {{ $profile->created_at}} | Editado em: {{ $profile->updated_at}}</p>
                         <form method="post" action="{{route('edit-profile', ['id' => $profile->id ]) }}">
                             @csrf
                             <div class="form-group">
@@ -70,7 +72,117 @@
                     </div>
                 </div>
             </div>
-            <div class="tab-pane fade" id="teste" role="tabpanel">
+            <div class="tab-pane fade" id="enderecos" role="tabpanel">
+                <div class="row">
+                    <div class="col">
+                        <div class="mt-2 text-end">
+                            <a class="btn btn-primary" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#ModalEndereco"><i class="fa-solid fa-plus pe-2"></i>Novo Endereço</a>
+                        </div>
+                        @if(count($profile->address) > 0)
+                        <table class="table table-hover mt-3 text-center">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Endereço</th>
+                                    <th scope="col">Número</th>
+                                    <th scope="col">Complemento</th>
+                                    <th scope="col">CEP</th>
+                                    <th scope="col">Bairro</th>
+                                    <th scope="col">Cidade</th>
+                                    <th scope="col">UF</th>
+                                    <th scope="col">Principal</th>
+                                    <th scope="col"></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                                @foreach($profile['address'] as $address)
+                                <tr>
+                                    <td>{{$address['endereco']}}</td>
+                                    <td>{{$address['endereco_numero']}}</td>
+                                    <td>{{$address['endereco_complemento']}}</td>
+                                    <td>{{$address['endereco_cep']}}</td>
+                                    <td>{{$address['endereco_bairro']}}</td>
+                                    <td>{{$address['cidade']}}</td>
+                                    <td>{{$address['uf']}}</td>
+                                    <td>
+                                        @if($address['flagprincipal'])
+                                        <i class="fa-solid fa-check"></i>
+                                        @endif
+                                    </td>
+                                    <td>
+                                        <a class="btn btn-success edit-address" data-variable="{{$address->id}}" data-bs-toggle="modal" data-bs-target="#ModalEndereco"><i class="fa-solid fa-eye"></i></a>
+                                        <a href="{{ route('delete-address', ['id'=> $address->id]) }}" class="btn btn-danger"><i class="fa-solid fa-trash"></i></a>
+                                    </td>
+                                </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                        @else
+                        <p class="mt-2">Esse cliente não possui nenhum endereço cadastro!</p>
+                        @endif
+                    </div>
+                </div>
+                <div class="modal fade" id="ModalEndereco" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">Cadastro de Endereço</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true"></span>
+                                </button>
+                            </div>
+                            <form method="post" action="{{ route('create-address') }}">
+                                <div class="modal-body">
+                                    @csrf
+                                    <input type="hidden" id="customer_id" name="customer_id" value="{{$profile->id}}" />
+                                    <input type="hidden" id="address_id" name="address_id" value="" />
+                                    <div class="form-group">
+                                        <label for="cep" class="form-label mt-4">CEP</label>
+                                        <input type="text" class="form-control" name="endereco_cep" id="endereco_cep" onblur="pesquisacep(this.value);">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="endereco" class="form-label mt-4">Endereço</label>
+                                        <input type="text" class="form-control" name="endereco" id="endereco" value="">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="numero" class="form-label mt-4">Número</label>
+                                        <input type="text" class="form-control" name="endereco_numero" id="endereco_numero">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="complemento" class="form-label mt-4">Complemento</label>
+                                        <input type="text" class="form-control" name="endereco_complemento" id="endereco_complemento">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="bairro" class="form-label mt-4">Bairro</label>
+                                        <input type="text" class="form-control" name="endereco_bairro" id="endereco_bairro">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="cidade" class="form-label mt-4">Cidade</label>
+                                        <input type="text" class="form-control" name="cidade" id="cidade">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="uf" class="form-label mt-4">UF</label>
+                                        <input type="text" class="form-control" name="uf" id="uf">
+                                    </div>
+                                    <div class="form-check mt-2">
+                                        <input class="form-check-input" type="checkbox" value="1" id="flagprincipal" name="flagprincipal">
+                                        <label class="form-check-label" for="flexCheckDefault">
+                                            Endereço Principal
+                                        </label>
+                                    </div>
+
+                                    </p>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="submit" class="btn btn-primary">Cadastrar</button>
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane fade" id="pets" role="tabpanel">
                 <div class="row">
                     <div class="col">
                         @if(count($profile['pets']) > 0)
@@ -101,5 +213,6 @@
 
             </div>
         </div>
+
 
         @endsection
