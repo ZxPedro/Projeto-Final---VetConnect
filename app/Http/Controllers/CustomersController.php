@@ -51,6 +51,8 @@ class CustomersController extends Controller
 
         $profile['pets'] = $profile->animais;
 
+        $profile['address'] = $profile->address;
+
         return view('customers.profile', compact('profile'));
     }
 
