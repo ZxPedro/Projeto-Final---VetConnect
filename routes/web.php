@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AnimalsController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CustomersAddressController;
 use App\Http\Controllers\CustomersController;
@@ -50,6 +51,9 @@ Route::prefix('customer')->middleware('auth')->group(function () {
     Route::post('/address', [CustomersAddressController::class, 'postCreateAddress'])->name('create-address');
 
     Route::get('/address/delete/{id}', [CustomersAddressController::class, 'deleteAddress'])->name('delete-address');
+
+    Route::get('/pets/create', [AnimalsController::class, 'viewCreatePets'])->name('view-pet-create');
+    Route::post('/pets/create', [AnimalsController::class, 'postCreatePet'])->name('pet-create');
 });
 
 Route::get('/address/edit/{id}', [CustomersAddressController::class, 'searchAddress']);

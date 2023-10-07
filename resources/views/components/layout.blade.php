@@ -13,11 +13,11 @@
 
 <body>
     @yield('navbar')
-    <div class="container">
+    <div class="col py-3">
         @yield('content')
     </div>
-
-
+    </div>
+    </div>
     <script type="text/javascript">
         function limpa_formulário_cep() {
             //Limpa valores do formulário de cep.
