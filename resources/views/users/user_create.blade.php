@@ -24,7 +24,6 @@
             <div class="form-group">
                 <label for="email" class="form-label mt-4">E-mail</label>
                 <input type="email" class="form-control" name="email" id="email" aria-describedby="emailHelp" placeholder="Digite seu e-mail">
-                <small id=" emailHelp" class="form-text text-muted">Não vamos vender o seu e-mail</small>
             </div>
             <div class="form-group">
                 <label for="password" class="form-label mt-4">Senha</label>

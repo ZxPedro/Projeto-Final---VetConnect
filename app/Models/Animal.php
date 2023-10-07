@@ -12,9 +12,10 @@ class Animal extends Model
 
     protected $fillable = [
 
-        'name',
         'customer_id',
+        'name',
         'especie',
+        'raca',
         'data_nascimento',
         'flagidoso',
         'flagcardiaco',

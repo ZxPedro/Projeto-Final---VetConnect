@@ -16,9 +16,10 @@ class CreateAnimalsTable extends Migration
     {
         Schema::create('animals', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
             $table->foreignId('customer_id')->references('id')->on('customers')->cascadeOnDelete();
+            $table->string('name');
             $table->string('especie');
+            $table->string('raca');
             $table->date('data_nascimento');
             $table->boolean('flagidoso');
             $table->boolean('flagcardiaco');

@@ -185,6 +185,9 @@
             <div class="tab-pane fade" id="pets" role="tabpanel">
                 <div class="row">
                     <div class="col">
+                        <div class="mt-2 text-end">
+                            <a href="{{ route('view-pet-create') }}" class="btn btn-primary"><i class="fa-solid fa-plus pe-2"></i>Novo Pet</a>
+                        </div>
                         @if(count($profile['pets']) > 0)
                         <table class="table table-hover mt-3 text-center">
                             <thead>
