@@ -18,6 +18,7 @@
     </div>
     </div>
     </div>
+    <!-- Buscar Cep -->
     <script type="text/javascript">
         function limpa_formulário_cep() {
             //Limpa valores do formulário de cep.
@@ -86,7 +87,8 @@
     </script>
 
 
-    <script>
+    <!-- Editar endereço -->
+    <script type="text/javascript">
         $(document).ready(function() {
             $('.edit-address').click(function() {
                 var enderecoId = $(this).data('variable'); // Obtém o ID do endereço do atributo de dados do botão
@@ -107,6 +109,13 @@
                         $('#cidade').val(data.cidade);
                         $('#uf').val(data.uf);
 
+                        if (data.flagprincipal) {
+                            $('#flagprincipal').prop('checked', true);
+                        } else {
+                            $('#flagprincipal').prop('checked', false);
+                        }
+
+
                     },
                     error: function(xhr, status, error) {
                         // Lide com erros, se necessário
@@ -124,7 +133,55 @@
                 $('#endereco_bairro').val('');
                 $('#cidade').val('');
                 $('#uf').val('');
+                $('#flagprincipal').prop('checked', false);
             });
+        });
+    </script>
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            // Seletor para os campos select
+            var especiesSelect = $('#especie');
+            var racasSelect = $('#raca');
+
+            // Adicione um evento de mudança ao campo de espécies
+            especiesSelect.change(function() {
+                var especieSelecionada = especiesSelect.val(); // Obtenha a espécie selecionada
+
+                // Faça uma solicitação AJAX para buscar as raças com base na espécie
+                $.ajax({
+                    url: '/breeds/' + especieSelecionada,
+                    type: 'GET',
+                    dataType: 'json',
+                    success: function(racas) {
+                        // Limpe e preencha o campo de raças com as novas opções
+                        racasSelect.empty(); // Limpe as opções existentes
+                        $.each(racas, function(index, raca) {
+                            racasSelect.append($('<option>', {
+                                value: raca.id,
+                                text: raca.name
+                            }));
+                        });
+
+                        // Habilitar ou desabilitar o campo de raças conforme necessário
+                        if (racas.length > 0) {
+                            racasSelect.prop('disabled', false);
+                        } else {
+                            racasSelect.prop('disabled', true);
+                            racasSelect.append($('<option>', {
+                                value: '',
+                                text: 'Não há raças disponíveis para esta espécie'
+                            }));
+                        }
+                    },
+                    error: function(xhr, status, error) {
+                        // Lide com erros, se necessário
+                    }
+                });
+            });
+
+            // Inicialize as opções do campo de raças com base na seleção inicial (se houver)
+            especiesSelect.trigger('change');
         });
     </script>
 </body>

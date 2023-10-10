@@ -21,11 +21,12 @@ class CreateAnimalsTable extends Migration
             $table->string('especie');
             $table->string('raca');
             $table->date('data_nascimento');
-            $table->boolean('flagidoso');
-            $table->boolean('flagcardiaco');
-            $table->boolean('flaghepletico');
-            $table->boolean('flaglesionado');
-            $table->text('outros');
+            $table->boolean('flagidoso')->nullable();
+            $table->boolean('flagcardiopata')->nullable();
+            $table->boolean('flagepiletico')->nullable();
+            $table->boolean('flaglesionado')->nullable();
+            $table->boolean('flagalergico')->nullable();
+            $table->text('observacao')->nullable();
             $table->timestamps();
         });
     }
