@@ -46,14 +46,16 @@ Route::prefix('customer')->middleware('auth')->group(function () {
 
     Route::get('/delete/{id}', [CustomersController::class, 'deleteProfile'])->name('customer-delete');
 
-    Route::get('/search', [CustomersController::class, 'search']);
-
     Route::post('/address', [CustomersAddressController::class, 'postCreateAddress'])->name('create-address');
 
     Route::get('/address/delete/{id}', [CustomersAddressController::class, 'deleteAddress'])->name('delete-address');
 
-    Route::get('/pets/create', [AnimalsController::class, 'viewCreatePets'])->name('view-pet-create');
-    Route::post('/pets/create', [AnimalsController::class, 'postCreatePet'])->name('pet-create');
+    Route::get('/profile/{id}/pets/create', [AnimalsController::class, 'viewCreatePets'])->name('view-pet-create');
+    Route::post('/profile/pets/create', [AnimalsController::class, 'postCreatePet'])->name('pet-create');
+
+    Route::get('/profile/pets/edit/{id}', [AnimalsController::class, 'editPet'])->name('edit-pet');
+    Route::post('/profile/pets/edit/{id}', [AnimalsController::class, 'updatePet'])->name('update-pet');
 });
 
 Route::get('/address/edit/{id}', [CustomersAddressController::class, 'searchAddress']);
+Route::get('/breeds/{id}', [AnimalsController::class, 'searchBreeds']);
