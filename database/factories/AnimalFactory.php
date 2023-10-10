@@ -22,10 +22,11 @@ class AnimalFactory extends Factory
             'especie' => $this->faker->name(),
             'data_nascimento' => $this->faker->date(),
             'flagidoso'  => $this->faker->boolean(),
-            'flagcardiaco' => $this->faker->boolean(),
-            'flaghepletico' => $this->faker->boolean(),
+            'flagcardiopata' => $this->faker->boolean(),
+            'flagepiletico' => $this->faker->boolean(),
             'flaglesionado' => $this->faker->boolean(),
-            'outros' => $this->faker->text(),
+            'flagalergico' => $this->faker->boolean(),
+            'observacao' => $this->faker->text(),
         ];
     }
 }

@@ -18,10 +18,11 @@ class Animal extends Model
         'raca',
         'data_nascimento',
         'flagidoso',
-        'flagcardiaco',
-        'flaghepletico',
+        'flagcardiopata',
+        'flagepiletico',
         'flaglesionado',
-        'outros'
+        'flagalergico',
+        'observacao'
 
     ];
 

@@ -26,8 +26,9 @@
                     <div class="col-12">
                         @if($errors->any())
                         @foreach($errors->all() as $error)
-                        <div class="alert alert-warning">
+                        <div class="alert alert-warning alert-dismissible fade show" role="alert">
                             {{ $error }}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                         </div>
                         @endforeach
                         @endif
@@ -186,7 +187,7 @@
                 <div class="row">
                     <div class="col">
                         <div class="mt-2 text-end">
-                            <a href="{{ route('view-pet-create') }}" class="btn btn-primary"><i class="fa-solid fa-plus pe-2"></i>Novo Pet</a>
+                            <a href="{{ route('view-pet-create', ['id' => $profile->id ]) }}" class="btn btn-primary"><i class="fa-solid fa-plus pe-2"></i>Novo Pet</a>
                         </div>
                         @if(count($profile['pets']) > 0)
                         <table class="table table-hover mt-3 text-center">
@@ -204,6 +205,11 @@
                                     <td>{{ $pet->name }}</td>
                                     <td>{{ $pet->especie }}</td>
                                     <td>{{ $pet->data_nascimento }}</td>
+                                    <td>
+                                        <a href="{{ route('edit-pet', ['id' => $pet->id ]) }}"" class=" btn btn-success"><i class="fa-solid fa-eye"></i></a>
+                                        <a class="btn btn-danger"><i class="fa-solid fa-trash"></i></a>
+                                    </td>
+
                                 </tr>
                                 @endforeach
                             </tbody>
