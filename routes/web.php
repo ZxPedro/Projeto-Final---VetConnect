@@ -59,3 +59,16 @@ Route::prefix('customer')->middleware('auth')->group(function () {
 
 Route::get('/address/edit/{id}', [CustomersAddressController::class, 'searchAddress']);
 Route::get('/breeds/{id}', [AnimalsController::class, 'searchBreeds']);
+
+Route::get('/cadastros/agendamento', function(){
+    return view('/cadastros/agendamento');
+});
+
+Route::get('/cadastros/veterinario', function(){
+    return view('/cadastros/veterinario');
+});
+
+Route::get('/cadastros/servico', function(){
+    return view('/cadastros/servico');
+});
+
