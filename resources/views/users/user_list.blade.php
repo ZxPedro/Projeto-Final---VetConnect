@@ -39,8 +39,8 @@
                         <td>{{ $user->email }}</td>
                         <td>{{ $user->created_at }}</td>
                         <td>
-                            <a href="#" class="btn btn-success"><i class="fa-solid fa-eye"></i></a>
-                            <a href="{{route('user-delete', ['id'=> $user->id])}}" class="btn btn-danger"><i class="fa-solid fa-trash"></i></a>
+                            <a href="{{route('user-edit', $user->id)}}" class="btn btn-success"><i class="fa-solid fa-eye"></i></a>
+                            <a href="{{route('user-delete', $user->id)}}" class="btn btn-danger"><i class="fa-solid fa-trash"></i></a>
                         </td>
                     </tr>
                     @endforeach
