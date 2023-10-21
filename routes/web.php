@@ -32,6 +32,8 @@ Route::prefix('users')->middleware('auth')->group(function () {
     Route::get('/', [UsersController::class, 'viewListUsers'])->name('user-list');
     Route::get('/create', [UsersController::class, 'viewCreateUser'])->name('view-user-create');
     Route::post('/create', [UsersController::class, 'postCreateUser'])->name('user-create');
+    Route::get('/edit/{id}', [UsersController::class, 'editUser'])->name('user-edit');
+    Route::post('/edit/{id}', [UsersController::class, 'updateUser'])->name('user-update');
     Route::get('/delete/{id}', [UsersController::class, 'deleteUser'])->name('user-delete');
 });
 

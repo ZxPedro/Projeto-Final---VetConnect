@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\Rule;
 
 class UsersController extends Controller
 {
@@ -36,6 +37,58 @@ class UsersController extends Controller
         User::create($validate);
 
         return redirect('users/');
+    }
+
+    public function editUser($id)
+    {
+
+        $user = User::find($id);
+
+        // dd($user);
+
+        return view('users.user_create', compact('user'));
+    }
+
+
+    public function updateUser(Request $request, $id)
+    {
+
+        $user = User::find($id);
+
+        if ($user) {
+
+
+
+            $validate = $this->validate($request, [
+                'name' => 'required',
+                'email' => [
+                    'required',
+                    Rule::unique('users', 'email')->ignore($id),
+                ],
+                'password' => 'confirmed'
+
+            ]);
+
+            dd($validate);
+
+            if (isset($validate['password'])) {
+
+                $user->update([
+                    'name' => $validate['name'],
+                    'email' => $validate['email'],
+                    'password' => $validate['password']
+                ]);
+            } else {
+                $user->update([
+                    'name' => $validate['name'],
+                    'email' => $validate['email'],
+                ]);
+            }
+
+
+
+            return redirect('users/');
+        }
     }
 
 
