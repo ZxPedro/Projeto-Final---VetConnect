@@ -3,7 +3,7 @@
 @section('navbar', View::make('components.navbar'))
 
 @section('content')
-<div class="container row">
+<div class="col-10 row justify-content-center">
     <h1 class="text-center" >Agendamentos do Dia</h1>
 
     <div class="card col-3" style="width: 20rem;">
