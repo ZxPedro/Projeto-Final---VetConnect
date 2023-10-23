@@ -13,31 +13,34 @@
                     </li>
                     <li>
                         <a href="/cadastros/agendamento" class="nav-link px-0 align-middle">
-                            <i class="fs-4 bi-table"></i> <span class="ms-1 d-none d-sm-inline"><i class="fa-solid fa-person pe-1"></i>Agendamento</span></a>
+                            <i class="fs-4 bi-table"></i> <span class="ms-1 d-none d-sm-inline"><i class="fa-regular fa-calendar pe-1"></i></i>Agendamento</span></a>
                     </li>
                     <li>
                         <a href="{{ route('customer-list') }}" class="nav-link px-0 align-middle">
                             <i class="fs-4 bi-table"></i> <span class="ms-1 d-none d-sm-inline"><i class="fa-solid fa-person pe-1"></i>Cliente</span></a>
-                    </li>                    
+                    </li>
                     <li>
                         <a href="#submenu2" data-bs-toggle="collapse" class="nav-link px-0 align-middle ">
-                            <i class="fs-4 bi-bootstrap"></i> <span class="ms-1 d-none d-sm-inline">Cadastros</span></a>
+                            <i class="fs-4 bi-bootstrap"></i> <span class="ms-1 d-none d-sm-inline"><i class="fa-solid fa-gears pe-1"></i>Gestão</span></a>
                         <ul class="collapse nav flex-column ms-1" id="submenu2" data-bs-parent="#menu">
                             <li class="w-100">
-                                <a href="/cadastros/veterinario" class="nav-link px-3"> <span class="d-none d-sm-inline">Veterinario</span></a>
+                                <a href="/cadastros/veterinario" class="nav-link px-3"> <span class="d-none d-sm-inline">Veterinários</span></a>
                             </li>
                             <li>
-                                <a href="{{ route('user-list') }}" class="nav-link px-3"> <span class="d-none d-sm-inline">Usuário</span></a>
+                                <a href="{{ route('user-list') }}" class="nav-link px-3"> <span class="d-none d-sm-inline">Usuários</span></a>
                             </li>
                             <li>
-                                <a href="/cadastros/servico" class="nav-link px-3"> <span class="d-none d-sm-inline">Serviço</span></a>
+                                <a href="{{route('categories-list')}}" class="nav-link px-3"> <span class="d-none d-sm-inline">Categorias</span></a>
+                            </li>
+                            <li>
+                                <a href="/cadastros/servico" class="nav-link px-3"> <span class="d-none d-sm-inline">Serviços</span></a>
                             </li>
                         </ul>
                     </li>
-                    <li>
+                    <!-- <li>
                         <a href="{{ route('user-list') }}" class="nav-link px-0 align-middle">
                             <i class="fs-4 bi-table"></i> <span class="ms-1 d-none d-sm-inline">Usuários</span></a>
-                    </li>
+                    </li> -->
                     <li>
                         <a href="#" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
                             <i class="fs-4 bi-grid"></i> <span class="ms-1 d-none d-sm-inline">Outros</span> </a>
@@ -64,12 +67,12 @@
                         <span class="d-none d-sm-inline mx-1">{{ auth()->user()->name }}</span>
                     </a>
                     <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
-                        <li><a class="dropdown-item" href="#">Settings</a></li>
+                        <!-- <li><a class="dropdown-item" href="#">Settings</a></li>
                         <li><a class="dropdown-item" href="#">Profile</a></li>
                         <li>
                             <hr class="dropdown-divider">
-                        </li>
-                        <li><a class="dropdown-item" href="{{ route('logout') }}">Sign out</a></li>
+                        </li> -->
+                        <li><a class="dropdown-item" href="{{ route('logout') }}">Sair</a></li>
                     </ul>
                 </div>
             </div>
