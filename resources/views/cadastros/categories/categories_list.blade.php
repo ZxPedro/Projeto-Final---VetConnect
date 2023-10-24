@@ -38,23 +38,22 @@
                     </tr>
                 </thead>
                 <tbody>
-
+                    @foreach($categories as $category)
                     <tr>
-                        <td>Cirugia</td>
-                        <td></td>
+                        <td>{{$category->name}}</td>
                         <td>
-                            <a href="#" class="btn btn-success"><i class="fa-solid fa-eye"></i></a>
-                            <a href="#" class="btn btn-danger"><i class="fa-solid fa-trash"></i></a>
+                            <a href="{{ route('categories-edit', $category->id) }}" class="btn btn-success"><i class="fa-solid fa-eye"></i></a>
+                            <a href="{{ route('category-delete', $category->id) }}" class="btn btn-danger"><i class="fa-solid fa-trash"></i></a>
                         </td>
                     </tr>
-
+                    @endforeach
                 </tbody>
             </table>
         </div>
         <div class="row mt-2">
             <div class="col pagination justify-content-end">
 
-
+                {{$categories->links()}}
             </div>
         </div>
     </div>

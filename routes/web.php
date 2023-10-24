@@ -66,6 +66,10 @@ Route::prefix('cadastros')->middleware('auth')->group(function () {
     Route::get('/categories/create', [CategoriesController::class, 'viewCreateCategories'])->name('view-categories-create');
     Route::post('/categories/create', [CategoriesController::class, 'postCreateCategories'])->name('categories-create');
 
+    Route::get('/categories/edit/{id}', [CategoriesController::class, 'editCategory'])->name('categories-edit');
+    Route::post('/categories/edit/{id}', [CategoriesController::class, 'updateCategory'])->name('categories-update');
+
+    Route::get('/delete/{id}', [CategoriesController::class, 'deleteCategory'])->name('category-delete');
 });
 
 

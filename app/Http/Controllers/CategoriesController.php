@@ -30,4 +30,49 @@ class CategoriesController extends Controller
 
         return redirect('/cadastros/categories');
     }
+
+    public function editCategory(int $id)
+    {
+
+        $category = Category::find($id);
+
+        if (!$category) {
+            return redirect()->route('categories-list')->withErrors(['invalid-category' => 'Categoria não localizada']);
+        }
+
+        return view('cadastros.categories.categories_create', compact('category'));
+    }
+
+    public function updateCategory(Request $request, $id)
+    {
+        $category = Category::find($id);
+
+        if (!$category) {
+            return redirect()->route('categories-list')->withErrors(['invalid-category' => 'Categoria não localizada']);
+        }
+
+        $validation = $this->validate($request, [
+            'name' => 'required'
+        ]);
+
+        $validation['updated_at'] = now();
+
+        $category->update($validation);
+
+        return redirect()->route('categories-list', $id)->withErrors(['sucess-category' => 'Categoria alterada com sucesso']);
+    }
+
+    public function deleteCategory(int $id)
+    {
+
+        $category = Category::find($id);
+
+        if (!$category) {
+            return redirect()->route('categories-list')->withErrors(['invalid-category' => 'Categoria não localizada']);
+        }
+
+        $category->delete();
+
+        return back()->withErrors(['success-delete' => 'Categoria deletada com sucesso!']);
+    }
 }
