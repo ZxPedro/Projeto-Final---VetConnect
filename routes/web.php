@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AnimalsController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CategoriesController;
 use App\Http\Controllers\CustomersAddressController;
 use App\Http\Controllers\CustomersController;
 use App\Http\Controllers\UsersController;
@@ -59,18 +60,26 @@ Route::prefix('customer')->middleware('auth')->group(function () {
     Route::post('/profile/pets/edit/{id}', [AnimalsController::class, 'updatePet'])->name('update-pet');
 });
 
+
+Route::prefix('cadastros')->middleware('auth')->group(function () {
+    Route::get('/categories', [CategoriesController::class, 'viewListCategories'])->name('categories-list');
+    Route::get('/categories/create', [CategoriesController::class, 'viewCreateCategories'])->name('view-categories-create');
+    Route::post('/categories/create', [CategoriesController::class, 'postCreateCategories'])->name('categories-create');
+
+    Route::get('/categories/edit/{id}', [CategoriesController::class, 'editCategory'])->name('categories-edit');
+    Route::post('/categories/edit/{id}', [CategoriesController::class, 'updateCategory'])->name('categories-update');
+
+    Route::get('/delete/{id}', [CategoriesController::class, 'deleteCategory'])->name('category-delete');
+});
+
+
 Route::get('/address/edit/{id}', [CustomersAddressController::class, 'searchAddress']);
 Route::get('/breeds/{id}', [AnimalsController::class, 'searchBreeds']);
 
-Route::get('/cadastros/agendamento', function(){
+Route::get('/cadastros/agendamento', function () {
     return view('/cadastros/agendamento');
 });
 
-Route::get('/cadastros/veterinario', function(){
+Route::get('/cadastros/veterinario', function () {
     return view('/cadastros/veterinario');
 });
-
-Route::get('/cadastros/servico', function(){
-    return view('/cadastros/servico');
-});
-
