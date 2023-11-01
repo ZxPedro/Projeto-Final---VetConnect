@@ -206,8 +206,8 @@
                                     <td>{{ $pet->especie }}</td>
                                     <td>{{ $pet->data_nascimento }}</td>
                                     <td>
-                                        <a href="{{ route('edit-pet', ['id' => $pet->id ]) }}"" class=" btn btn-success"><i class="fa-solid fa-eye"></i></a>
-                                        <a class="btn btn-danger"><i class="fa-solid fa-trash"></i></a>
+                                        <a href="{{ route('edit-pet', ['id' => $pet->id ]) }}" class=" btn btn-success"><i class="fa-solid fa-eye"></i></a>
+                                        <a href="{{ route('delete-pet', $pet->id) }}" class=" btn btn-danger"><i class="fa-solid fa-trash"></i></a>
                                     </td>
 
                                 </tr>

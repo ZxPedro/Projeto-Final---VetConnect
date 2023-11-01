@@ -58,6 +58,7 @@ Route::prefix('customer')->middleware('auth')->group(function () {
 
     Route::get('/profile/pets/edit/{id}', [AnimalsController::class, 'editPet'])->name('edit-pet');
     Route::post('/profile/pets/edit/{id}', [AnimalsController::class, 'updatePet'])->name('update-pet');
+    Route::get('/profile/pets//delete/{id}', [AnimalsController::class, 'deletePet'])->name('delete-pet');
 });
 
 

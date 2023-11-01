@@ -80,4 +80,18 @@ class AnimalsController extends Controller
 
         return view('pets.pets_create', compact('pet', 'especies'));
     }
+
+    public function deletePet($id)
+    {
+
+        $pet = Animal::find($id);
+
+        if (!$pet) {
+            return back()->withErrors(['wrong-pet' => 'Pet não localizado!']);
+        }
+
+        $pet->delete();
+
+        return back()->withErrors(['success-delete' => 'Animal deletado com sucesso!']);
+    }
 }
