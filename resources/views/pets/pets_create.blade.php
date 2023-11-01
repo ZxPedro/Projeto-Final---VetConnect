@@ -50,7 +50,7 @@
                 <div class="row">
                     <div class="col-4">
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="1" id="flagidoso" name="flagidoso" {{ isset($pet->flagidoso) ? 'checked' : '' }}>
+                            <input class="form-check-input" type="checkbox" value="1" id="flagidoso" name="flagidoso" {{ isset($pet->flagidoso) ? $pet->flagidoso == 1 ? 'checked' : '' : ''}}>
                             <label class="form-check-label" for="flagidoso">
                                 Idoso
                             </label>
@@ -58,7 +58,7 @@
                     </div>
                     <div class="col-4">
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="1" id="flagcardiopata" name="flagcardiopata" {{ isset($pet->flagcardiopata) ? 'checked' : '' }}>
+                            <input class="form-check-input" type="checkbox" value="1" id="flagcardiopata" name="flagcardiopata" {{  isset($pet->flagcardiopata) ? $pet->flagcardiopata == 1 ? 'checked' : '' : ''}}>
                             <label class="form-check-label" for="flagcardiopata">
                                 Cardiopata
                             </label>
@@ -66,7 +66,7 @@
                     </div>
                     <div class="col-4">
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="1" id="flagepiletico" name="flagepiletico" {{ isset($pet->flagepiletico) ? 'checked' : '' }}>
+                            <input class="form-check-input" type="checkbox" value="1" id="flagepiletico" name="flagepiletico" {{ isset($pet->flagepiletico) ? $pet->flagepiletico == 1 ? 'checked' : '' : ''}}>
                             <label class="form-check-label" for="flagepiletico">
                                 Epilético
                             </label>
@@ -76,7 +76,7 @@
                 <div class="row">
                     <div class="col-4">
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="1" id="flaglesionado" name="flaglesionado" {{ isset($pet->flaglesionado) ? 'checked' : '' }}>
+                            <input class="form-check-input" type="checkbox" value="1" id="flaglesionado" name="flaglesionado" {{ isset($pet->flaglesionado) ? $pet->flaglesionado == 1 ? 'checked' : '' : '' }}>
                             <label class="form-check-label" for="flaglesionado">
                                 Lesionado
                             </label>
@@ -84,7 +84,7 @@
                     </div>
                     <div class="col-4">
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="1" id="flagalergico" name="flagalergico" {{ isset($pet->flagalergico) ? 'checked' : '' }}>
+                            <input class="form-check-input" type="checkbox" value="1" id="flagalergico" name="flagalergico" {{ isset($pet->flagalergico) ? $pet->flagalergico == 1 ? 'checked' : '' : '' }}>
                             <label class="form-check-label" for="flagalergico">
                                 Alérgico
                             </label>

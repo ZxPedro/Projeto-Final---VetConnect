@@ -81,13 +81,55 @@ class AnimalsController extends Controller
         return view('pets.pets_create', compact('pet', 'especies'));
     }
 
+    public function updatePet(Request $request, $id)
+    {
+        $pet = Animal::find($id);
+
+        $customer_id = $request['customer_id'];
+
+        if (!$pet) {
+
+            return redirect()->route('view-profile', $customer_id)->withErrors(['wrong-pet' => 'Animal não localizado!']);
+        }
+
+
+        $validate = $this->validate($request, [
+            'customer_id' => 'required',
+            'name' => 'required',
+            'especie' => 'required',
+            'raca'  => 'required',
+            'data_nascimento' => '',
+            'flagidoso' => '',
+            'flagcardiopata' => '',
+            'flagepiletico' => '',
+            'flaglesionado' => '',
+            'flagalergico' => '',
+            'observacao' => ''
+        ]);
+
+        isset($validate['flagidoso']) ?  $validate['flagidoso'] = 1 : $validate['flagidoso'] = '0';
+
+        //dd($validate['flagidoso']);
+
+        isset($validate['flagcardiopata']) ?  $validate['flagcardiopata'] = 1 : $validate['flagcardiopata'] = 0;
+        isset($validate['flagepiletico']) ?  $validate['flagepiletico'] = 1 : $validate['flagepiletico'] = 0;
+        isset($validate['flaglesionado']) ?  $validate['flaglesionado'] = 1 : $validate['flaglesionado'] = 0;
+        isset($validate['flagalergico']) ?  $validate['flagalergico'] = 1 : $validate['flagalergico'] = 0;
+
+        $validate['updated_at'] = now();
+
+        $pet->update($validate);
+
+        return redirect()->route('view-profile', $customer_id)->withErrors(['sucess-pet' => 'Animal alterado com sucesso']);
+    }
+
     public function deletePet($id)
     {
 
         $pet = Animal::find($id);
 
         if (!$pet) {
-            return back()->withErrors(['wrong-pet' => 'Pet não localizado!']);
+            return back()->withErrors(['wrong-pet' => 'Animal não localizado!']);
         }
 
         $pet->delete();
