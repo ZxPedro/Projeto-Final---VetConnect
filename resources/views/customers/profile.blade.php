@@ -61,9 +61,9 @@
                             <div class="form-group">
                                 <label for="genero" class="form-label mt-4">Gênero</label>
                                 <select class="form-select" id="genero" name="genero">
-                                    <option value="M">Masculino</option>
-                                    <option value="F">Feminino</option>
-                                    <option value="O">Outros</option>
+                                    <option value="M" {{$profile->genero === 'M' ? 'selected' : '' }}>Masculino</option>
+                                    <option value="F" {{$profile->genero === 'F' ? 'selected' : '' }}>Feminino</option>
+                                    <option value="O" {{$profile->genero === 'O' ? 'selected' : '' }}>Outros</option>
                                 </select>
                             </div>
                             <button type="submit" class="btn btn-primary mt-2">Salvar</button>
@@ -206,8 +206,8 @@
                                     <td>{{ $pet->especie }}</td>
                                     <td>{{ $pet->data_nascimento }}</td>
                                     <td>
-                                        <a href="{{ route('edit-pet', ['id' => $pet->id ]) }}"" class=" btn btn-success"><i class="fa-solid fa-eye"></i></a>
-                                        <a class="btn btn-danger"><i class="fa-solid fa-trash"></i></a>
+                                        <a href="{{ route('edit-pet', ['id' => $pet->id ]) }}" class=" btn btn-success"><i class="fa-solid fa-eye"></i></a>
+                                        <a href="{{ route('delete-pet', $pet->id) }}" class=" btn btn-danger"><i class="fa-solid fa-trash"></i></a>
                                     </td>
 
                                 </tr>

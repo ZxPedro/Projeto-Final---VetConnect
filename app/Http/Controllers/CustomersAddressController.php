@@ -11,8 +11,9 @@ class CustomersAddressController extends Controller
     public function postCreateAddress(Request $request)
     {
 
-        $customer_id = $request['customer_id'];
-        $address_id = $request['address_id'];
+        $customer_id = $request['customer_id']; 
+
+        $address_id = $request['address_id']; 
 
         $validation = $this->validate($request, [
             'customer_id' => 'required',
@@ -30,29 +31,46 @@ class CustomersAddressController extends Controller
             ->where('customer_id', $customer_id)
             ->where('flagprincipal', 1)->get();
 
-
-        if (isset($validation['flagprincipal']) && count($check_flagprincipal) > 0) {
-            return back()->withErrors(['wrong-mainaddress' => 'Você já possui um endereço principal']);
-        }
-
         if ($address_id) {
 
-            if (!isset($validation['flagprincipal'])) {
-                $validation['flagprincipal'] = null;
+            $customer_address = CustomerAddress::find($address_id);
+            if (isset($validation['flagprincipal']) && count($check_flagprincipal) > 0) {
+
+                $check_flagprincipal = json_decode($check_flagprincipal, true);
+
+
+                if ($address_id == $check_flagprincipal[0]['id']) {
+
+                    $validation['updated_at'] = now();
+
+                    $customer_address->update($validation);
+
+                    return redirect()->route('view-profile', $customer_id)->withErrors(['sucess-address' => 'Endereço alterado com sucesso!']);
+                }
+
+                return back()->withErrors(['wrong-mainaddress' => 'Você já possui um endereço principal']);
+            } else {
+
+                if (!isset($validation['flagprincipal'])) {
+                    $validation['flagprincipal'] = false;
+                }
+
+                $validation['updated_at'] = now();
+
+                $customer_address->update($validation);
+
+                return redirect()->route('view-profile', $customer_id)->withErrors(['sucess-address' => 'Endereço alterado com sucesso!']);
+            }
+        } else {
+
+            if (isset($validation['flagprincipal']) &&  count($check_flagprincipal) > 0) {
+                return back()->withErrors(['wrong-mainaddress' => 'Você já possui um endereço principal']);
             }
 
-            $customer_address = CustomerAddress::find($address_id);
+            CustomerAddress::create($validation);
 
-            $validation['updated_at'] = now();
-
-            $customer_address->update($validation);
-
-            return redirect()->route('view-profile', $customer_id)->withErrors(['sucess-address' => 'Endereço alterado com sucesso!']);
+            return redirect()->route('view-profile', $customer_id)->withErrors(['sucess-address' => 'Endereço cadastrado com sucesso!']);
         }
-
-        CustomerAddress::create($validation);
-
-        return redirect()->route('view-profile', $customer_id)->withErrors(['sucess-address' => 'Endereço cadastrado com sucesso!']);
     }
 
     public function searchAddress($id)

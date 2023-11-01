@@ -69,9 +69,11 @@ class UsersController extends Controller
 
             ]);
 
-            dd($validate);
+
 
             if (isset($validate['password'])) {
+
+                $validate['password'] = Hash::make($validate['password']);
 
                 $user->update([
                     'name' => $validate['name'],
