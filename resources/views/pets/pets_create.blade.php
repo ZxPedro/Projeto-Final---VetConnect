@@ -32,7 +32,7 @@
                 <select class="form-select" id="especie" name="especie">
 
                     @foreach($especies as $codigo => $nome)
-                    <option value="{{ $codigo }}"> {{ $nome }} </option>
+                    <option value="{{ $codigo }}" {{ isset($pet->especie) ? $pet->especie == $codigo ? 'selected' : '' : ''}}> {{ $nome }} </option>
                     @endforeach
 
                 </select>
@@ -42,7 +42,6 @@
                 <select class="form-select" id="raca" name="raca">
 
                     <option value="{{ isset($pet->raca) }}"></option>
-
 
                 </select>
             </div>
