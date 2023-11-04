@@ -33,7 +33,7 @@
                                 <a href="{{route('categories-list')}}" class="nav-link px-3"> <span class="d-none d-sm-inline">Categorias</span></a>
                             </li>
                             <li>
-                                <a href="/cadastros/servico" class="nav-link px-3"> <span class="d-none d-sm-inline">Serviços</span></a>
+                                <a href="{{route('services-list')}}" class="nav-link px-3"> <span class="d-none d-sm-inline">Serviços</span></a>
                             </li>
                         </ul>
                     </li>

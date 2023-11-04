@@ -6,6 +6,7 @@ use App\Http\Controllers\CategoriesController;
 use App\Http\Controllers\CustomersAddressController;
 use App\Http\Controllers\CustomersController;
 use App\Http\Controllers\UsersController;
+use App\Http\Controllers\ServicesController;
 use App\Models\Customer;
 use Illuminate\Support\Facades\Route;
 
@@ -62,15 +63,27 @@ Route::prefix('customer')->middleware('auth')->group(function () {
 });
 
 
-Route::prefix('cadastros')->middleware('auth')->group(function () {
-    Route::get('/categories', [CategoriesController::class, 'viewListCategories'])->name('categories-list');
-    Route::get('/categories/create', [CategoriesController::class, 'viewCreateCategories'])->name('view-categories-create');
-    Route::post('/categories/create', [CategoriesController::class, 'postCreateCategories'])->name('categories-create');
+Route::prefix('cadastros/categories')->middleware('auth')->group(function () {
+    Route::get('/', [CategoriesController::class, 'viewListCategories'])->name('categories-list');
+    Route::get('/create', [CategoriesController::class, 'viewCreateCategories'])->name('view-categories-create');
+    Route::post('/create', [CategoriesController::class, 'postCreateCategories'])->name('categories-create');
 
-    Route::get('/categories/edit/{id}', [CategoriesController::class, 'editCategory'])->name('categories-edit');
-    Route::post('/categories/edit/{id}', [CategoriesController::class, 'updateCategory'])->name('categories-update');
+    Route::get('/edit/{id}', [CategoriesController::class, 'editCategory'])->name('categories-edit');
+    Route::post('/edit/{id}', [CategoriesController::class, 'updateCategory'])->name('categories-update');
 
     Route::get('/delete/{id}', [CategoriesController::class, 'deleteCategory'])->name('category-delete');
+});
+
+
+Route::prefix('cadastros/services')->middleware('auth')->group(function () {
+    Route::get('/', [ServicesController::class, 'viewListServices'])->name('services-list');
+    Route::get('/create', [ServicesController::class, 'viewCreateServices'])->name('view-services-create');
+    Route::post('/create', [ServicesController::class, 'postCreateServices'])->name('services-create');
+
+    Route::get('/edit/{id}', [ServicesController::class, 'editService'])->name('services-edit');
+    Route::post('/edit/{id}', [ServicesController::class, 'updateService'])->name('service-update');
+
+    Route::get('/delete/{id}', [ServicesController::class, 'deleteService'])->name('service-delete');
 });
 
 
