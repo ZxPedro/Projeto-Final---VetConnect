@@ -44,8 +44,6 @@ class UsersController extends Controller
 
         $user = User::find($id);
 
-        // dd($user);
-
         return view('users.user_create', compact('user'));
     }
 
@@ -70,6 +68,7 @@ class UsersController extends Controller
             ]);
 
 
+            dd('chegou aqui');
 
             if (isset($validate['password'])) {
 

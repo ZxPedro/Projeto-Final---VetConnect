@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Customer;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class CustomersController extends Controller
 {
@@ -67,8 +68,18 @@ class CustomersController extends Controller
 
         $validation = $this->validate($request, [
             'name' => 'required',
-            'email' => 'required|email',
-            'cpf' => 'required|size:11',
+            'email' => [
+                'required',
+                'email',
+                Rule::unique('customers', 'email')->ignore($id)
+            ],
+
+            'cpf' => [
+                'required',
+                'size:11',
+                Rule::unique('customers', 'cpf')->ignore($id),
+            ],
+
             'data_nascimento' => 'required',
             'telefone' => 'required',
             'genero' => 'required'

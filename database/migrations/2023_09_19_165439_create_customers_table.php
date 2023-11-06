@@ -19,7 +19,7 @@ class CreateCustomersTable extends Migration
             $table->string('email')->unique();
             $table->date('data_nascimento');
             $table->string('telefone');
-            $table->string('cpf');
+            $table->string('cpf')->unique();
             $table->char('genero', 1);
             $table->timestamps();
         });
