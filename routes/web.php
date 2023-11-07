@@ -87,6 +87,17 @@ Route::prefix('cadastros/services')->middleware('auth')->group(function () {
 });
 
 
+Route::prefix('cadastros/professionals')->middleware('auth')->group(function () {
+    Route::get('/', [ProfessionalsController::class, 'viewListProfessionals'])->name('professionals-list');
+    Route::get('/create', [ProfessionalsController::class, 'viewCreateProfessionals'])->name('view-professionals-create');
+    Route::post('/create', [ProfessionalsController::class, 'postCreateProfessionals'])->name('professionals-create');
+
+    Route::get('/edit/{id}', [ProfessionalsController::class, 'editProfessional'])->name('professionals-edit');
+    Route::post('/edit/{id}', [ProfessionalsController::class, 'updateProfessional'])->name('professional-update');
+
+    Route::get('/delete/{id}', [ProfessionalsController::class, 'deleteProfessional'])->name('professional-delete');
+});
+
 Route::get('/address/edit/{id}', [CustomersAddressController::class, 'searchAddress']);
 Route::get('/breeds/{id}', [AnimalsController::class, 'searchBreeds']);
 
