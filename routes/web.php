@@ -5,6 +5,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CategoriesController;
 use App\Http\Controllers\CustomersAddressController;
 use App\Http\Controllers\CustomersController;
+use App\Http\Controllers\ProfessionalsController;
 use App\Http\Controllers\UsersController;
 use App\Http\Controllers\ServicesController;
 use App\Models\Customer;
@@ -106,5 +107,5 @@ Route::get('/cadastros/agendamento', function () {
 });
 
 Route::get('/cadastros/veterinario', function () {
-    return view('/cadastros/veterinario');
+    return view('cadastros.professionals.professionals_create');
 });

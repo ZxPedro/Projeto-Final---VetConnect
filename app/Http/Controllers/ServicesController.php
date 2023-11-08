@@ -31,7 +31,6 @@ class ServicesController extends Controller
 
     public function postCreateServices(Request $request)
     {
-        // dd($request);
 
         $validation = $this->validate($request, [
             'name' => 'required',

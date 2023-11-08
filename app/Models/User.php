@@ -38,4 +38,9 @@ class User extends Authenticatable
      * @var array<string, string>
      */
     protected $casts = [];
+
+    public function professional()
+    {
+        return $this->hasMany(ProfessionalService::class);
+    }
 }
