@@ -20,8 +20,8 @@ class Service extends Model
         return $this->belongsTo(Category::class);
     }
 
-    public function professionals()
+    public function users()
     {
-        return $this->belongsToMany(ProfessionalService::class, 'professional_services', 'id', 'service_id');
+        return $this->belongsToMany(User::class);
     }
 }

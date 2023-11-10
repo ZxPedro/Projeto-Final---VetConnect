@@ -39,8 +39,9 @@ class User extends Authenticatable
      */
     protected $casts = [];
 
-    public function professional()
+
+    public function services()
     {
-        return $this->hasMany(ProfessionalService::class);
+        return $this->belongsToMany(Service::class);
     }
 }
