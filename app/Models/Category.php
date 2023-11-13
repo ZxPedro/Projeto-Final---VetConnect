@@ -17,4 +17,9 @@ class Category extends Model
     {
         return $this->hasMany(Service::class);
     }
+
+    public function users()
+    {
+        return $this->belongsToMany(User::class);
+    }
 }

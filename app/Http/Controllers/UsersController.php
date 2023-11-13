@@ -93,9 +93,17 @@ class UsersController extends Controller
     }
 
 
-    public function deleteUser(User $id)
+    public function deleteUser($id)
     {
-        $id->delete();
-        return back();
+
+        $user = User::find($id);
+
+        if (!$user) {
+            return redirect()->route('user-list')->withErrors(['invalid-user' => 'Usuário não localizado']);
+        }
+
+        $user->delete();
+
+        return back()->withErrors(['success-delete' => 'Usuário deletado com sucesso!']);
     }
 }

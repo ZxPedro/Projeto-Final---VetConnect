@@ -5,7 +5,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CategoriesController;
 use App\Http\Controllers\CustomersAddressController;
 use App\Http\Controllers\CustomersController;
-use App\Http\Controllers\ServiceUserController;
+use App\Http\Controllers\CategoryUserController;
 use App\Http\Controllers\UsersController;
 use App\Http\Controllers\ServicesController;
 use App\Models\Customer;
@@ -89,14 +89,14 @@ Route::prefix('cadastros/services')->middleware('auth')->group(function () {
 
 
 Route::prefix('cadastros/professionals')->middleware('auth')->group(function () {
-    Route::get('/', [ServiceUserController::class, 'viewListProfessionals'])->name('professionals-list');
-    Route::get('/create', [ServiceUserController::class, 'viewCreateProfessionals'])->name('view-professionals-create');
-    Route::post('/create', [ServiceUserController::class, 'postCreateProfessionals'])->name('professionals-create');
+    Route::get('/', [CategoryUserController::class, 'viewListProfessionals'])->name('professionals-list');
+    Route::get('/create', [CategoryUserController::class, 'viewCreateProfessionals'])->name('view-professionals-create');
+    Route::post('/create', [CategoryUserController::class, 'postCreateProfessionals'])->name('professionals-create');
 
-    Route::get('/edit/{id}', [ServiceUserController::class, 'editProfessional'])->name('professionals-edit');
-    Route::post('/edit/{id}', [ServiceUserController::class, 'updateProfessional'])->name('professional-update');
+    Route::get('/edit/{id}', [CategoryUserController::class, 'editProfessional'])->name('professionals-edit');
+    Route::post('/edit/{id}', [CategoryUserController::class, 'updateProfessional'])->name('professional-update');
 
-    Route::get('/delete/{id}', [ServiceUserController::class, 'deleteProfessional'])->name('professional-delete');
+    Route::get('/delete/{id}', [CategoryUserController::class, 'deleteProfessional'])->name('professional-delete');
 });
 
 Route::get('/address/edit/{id}', [CustomersAddressController::class, 'searchAddress']);
