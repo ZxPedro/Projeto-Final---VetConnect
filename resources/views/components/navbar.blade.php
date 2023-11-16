@@ -1,3 +1,4 @@
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 <div class="container-fluid">
     <div class="row flex-nowrap">
         <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0 bg-dark">
@@ -8,20 +9,20 @@
                 <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
                     <li class="nav-item">
                         <a href="{{ route('dashboard') }}" class="nav-link align-middle px-0">
-                            <i class="fs-4 bi-house"></i> <span class="ms-1 d-none d-sm-inline"><i class="fa-solid fa-house pe-1"></i>Home</span>
+                        <i class="fa-solid fa-house pe-1"></i><span class="ms-1 d-none d-sm-inline">Home</span>
                         </a>
                     </li>
                     <li>
                         <a href="/cadastros/agendamento" class="nav-link px-0 align-middle">
-                            <i class="fs-4 bi-table"></i> <span class="ms-1 d-none d-sm-inline"><i class="fa-regular fa-calendar pe-1"></i></i>Agendamento</span></a>
+                        <i class="fa-regular fa-calendar pe-1"></i><span class="ms-1 d-none d-sm-inline"></i>Agendamento</span></a>
                     </li>
                     <li>
                         <a href="{{ route('customer-list') }}" class="nav-link px-0 align-middle">
-                            <i class="fs-4 bi-table"></i> <span class="ms-1 d-none d-sm-inline"><i class="fa-solid fa-person pe-1"></i>Cliente</span></a>
+                        <i class="fa-solid fa-person pe-1"></i> <span class="ms-1 d-none d-sm-inline"></i>Cliente</span></a>
                     </li>
                     <li>
                         <a href="#submenu2" data-bs-toggle="collapse" class="nav-link px-0 align-middle ">
-                            <i class="fs-4 bi-bootstrap"></i> <span class="ms-1 d-none d-sm-inline"><i class="fa-solid fa-gears pe-1"></i>Gestão</span></a>
+                        <i class="fa-solid fa-gears pe-1"></i> <span class="ms-1 d-none d-sm-inline">Gestão</span></a>
                         <ul class="collapse nav flex-column ms-1" id="submenu2" data-bs-parent="#menu">
                             <li class="w-100">
                                 <a href="/cadastros/veterinario" class="nav-link px-3"> <span class="d-none d-sm-inline">Veterinários</span></a>
