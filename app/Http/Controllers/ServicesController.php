@@ -97,4 +97,12 @@ class ServicesController extends Controller
 
         return back()->withErrors(['success-delete' => 'Serviço deletado com sucesso!']);
     }
+
+    public function getPriceService($id)
+    {
+
+        $service = Service::find($id);
+
+        return response()->json($service);
+    }
 }

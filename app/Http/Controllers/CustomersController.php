@@ -114,4 +114,14 @@ class CustomersController extends Controller
 
         return response()->json($customer);
     }
+
+    public function searchAnimalsCustomer($id)
+    {
+
+        $customer = Customer::find($id);
+
+        $customer_pet = $customer->animais;
+
+        return response()->json($customer_pet);
+    }
 }

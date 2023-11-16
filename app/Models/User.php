@@ -44,4 +44,9 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Category::class)->withPivot('working_days');;
     }
+
+    public function scheduling()
+    {
+        return $this->hasMany(Scheduling::class);
+    }
 }

@@ -96,14 +96,28 @@ class UsersController extends Controller
     public function deleteUser($id)
     {
 
-        $user = User::find($id);
+        try {
+            $user = User::find($id);
 
-        if (!$user) {
-            return redirect()->route('user-list')->withErrors(['invalid-user' => 'Usuário não localizado']);
+            if (!$user) {
+                return redirect()->route('user-list')->withErrors(['invalid-user' => 'Usuário não localizado']);
+            }
+
+            $user->delete();
+
+            return back()->withErrors(['success-delete' => 'Usuário deletado com sucesso!']);
+        } catch (\Throwable $th) {
+            return back()->withErrors(['wrong-delete' => 'Algo deu errado, tente novamente!']);
         }
+    }
 
-        $user->delete();
+    public function userCategories($id)
+    {
 
-        return back()->withErrors(['success-delete' => 'Usuário deletado com sucesso!']);
+        $professional = User::find($id);
+
+        $professional_categories = $professional->categories;
+
+        return response()->json($professional_categories);
     }
 }

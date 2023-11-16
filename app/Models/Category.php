@@ -22,4 +22,9 @@ class Category extends Model
     {
         return $this->belongsToMany(User::class);
     }
+
+    public function scheduling()
+    {
+        return $this->hasMany(Scheduling::class);
+    }
 }

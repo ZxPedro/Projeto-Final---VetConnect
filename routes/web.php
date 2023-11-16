@@ -8,6 +8,7 @@ use App\Http\Controllers\CustomersController;
 use App\Http\Controllers\CategoryUserController;
 use App\Http\Controllers\UsersController;
 use App\Http\Controllers\ServicesController;
+use App\Http\Controllers\SchedulingController;
 use App\Models\Customer;
 use Illuminate\Support\Facades\Route;
 
@@ -100,10 +101,16 @@ Route::prefix('cadastros/professionals')->middleware('auth')->group(function () 
 });
 
 Route::get('/address/edit/{id}', [CustomersAddressController::class, 'searchAddress']);
-Route::get('/breeds/{id}', [AnimalsController::class, 'searchBreeds']);
 
-Route::get('/cadastros/agendamento', function () {
-    return view('/cadastros/agendamento');
+Route::get('/breeds/{id}', [AnimalsController::class, 'searchBreeds']);
+Route::get('/animalscustomer/{id}', [CustomersController::class, 'searchAnimalsCustomer']);
+Route::get('/professionalcategories/{id}', [UsersController::class, 'userCategories']);
+Route::get('/categoryservice/{id}', [CategoriesController::class, 'searchServicesCategory']);
+Route::get('/getpriceservice/{id}', [ServicesController::class, 'getPriceService']);
+
+Route::prefix('agendamento')->middleware('auth')->group(function () {
+    Route::get('/create', [SchedulingController::class, 'viewCreateScheduling'])->name('agendamentos');
+    Route::post('/create', [SchedulingController::class, 'postCreateScheduling'])->name('agendamentos-create');
 });
 
 Route::get('/cadastros/veterinario', function () {

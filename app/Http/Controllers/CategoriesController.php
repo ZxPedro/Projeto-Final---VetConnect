@@ -65,14 +65,29 @@ class CategoriesController extends Controller
     public function deleteCategory(int $id)
     {
 
+        try {
+            $category = Category::find($id);
+
+            if (!$category) {
+                return redirect()->route('categories-list')->withErrors(['invalid-category' => 'Categoria não localizada']);
+            }
+
+            $category->delete();
+
+            return back()->withErrors(['success-delete' => 'Categoria deletada com sucesso!']);
+        } catch (\Throwable $th) {
+            return back()->withErrors(['wrong-delete' => 'Algo deu errado, tente novamente!']);
+        }
+    }
+
+    public function searchServicesCategory($id)
+    {
+
         $category = Category::find($id);
 
-        if (!$category) {
-            return redirect()->route('categories-list')->withErrors(['invalid-category' => 'Categoria não localizada']);
-        }
+        $services_category = $category->service;
 
-        $category->delete();
-
-        return back()->withErrors(['success-delete' => 'Categoria deletada com sucesso!']);
+        // dd($services_category);
+        return response()->json($services_category);
     }
 }
