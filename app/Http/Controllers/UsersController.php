@@ -44,8 +44,6 @@ class UsersController extends Controller
 
         $user = User::find($id);
 
-        // dd($user);
-
         return view('users.user_create', compact('user'));
     }
 
@@ -70,6 +68,7 @@ class UsersController extends Controller
             ]);
 
 
+            dd('chegou aqui');
 
             if (isset($validate['password'])) {
 
@@ -94,9 +93,31 @@ class UsersController extends Controller
     }
 
 
-    public function deleteUser(User $id)
+    public function deleteUser($id)
     {
-        $id->delete();
-        return back();
+
+        try {
+            $user = User::find($id);
+
+            if (!$user) {
+                return redirect()->route('user-list')->withErrors(['invalid-user' => 'Usuário não localizado']);
+            }
+
+            $user->delete();
+
+            return back()->withErrors(['success-delete' => 'Usuário deletado com sucesso!']);
+        } catch (\Throwable $th) {
+            return back()->withErrors(['wrong-delete' => 'Algo deu errado, tente novamente!']);
+        }
+    }
+
+    public function userCategories($id)
+    {
+
+        $professional = User::find($id);
+
+        $professional_categories = $professional->categories;
+
+        return response()->json($professional_categories);
     }
 }

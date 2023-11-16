@@ -19,4 +19,9 @@ class Service extends Model
     {
         return $this->belongsTo(Category::class);
     }
+
+    public function scheduling()
+    {
+        return $this->hasMany(Scheduling::class);
+    }
 }

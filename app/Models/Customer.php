@@ -29,4 +29,9 @@ class Customer extends Model
     {
         return $this->hasMany(CustomerAddress::class);
     }
+
+    public function scheduling()
+    {
+        return $this->hasMany(Scheduling::class);
+    }
 }

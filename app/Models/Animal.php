@@ -30,4 +30,9 @@ class Animal extends Model
     {
         return $this->belongsTo(Customer::class);
     }
+
+    public function scheduling()
+    {
+        return $this->hasMany(Scheduling::class);
+    }
 }

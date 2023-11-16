@@ -5,8 +5,10 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CategoriesController;
 use App\Http\Controllers\CustomersAddressController;
 use App\Http\Controllers\CustomersController;
+use App\Http\Controllers\CategoryUserController;
 use App\Http\Controllers\UsersController;
 use App\Http\Controllers\ServicesController;
+use App\Http\Controllers\SchedulingController;
 use App\Models\Customer;
 use Illuminate\Support\Facades\Route;
 
@@ -87,13 +89,30 @@ Route::prefix('cadastros/services')->middleware('auth')->group(function () {
 });
 
 
-Route::get('/address/edit/{id}', [CustomersAddressController::class, 'searchAddress']);
-Route::get('/breeds/{id}', [AnimalsController::class, 'searchBreeds']);
+Route::prefix('cadastros/professionals')->middleware('auth')->group(function () {
+    Route::get('/', [CategoryUserController::class, 'viewListProfessionals'])->name('professionals-list');
+    Route::get('/create', [CategoryUserController::class, 'viewCreateProfessionals'])->name('view-professionals-create');
+    Route::post('/create', [CategoryUserController::class, 'postCreateProfessionals'])->name('professionals-create');
 
-Route::get('/cadastros/agendamento', function () {
-    return view('/cadastros/agendamento');
+    Route::get('/edit/{id}', [CategoryUserController::class, 'editProfessional'])->name('professionals-edit');
+    Route::post('/edit/{id}', [CategoryUserController::class, 'updateProfessional'])->name('professional-update');
+
+    Route::get('/delete/{id}', [CategoryUserController::class, 'deleteProfessional'])->name('professional-delete');
+});
+
+Route::get('/address/edit/{id}', [CustomersAddressController::class, 'searchAddress']);
+
+Route::get('/breeds/{id}', [AnimalsController::class, 'searchBreeds']);
+Route::get('/animalscustomer/{id}', [CustomersController::class, 'searchAnimalsCustomer']);
+Route::get('/professionalcategories/{id}', [UsersController::class, 'userCategories']);
+Route::get('/categoryservice/{id}', [CategoriesController::class, 'searchServicesCategory']);
+Route::get('/getpriceservice/{id}', [ServicesController::class, 'getPriceService']);
+
+Route::prefix('agendamento')->middleware('auth')->group(function () {
+    Route::get('/create', [SchedulingController::class, 'viewCreateScheduling'])->name('agendamentos');
+    Route::post('/create', [SchedulingController::class, 'postCreateScheduling'])->name('agendamentos-create');
 });
 
 Route::get('/cadastros/veterinario', function () {
-    return view('/cadastros/veterinario');
+    return view('cadastros.professionals.professionals_create');
 });

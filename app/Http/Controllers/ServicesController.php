@@ -31,7 +31,6 @@ class ServicesController extends Controller
 
     public function postCreateServices(Request $request)
     {
-        // dd($request);
 
         $validation = $this->validate($request, [
             'name' => 'required',
@@ -97,5 +96,13 @@ class ServicesController extends Controller
         $service->delete();
 
         return back()->withErrors(['success-delete' => 'Serviço deletado com sucesso!']);
+    }
+
+    public function getPriceService($id)
+    {
+
+        $service = Service::find($id);
+
+        return response()->json($service);
     }
 }

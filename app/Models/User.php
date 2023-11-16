@@ -38,4 +38,15 @@ class User extends Authenticatable
      * @var array<string, string>
      */
     protected $casts = [];
+
+
+    public function categories()
+    {
+        return $this->belongsToMany(Category::class)->withPivot('working_days');;
+    }
+
+    public function scheduling()
+    {
+        return $this->hasMany(Scheduling::class);
+    }
 }

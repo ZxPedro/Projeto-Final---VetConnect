@@ -139,24 +139,21 @@
         });
     </script>
 
+
+    <!-- Exibe as raças de acordo com a especie selecionada -->
     <script type="text/javascript">
         $(document).ready(function() {
-            // Seletor para os campos select
             var especiesSelect = $('#especie');
             var racasSelect = $('#raca');
 
-            // Adicione um evento de mudança ao campo de espécies
             especiesSelect.change(function() {
-                var especieSelecionada = especiesSelect.val(); // Obtenha a espécie selecionada
-
-                // Faça uma solicitação AJAX para buscar as raças com base na espécie
+                var especieSelecionada = especiesSelect.val();
                 $.ajax({
                     url: '/breeds/' + especieSelecionada,
                     type: 'GET',
                     dataType: 'json',
                     success: function(racas) {
-                        // Limpe e preencha o campo de raças com as novas opções
-                        racasSelect.empty(); // Limpe as opções existentes
+                        racasSelect.empty();
                         $.each(racas, function(index, raca) {
                             racasSelect.append($('<option>', {
                                 value: raca.id,
@@ -164,7 +161,6 @@
                             }));
                         });
 
-                        // Habilitar ou desabilitar o campo de raças conforme necessário
                         if (racas.length > 0) {
                             racasSelect.prop('disabled', false);
                         } else {
@@ -175,14 +171,169 @@
                             }));
                         }
                     },
-                    error: function(xhr, status, error) {
-                        // Lide com erros, se necessário
-                    }
+                    error: function(xhr, status, error) {}
                 });
             });
 
-            // Inicialize as opções do campo de raças com base na seleção inicial (se houver)
             especiesSelect.trigger('change');
+        });
+    </script>
+
+    <!-- Exibe os pets de acordo com o cliente selecionado -->
+    <script type="text/javascript">
+        $(document).ready(function() {
+            var customerSelect = $('#customer_id_scheduling');
+            var animalSelect = $('#animal_id_scheduling');
+
+            customerSelect.change(function() {
+                var customerSelecionado = customerSelect.val();
+
+                $.ajax({
+                    url: '/animalscustomer/' + customerSelecionado,
+                    type: 'GET',
+                    dataType: 'json',
+                    success: function(pets) {
+                        animalSelect.empty();
+                        $.each(pets, function(index, pet) {
+                            animalSelect.append($('<option>', {
+                                value: pet.id,
+                                text: pet.name
+                            }));
+                        });
+
+                        if (pets.length > 0) {
+                            animalSelect.prop('disabled', false);
+                        } else {
+                            animalSelect.prop('disabled', true);
+                            animalSelect.append($('<option>', {
+                                value: '',
+                                text: 'Não há Pets disponíveis para esse cliente'
+                            }));
+                        }
+                    },
+                    error: function(xhr, status, error) {}
+                });
+            });
+
+            customerSelect.trigger('change');
+        });
+    </script>
+
+    <!-- Exibe as categorias de acordo com o funcionário selecionado -->
+    <script type="text/javascript">
+        $(document).ready(function() {
+            var professionalSelect = $('#professional_id_scheduling');
+            var categorySelect = $('#category_id_scheduling');
+
+            professionalSelect.change(function() {
+                var professionalSelecionado = professionalSelect.val();
+
+                $.ajax({
+                    url: '/professionalcategories/' + professionalSelecionado,
+                    type: 'GET',
+                    dataType: 'json',
+                    success: function(categories) {
+                        categorySelect.empty();
+                        $.each(categories, function(index, category) {
+                            categorySelect.append($('<option value="' + category.id + '">' + category.name + '</option>'));
+                        });
+
+                        if (categories.length > 0) {
+                            categorySelect.prop('disabled', false);
+                        } else {
+                            categorySelect.prop('disabled', true);
+                            categorySelect.append($('<option>', {
+                                value: '',
+                                text: 'Não há categorias disponíveis para esse profissional'
+                            }));
+                        }
+                    },
+                    error: function(xhr, status, error) {}
+                });
+            });
+
+            professionalSelect.trigger('change');
+        });
+    </script>
+
+    <!-- Exibe os serviços de acordo com a categoria selecionada -->
+    <script type="text/javascript">
+        $(document).ready(function() {
+            var categorySelect = $('#category_id_scheduling');
+            var serviceSelect = $('#service_id_scheduling');
+
+            categorySelect.change(function() {
+                var categorySelecionada = categorySelect.val();
+
+                $.ajax({
+                    url: '/categoryservice/' + categorySelecionada,
+                    type: 'GET',
+                    dataType: 'json',
+                    success: function(services) {
+
+                        serviceSelect.empty();
+                        $.each(services, function(index, service) {
+                            serviceSelect.append($('<option>', {
+                                value: service.id,
+                                text: service.name
+                            }));
+                        });
+
+                        if (services.length > 0) {
+                            serviceSelect.prop('disabled', false);
+                        } else {
+                            serviceSelect.prop('disabled', true);
+                            serviceSelect.append($('<option>', {
+                                value: '',
+                                text: 'Não há serviços para essa categoria'
+                            }));
+                        }
+                    },
+                    error: function(xhr, status, error) {}
+                });
+            });
+
+            categorySelect.trigger('change');
+        });
+    </script>
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            var servicesSelect = $('#service_id_scheduling');
+            var totalInput = $('#total_service');
+
+            servicesSelect.change(function() {
+                var serviceSelecionado = servicesSelect.val();
+
+                $.ajax({
+                    url: '/getpriceservice/' + serviceSelecionado,
+                    type: 'GET',
+                    dataType: 'json',
+                    success: function(services) {
+
+                        totalInput.empty();
+                        $.each(services, function(index, service) {
+                            totalInput.val($('<input>', {
+                                value: service.price,
+                                text: service.price
+                            }));
+                        });
+
+                        if (services.length > 0) {
+                            totalInput.prop('disabled', false);
+                        } else {
+                            totalInput.prop('disabled', true);
+                            totalInput.append($('<option>', {
+                                value: '',
+                                text: 'Não há serviços para essa categoria'
+                            }));
+                        }
+                    },
+                    error: function(xhr, status, error) {}
+                });
+            });
+
+            servicesSelect.trigger('change');
         });
     </script>
 </body>
