@@ -43,11 +43,17 @@
 
                 <div class="form-group mb-3">
                     <label for="professional_id" class="form-label mt-4">Profissional</label>
+                    @if($professionals)
                     <select class="form-select" id="professional_id_scheduling" name="professional_id">
                         @foreach($professionals as $professional)
                         <option value="{{$professional->id}}">{{$professional->name}}</option>
                         @endforeach
                     </select>
+                    @else
+                    <select class="form-select" id="professional_id_scheduling" name="professional_id" disabled>
+                        <option value="">Não há profissionais cadastrados</option>
+                    </select>
+                    @endif
                 </div>
 
                 <div class="row">
@@ -78,8 +84,8 @@
                     <textarea class="form-control" id="descricao" name="descricao" rows="3"></textarea>
                 </div>
                 <div class="mb-3">
-                    <label for="total" class="form-label mt-4">Total</label>
-                    <input type="text" class="form-control" name="total" id="total_service" placeholder="Valor do Serviço" value="">
+                    <label for="total" class="form-label mt-4">Total do serviço</label>
+                    <input type="text" class="form-control" name="total" id="total_service" placeholder="Valor do Serviço" value="" readonly>
                 </div>
 
                 <fieldset class="form-group row">

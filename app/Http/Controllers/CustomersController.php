@@ -2,7 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Animal;
+use App\Models\Category;
 use App\Models\Customer;
+use App\Models\Service;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 
@@ -53,6 +57,40 @@ class CustomersController extends Controller
         $profile['pets'] = $profile->animais;
 
         $profile['address'] = $profile->address;
+
+        $schedules = $profile->scheduling;
+
+
+        if (count($schedules) > 0) {
+            foreach ($schedules as $scheduling) {
+
+                $pet_scheduling = Animal::find($scheduling['animal_id']);
+                $category_scheduling = Category::find($scheduling['category_id']);
+                $user_scheduling = User::find($scheduling['professional_id']);
+                $service_scheduling = Service::find($scheduling['service_id']);
+
+                $customer_scheduling[] = [
+                    'pet_name' => $pet_scheduling->name,
+                    'category_name' => $category_scheduling->name,
+                    'service_name' =>  $service_scheduling->name,
+                    'service_price' => $service_scheduling->price,
+                    'professional_name' =>  $user_scheduling->name,
+                    'status' => $scheduling->status,
+                    'date_scheduling' => $scheduling->data_agendamento
+                ];
+            }
+
+            $profile['schedules'] = $customer_scheduling;
+        } else {
+            $profile['schedules'] = [];
+        }
+
+
+
+
+
+
+
 
         return view('customers.profile', compact('profile'));
     }
