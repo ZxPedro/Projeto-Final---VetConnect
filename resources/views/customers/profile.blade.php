@@ -224,7 +224,6 @@
                     <div class="row">
                         <div class="col">
 
-                            @foreach($dashboard_schedules as $dashboard_scheduling)
                             <table class="table table-hover mt-3 text-center">
                                 <thead>
                                     <tr>
@@ -246,17 +245,14 @@
                                         <td>{{$scheduling['service_price']}}</td>
                                         <td>{{$scheduling['professional_name']}}</td>
                                         <td>{{$scheduling['date_scheduling']}}</td>
-                                        <td>{{$scheduling['status']}}</td>
+                                        <td>{{$scheduling['status_name']}}</td>
                                         <td>
-                                            <a href="" class=" btn btn-success"><i class="fa-solid fa-eye"></i></a>
+                                            <a href="{{route('agendamento-view', $scheduling['id'])}}" class=" btn btn-success"><i class="fa-solid fa-eye"></i></a>
                                         </td>
                                     </tr>
                                     @endforeach
                                 </tbody>
                             </table>
-                            @else
-                            <p class="mt-2">Esse cliente não possui nenhum agendamento realizado!</p>
-                            @endif
                         </div>
                     </div>
                 </div>

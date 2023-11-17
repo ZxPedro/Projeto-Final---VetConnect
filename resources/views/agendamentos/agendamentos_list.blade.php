@@ -43,6 +43,7 @@
                         </tr>
                     </thead>
                     <tbody>
+                        @if($dashboard_schedules)
                         @foreach($dashboard_schedules as $dashboard_scheduling)
                         <tr>
                             <td>{{$dashboard_scheduling['id']}}</td>
@@ -52,12 +53,22 @@
                             <td>{{$dashboard_scheduling['service_price']}}</td>
                             <td>{{$dashboard_scheduling['professional_name']}}</td>
                             <td>{{$dashboard_scheduling['date_scheduling']}}</td>
-                            <td>{{$dashboard_scheduling['status']}}</td>
+                            <td>{{$dashboard_scheduling['status_name']}}</td>
                             <td>
-                                <a href="{{route('agendamento-view', $dashboard_scheduling['id'])}}" class="btn btn-success"><i class="fa-solid fa-eye"></i></a>
+                                <div class="btn-group">
+                                    <a href="{{route('agendamento-view', $dashboard_scheduling['id'])}}" class="btn btn-success me-1"><i class="fa-solid fa-eye"></i></a>
+                                    @if($dashboard_scheduling['status_id'] != '4')
+                                    <form action="{{route('cancelar-agendamento', $dashboard_scheduling['id'])}}" method="post">
+                                        @csrf
+                                        <button type="submit" class="btn btn-danger"><i class="fa-solid fa-ban"></i></button>
+                                    </form>
+                                    @endif
+                                </div>
                             </td>
+
                         </tr>
                         @endforeach
+                        @endif
                     </tbody>
                 </table>
             </div>

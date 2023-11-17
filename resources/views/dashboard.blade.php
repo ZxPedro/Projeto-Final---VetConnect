@@ -15,7 +15,7 @@
         @endif
 
         @foreach($dashboard_schedules as $dashboard_scheduling)
-        @if($dashboard_scheduling && $dashboard_scheduling['status'] == 'Confirmado')
+        @if($dashboard_scheduling && $dashboard_scheduling['status_id'] == '2')
         <div class="col-md-4 mb-4">
             <div class="card">
                 <div class="card-header">
@@ -30,7 +30,7 @@
                         <li class="list-group-item"><strong>Serviço: </strong>{{$dashboard_scheduling['service_name']}}</li>
                         <li class="list-group-item"><strong>Profissional: </strong>{{$dashboard_scheduling['professional_name']}}</li>
                         <li class="list-group-item"><strong>Valor: </strong>{{$dashboard_scheduling['service_price']}}</li>
-                        <li class="list-group-item"><strong>Status: </strong>{{$dashboard_scheduling['status']}}</li>
+                        <li class="list-group-item"><strong>Status: </strong>{{$dashboard_scheduling['status_name']}}</li>
                     </ul>
                 </div>
                 <div class="card-footer d-flex justify-content-between align-items-center">
@@ -38,8 +38,6 @@
                         @csrf
                         <button type="submit" class="btn btn-success">Finalizar</button>
                     </form>
-
-
                 </div>
             </div>
         </div>

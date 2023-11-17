@@ -110,9 +110,11 @@ Route::get('/getpriceservice/{id}', [ServicesController::class, 'getPriceService
 Route::prefix('agendamento')->middleware('auth')->group(function () {
     Route::get('/', [SchedulingController::class, 'viewListScheduling'])->name('agendamentos-list');
     Route::get('/service/{id}', [SchedulingController::class, 'viewServiceById'])->name('agendamento-view');
+    Route::post('/service/edit/{id}', [SchedulingController::class, 'updateServiceById'])->name('agendamento-update');
     Route::get('/create', [SchedulingController::class, 'viewCreateScheduling'])->name('agendamentos');
     Route::post('/create', [SchedulingController::class, 'postCreateScheduling'])->name('agendamentos-create');
     Route::post('/finish/{id}', [SchedulingController::class, 'finishService'])->name('finalizar-agendamento');
+    Route::post('/cancel/{id}', [SchedulingController::class, 'cancelService'])->name('cancelar-agendamento');
 });
 
 Route::get('/cadastros/veterinario', function () {

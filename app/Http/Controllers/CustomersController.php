@@ -6,6 +6,7 @@ use App\Models\Animal;
 use App\Models\Category;
 use App\Models\Customer;
 use App\Models\Service;
+use App\Models\Status;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
@@ -68,14 +69,17 @@ class CustomersController extends Controller
                 $category_scheduling = Category::find($scheduling['category_id']);
                 $user_scheduling = User::find($scheduling['professional_id']);
                 $service_scheduling = Service::find($scheduling['service_id']);
+                $status_scheduling = Status::find($scheduling['status_id']);
 
                 $customer_scheduling[] = [
+                    'id' => $scheduling->id,
                     'pet_name' => $pet_scheduling->name,
                     'category_name' => $category_scheduling->name,
                     'service_name' =>  $service_scheduling->name,
                     'service_price' => $service_scheduling->price,
                     'professional_name' =>  $user_scheduling->name,
-                    'status' => $scheduling->status,
+                    'status_id' =>  $status_scheduling->id,
+                    'status_name' =>  $status_scheduling->status_name,
                     'date_scheduling' => $scheduling->data_agendamento
                 ];
             }
@@ -84,13 +88,6 @@ class CustomersController extends Controller
         } else {
             $profile['schedules'] = [];
         }
-
-
-
-
-
-
-
 
         return view('customers.profile', compact('profile'));
     }

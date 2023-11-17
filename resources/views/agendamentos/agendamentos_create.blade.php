@@ -90,36 +90,14 @@
 
                 <fieldset class="form-group row">
                     <legend class="mt-4">Status</legend>
+                    @foreach($status as $value)
                     <div class="form-check col-2">
-                        <input class="form-check-input" type="radio" name="status" id="optionAgendado" value="Agendado" checked="">
+                        <input class="form-check-input" type="radio" name="status_id" id="optionAgendado" value="{{ $value->id}}">
                         <label class="form-check-label" for="optionAgendado">
-                            Agendado
+                            {{ $value->status_name}}
                         </label>
                     </div>
-                    <div class="form-check col-2">
-                        <input class="form-check-input" type="radio" name="status" id="optionConfirmado" value="Confirmado">
-                        <label class="form-check-label" for="optionConfirmado">
-                            Confirmado
-                        </label>
-                    </div>
-                    <div class="form-check col-2">
-                        <input class="form-check-input" type="radio" name="status" id="optionRemarcado" value="Remarcado">
-                        <label class="form-check-label" for="optionRemarcado">
-                            Remarcado
-                        </label>
-                    </div>
-                    <div class="form-check col-2">
-                        <input class="form-check-input" type="radio" name="status" id="optionFinalizado" value="Finalizado">
-                        <label class="form-check-label" for="optionFinalizado">
-                            Finalizado
-                        </label>
-                    </div>
-                    <div class="form-check col-2">
-                        <input class="form-check-input" type="radio" name="status" id="optionFaltou" value="Faltou">
-                        <label class="form-check-label" for="optionFaltou">
-                            Faltou
-                        </label>
-                    </div>
+                    @endforeach
                 </fieldset>
 
                 <button type="submit" class="btn btn-primary mt-2">Cadastrar</button>
