@@ -92,8 +92,8 @@
                     <legend class="mt-4">Status</legend>
                     @foreach($status as $value)
                     <div class="form-check col-2">
-                        <input class="form-check-input" type="radio" name="status_id" id="optionAgendado" value="{{ $value->id}}">
-                        <label class="form-check-label" for="optionAgendado">
+                        <input class="form-check-input" type="radio" name="status_id" id="option{{ $value->status_name}}" value="{{ $value->id}}">
+                        <label class="form-check-label" for="option{{ $value->status_name}}">
                             {{ $value->status_name}}
                         </label>
                     </div>

@@ -355,6 +355,20 @@
             servicesSelect.trigger('change');
         });
     </script>
+
+    <script>
+        $(document).ready(function() {
+            $('#ModalStockEntryAndExit').on('show.bs.modal', function(event) {
+                var button = $(event.relatedTarget); // Botão que acionou o modal
+                var productId = button.data('product-id'); // Extrai o ID do produto do botão
+                var productName = button.data('product-name'); // Extrai o nome do produto do botão
+
+                // Atualiza os valores dos campos de entrada no modal
+                $('#productIdModal').val(productId);
+                $('#productName').text(productName);
+            });
+        });
+    </script>
 </body>
 
 

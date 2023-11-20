@@ -27,4 +27,9 @@ class Category extends Model
     {
         return $this->hasMany(Scheduling::class);
     }
+
+    public function products()
+    {
+        return $this->belongsTo(Product::class);
+    }
 }

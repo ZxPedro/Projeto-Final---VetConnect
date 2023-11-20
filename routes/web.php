@@ -6,6 +6,7 @@ use App\Http\Controllers\CategoriesController;
 use App\Http\Controllers\CustomersAddressController;
 use App\Http\Controllers\CustomersController;
 use App\Http\Controllers\CategoryUserController;
+use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\UsersController;
 use App\Http\Controllers\ServicesController;
 use App\Http\Controllers\SchedulingController;
@@ -116,6 +117,18 @@ Route::prefix('agendamento')->middleware('auth')->group(function () {
     Route::post('/finish/{id}', [SchedulingController::class, 'finishService'])->name('finalizar-agendamento');
     Route::post('/cancel/{id}', [SchedulingController::class, 'cancelService'])->name('cancelar-agendamento');
 });
+
+Route::prefix('produto')->middleware('auth')->group(function () {
+    Route::get('/', [ProductsController::class, 'viewListProducts'])->name('products-list');
+    Route::get('/create', [ProductsController::class, 'viewCreateProduct'])->name('view-product-create');
+    Route::post('/create', [ProductsController::class, 'postCreateProduct'])->name('product-create');
+    Route::get('/edit/{id}', [ProductsController::class, 'editProduct'])->name('product-edit');
+    Route::post('/edit/{id}', [ProductsController::class, 'updateProduct'])->name('product-update');
+    Route::get('/delete/{id}', [ProductsController::class, 'deleteProduct'])->name('product-delete');
+
+    Route::post('/update', [ProductsController::class, 'updateStrock'])->name('product-stock');
+});
+
 
 Route::get('/cadastros/veterinario', function () {
     return view('cadastros.professionals.professionals_create');
