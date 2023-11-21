@@ -61,7 +61,7 @@
                         <div class="form-group">
                             <label for="category_id" class="form-label mt-4">Categoria</label>
                             <select class="form-select" id="category_id_scheduling" name="category_id">
-                                <option value="">--Please choose an option--</option>
+                                <option value="">Selecione a categoria desejada</option>
                             </select>
                         </div>
                     </div>

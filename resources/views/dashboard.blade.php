@@ -14,6 +14,7 @@
         @endforeach
         @endif
 
+        @if($dashboard_schedules)
         @foreach($dashboard_schedules as $dashboard_scheduling)
         @if($dashboard_scheduling && $dashboard_scheduling['status_id'] == '2')
         <div class="col-md-4 mb-4">
@@ -42,15 +43,8 @@
             </div>
         </div>
         @endif
-
-
         @endforeach
-
-
-
-
-
-
+        @endif
     </div>
 </div>
 

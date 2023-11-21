@@ -29,8 +29,6 @@
     @endif
     <div class="row">
         <div class="col-12">
-
-
             <table class="table table-hover mt-3 text-center" id="">
                 <thead>
                     <tr>
