@@ -6,10 +6,12 @@ use App\Http\Controllers\CategoriesController;
 use App\Http\Controllers\CustomersAddressController;
 use App\Http\Controllers\CustomersController;
 use App\Http\Controllers\CategoryUserController;
+use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\UsersController;
 use App\Http\Controllers\ServicesController;
 use App\Http\Controllers\SchedulingController;
 use App\Models\Customer;
+use App\Models\Scheduling;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -27,9 +29,7 @@ Route::get('/', [AuthController::class, 'viewLoginPage']);
 Route::post('/', [AuthController::class, 'postAuthenticate'])->name('login');
 ROute::get('/logout', [AuthController::class, 'getLogout'])->name('logout');
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware('auth')->name('dashboard');
+Route::get('/dashboard', [SchedulingController::class, 'viewSchedulesDashboard'])->middleware('auth')->name('dashboard');
 
 Route::prefix('users')->middleware('auth')->group(function () {
 
@@ -102,16 +102,33 @@ Route::prefix('cadastros/professionals')->middleware('auth')->group(function () 
 
 Route::get('/address/edit/{id}', [CustomersAddressController::class, 'searchAddress']);
 
-Route::get('/breeds/{id}', [AnimalsController::class, 'searchBreeds']);
-Route::get('/animalscustomer/{id}', [CustomersController::class, 'searchAnimalsCustomer']);
-Route::get('/professionalcategories/{id}', [UsersController::class, 'userCategories']);
-Route::get('/categoryservice/{id}', [CategoriesController::class, 'searchServicesCategory']);
-Route::get('/getpriceservice/{id}', [ServicesController::class, 'getPriceService']);
+Route::get('/breeds/{id}', [AnimalsController::class, 'searchBreeds'])->middleware('auth');
+Route::get('/animalscustomer/{id}', [CustomersController::class, 'searchAnimalsCustomer'])->middleware('auth');
+Route::get('/professionalcategories/{id}', [UsersController::class, 'userCategories'])->middleware('auth');
+Route::get('/categoryservice/{id}', [CategoriesController::class, 'searchServicesCategory'])->middleware('auth');
+Route::get('/getpriceservice/{id}', [ServicesController::class, 'getPriceService'])->middleware('auth');
 
 Route::prefix('agendamento')->middleware('auth')->group(function () {
+    Route::get('/', [SchedulingController::class, 'viewListScheduling'])->name('agendamentos-list');
+    Route::get('/service/{id}', [SchedulingController::class, 'viewServiceById'])->name('agendamento-view');
+    Route::post('/service/edit/{id}', [SchedulingController::class, 'updateServiceById'])->name('agendamento-update');
     Route::get('/create', [SchedulingController::class, 'viewCreateScheduling'])->name('agendamentos');
     Route::post('/create', [SchedulingController::class, 'postCreateScheduling'])->name('agendamentos-create');
+    Route::post('/finish/{id}', [SchedulingController::class, 'finishService'])->name('finalizar-agendamento');
+    Route::post('/cancel/{id}', [SchedulingController::class, 'cancelService'])->name('cancelar-agendamento');
 });
+
+Route::prefix('produto')->middleware('auth')->group(function () {
+    Route::get('/', [ProductsController::class, 'viewListProducts'])->name('products-list');
+    Route::get('/create', [ProductsController::class, 'viewCreateProduct'])->name('view-product-create');
+    Route::post('/create', [ProductsController::class, 'postCreateProduct'])->name('product-create');
+    Route::get('/edit/{id}', [ProductsController::class, 'editProduct'])->name('product-edit');
+    Route::post('/edit/{id}', [ProductsController::class, 'updateProduct'])->name('product-update');
+    Route::get('/delete/{id}', [ProductsController::class, 'deleteProduct'])->name('product-delete');
+
+    Route::post('/update', [ProductsController::class, 'updateStrock'])->name('product-stock');
+});
+
 
 Route::get('/cadastros/veterinario', function () {
     return view('cadastros.professionals.professionals_create');

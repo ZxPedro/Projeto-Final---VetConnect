@@ -18,7 +18,7 @@
                     <a class="nav-link" data-bs-toggle="tab" href="#pets" aria-selected="false" tabindex="-1" role="tab">Pets</a>
                 </li>
                 <li class="nav-item" role="presentation">
-                    <a class="nav-link" data-bs-toggle="tab" href="#teste" aria-selected="false" tabindex="-1" role="tab">Agendamentos</a>
+                    <a class="nav-link" data-bs-toggle="tab" href="#agendamentos" aria-selected="false" tabindex="-1" role="tab">Agendamentos</a>
                 </li>
             </ul>
 
@@ -216,6 +216,43 @@
                             @else
                             <p class="mt-2">Esse cliente não possui nenhum animal cadastrado!</p>
                             @endif
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tab-pane fade" id="agendamentos" role="tabpanel">
+                    <div class="row">
+                        <div class="col">
+
+                            <table class="table table-hover mt-3 text-center">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Pet</th>
+                                        <th scope="col">Categoria</th>
+                                        <th scope="col">Serviço</th>
+                                        <th scope="col">Preço</th>
+                                        <th scope="col">Profissional</th>
+                                        <th scope="col">Data de agendamento</th>
+                                        <th scope="col">Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach($profile['schedules'] as $scheduling)
+                                    <tr>
+                                        <td>{{$scheduling['pet_name']}}</td>
+                                        <td>{{$scheduling['category_name']}}</td>
+                                        <td>{{$scheduling['service_name']}}</td>
+                                        <td>{{$scheduling['service_price']}}</td>
+                                        <td>{{$scheduling['professional_name']}}</td>
+                                        <td>{{$scheduling['date_scheduling']}}</td>
+                                        <td>{{$scheduling['status_name']}}</td>
+                                        <td>
+                                            <a href="{{route('agendamento-view', $scheduling['id'])}}" class=" btn btn-success"><i class="fa-solid fa-eye"></i></a>
+                                        </td>
+                                    </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>

@@ -20,10 +20,10 @@ class CreateSchedulingTable extends Migration
             $table->foreignId('category_id')->references('id')->on('categories')->cascadeOnDelete();
             $table->foreignId('professional_id')->references('id')->on('users')->cascadeOnDelete();
             $table->foreignId('service_id')->references('id')->on('services')->cascadeOnDelete();
+            $table->foreignId('status_id')->references('id')->on('status')->cascadeOnDelete();
             $table->decimal('total', 15, 4);
             $table->dateTime('data_agendamento');
             $table->boolean('flagfinalizado')->nullable();;
-            $table->string('status');
             $table->text('descricao')->nullable();
             $table->timestamps();
         });

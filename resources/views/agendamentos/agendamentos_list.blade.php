@@ -7,16 +7,15 @@
 <div class="row justify-content-center ">
     <div class="row mt-3">
         <div class="col-4">
-            <h4>Lista de Profissionais</h4>
+            <h4>Lista de Agendamentos</h4>
         </div>
         <div class="col-4 text-center">
             <div class="input-group mb-3">
-                <input type="text" class="form-control" placeholder="Nome" aria-label="" aria-describedby="button-addon2" id="">
-                <button class="btn btn-primary" type="button" id="button-addon2"><i class="fa-solid fa-magnifying-glass"></i></button>
+                <input type="text" class="form-control" aria-describedby="button-addon2" hidden>
             </div>
         </div>
         <div class="col-4 text-end">
-            <a href="{{route('view-professionals-create')}}" class="btn btn-primary"><i class="fa-solid fa-plus pe-2"></i>Cadastrar</a>
+            <a href="{{route('agendamentos')}}" class="btn btn-primary"><i class="fa-solid fa-plus pe-2"></i>Agendar</a>
         </div>
     </div>
     @if($errors->any())
@@ -29,36 +28,53 @@
     @endif
     <div class="row">
         <div class="col-12">
+            <div class="table-responsive">
+                <table class="table table-hover mt-3">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Cliente</th>
+                            <th scope="col">Pet</th>
+                            <th scope="col">Serviço</th>
+                            <th scope="col">Preço</th>
+                            <th scope="col">Profissional</th>
+                            <th scope="col">Data de agendamento</th>
+                            <th scope="col">Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if($dashboard_schedules)
+                        @foreach($dashboard_schedules as $dashboard_scheduling)
+                        <tr>
+                            <td>{{$dashboard_scheduling['id']}}</td>
+                            <td>{{$dashboard_scheduling['customer_name']}}</td>
+                            <td>{{$dashboard_scheduling['pet_name']}}</td>
+                            <td>{{$dashboard_scheduling['service_name']}}</td>
+                            <td>{{$dashboard_scheduling['service_price']}}</td>
+                            <td>{{$dashboard_scheduling['professional_name']}}</td>
+                            <td>{{$dashboard_scheduling['date_scheduling']}}</td>
+                            <td>{{$dashboard_scheduling['status_name']}}</td>
+                            <td>
+                                <div class="btn-group">
+                                    <a href="{{route('agendamento-view', $dashboard_scheduling['id'])}}" class="btn btn-success me-1"><i class="fa-solid fa-eye"></i></a>
+                                    @if($dashboard_scheduling['status_id'] != '4')
+                                    <form action="{{route('cancelar-agendamento', $dashboard_scheduling['id'])}}" method="post">
+                                        @csrf
+                                        <button type="submit" class="btn btn-danger"><i class="fa-solid fa-ban"></i></button>
+                                    </form>
+                                    @endif
+                                </div>
+                            </td>
 
-
-            <table class="table table-hover mt-3 text-center" id="">
-                <thead>
-                    <tr>
-                        <th scope="col">Nome</th>
-                        <th scope="col">Especialidades</th>
-                        <th scope="col">Escala</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach($users as $user)
-                    @if($user->categories_user)
-                    <tr>
-                        <td>{{$user->name}}</td>
-                        <td>{{$user->categories_user}} Especialidade(s)</td>
-                        <td>{{$user->working_days}} Dias</td>
-                        <td>
-                            <a href="{{route('professionals-edit', $user->id)}}" class="btn btn-success"><i class="fa-solid fa-eye"></i></a>
-                            <a href="{{route('professional-delete', $user->id)}}" class="btn btn-danger"><i class="fa-solid fa-trash"></i></a>
-                        </td>
-                    </tr>
-                    @endif
-                    @endforeach
-                </tbody>
-            </table>
+                        </tr>
+                        @endforeach
+                        @endif
+                    </tbody>
+                </table>
+            </div>
         </div>
         <div class="row mt-2">
             <div class="col pagination justify-content-end">
-
 
             </div>
         </div>

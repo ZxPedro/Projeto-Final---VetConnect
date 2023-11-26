@@ -43,11 +43,17 @@
 
                 <div class="form-group mb-3">
                     <label for="professional_id" class="form-label mt-4">Profissional</label>
+                    @if($professionals)
                     <select class="form-select" id="professional_id_scheduling" name="professional_id">
                         @foreach($professionals as $professional)
                         <option value="{{$professional->id}}">{{$professional->name}}</option>
                         @endforeach
                     </select>
+                    @else
+                    <select class="form-select" id="professional_id_scheduling" name="professional_id" disabled>
+                        <option value="">Não há profissionais cadastrados</option>
+                    </select>
+                    @endif
                 </div>
 
                 <div class="row">
@@ -55,7 +61,7 @@
                         <div class="form-group">
                             <label for="category_id" class="form-label mt-4">Categoria</label>
                             <select class="form-select" id="category_id_scheduling" name="category_id">
-                                <option value="">--Please choose an option--</option>
+                                <option value="">Selecione a categoria desejada</option>
                             </select>
                         </div>
                     </div>
@@ -78,42 +84,20 @@
                     <textarea class="form-control" id="descricao" name="descricao" rows="3"></textarea>
                 </div>
                 <div class="mb-3">
-                    <label for="total" class="form-label mt-4">Total</label>
-                    <input type="text" class="form-control" name="total" id="total_service" placeholder="Valor do Serviço" value="">
+                    <label for="total" class="form-label mt-4">Total do serviço</label>
+                    <input type="text" class="form-control" name="total" id="total_service" placeholder="Valor do Serviço" value="" readonly>
                 </div>
 
                 <fieldset class="form-group row">
                     <legend class="mt-4">Status</legend>
+                    @foreach($status as $value)
                     <div class="form-check col-2">
-                        <input class="form-check-input" type="radio" name="status" id="optionAgendado" value="Agendado" checked="">
-                        <label class="form-check-label" for="optionAgendado">
-                            Agendado
+                        <input class="form-check-input" type="radio" name="status_id" id="option{{ $value->status_name}}" value="{{ $value->id}}">
+                        <label class="form-check-label" for="option{{ $value->status_name}}">
+                            {{ $value->status_name}}
                         </label>
                     </div>
-                    <div class="form-check col-2">
-                        <input class="form-check-input" type="radio" name="status" id="optionConfirmado" value="Confirmado">
-                        <label class="form-check-label" for="optionConfirmado">
-                            Confirmado
-                        </label>
-                    </div>
-                    <div class="form-check col-2">
-                        <input class="form-check-input" type="radio" name="status" id="optionRemarcado" value="Remarcado">
-                        <label class="form-check-label" for="optionRemarcado">
-                            Remarcado
-                        </label>
-                    </div>
-                    <div class="form-check col-2">
-                        <input class="form-check-input" type="radio" name="status" id="optionFinalizado" value="Finalizado">
-                        <label class="form-check-label" for="optionFinalizado">
-                            Finalizado
-                        </label>
-                    </div>
-                    <div class="form-check col-2">
-                        <input class="form-check-input" type="radio" name="status" id="optionFaltou" value="Faltou">
-                        <label class="form-check-label" for="optionFaltou">
-                            Faltou
-                        </label>
-                    </div>
+                    @endforeach
                 </fieldset>
 
                 <button type="submit" class="btn btn-primary mt-2">Cadastrar</button>

@@ -20,7 +20,7 @@ class Scheduling extends Model
         'total',
         'data_agendamento',
         'flagfinalizado',
-        'status',
+        'status_id',
         'descricao'
     ];
 
@@ -47,5 +47,10 @@ class Scheduling extends Model
     public function service()
     {
         return $this->belongsTo(Service::class);
+    }
+
+    public function status()
+    {
+        return $this->belongsTo(Status::class);
     }
 }

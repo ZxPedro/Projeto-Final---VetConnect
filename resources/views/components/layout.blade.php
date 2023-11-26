@@ -233,12 +233,24 @@
                     type: 'GET',
                     dataType: 'json',
                     success: function(categories) {
+                        // Limpar todas as opções existentes
                         categorySelect.empty();
-                        $.each(categories, function(index, category) {
-                            categorySelect.append($('<option value="' + category.id + '">' + category.name + '</option>'));
-                        });
+
+                        // Adicionar a opção padrão
+                        categorySelect.append($('<option>', {
+                            value: 'default', // ou outro valor padrão
+                            text: 'Selecione uma categoria'
+                        }));
 
                         if (categories.length > 0) {
+                            // Adicionar as outras opções com base no profissional
+                            $.each(categories, function(index, category) {
+                                categorySelect.append($('<option>', {
+                                    value: category.id,
+                                    text: category.name
+                                }));
+                            });
+
                             categorySelect.prop('disabled', false);
                         } else {
                             categorySelect.prop('disabled', true);
@@ -270,16 +282,24 @@
                     type: 'GET',
                     dataType: 'json',
                     success: function(services) {
-
+                        // Limpar todas as opções existentes
                         serviceSelect.empty();
-                        $.each(services, function(index, service) {
-                            serviceSelect.append($('<option>', {
-                                value: service.id,
-                                text: service.name
-                            }));
-                        });
+
+                        // Adicionar a opção padrão
+                        serviceSelect.append($('<option>', {
+                            value: 'default', // ou outro valor padrão
+                            text: 'Selecione o serviço desejado'
+                        }));
 
                         if (services.length > 0) {
+                            // Adicionar as outras opções com base na categoria
+                            $.each(services, function(index, service) {
+                                serviceSelect.append($('<option>', {
+                                    value: service.id,
+                                    text: service.name
+                                }));
+                            });
+
                             serviceSelect.prop('disabled', false);
                         } else {
                             serviceSelect.prop('disabled', true);
@@ -297,6 +317,8 @@
         });
     </script>
 
+
+
     <script type="text/javascript">
         $(document).ready(function() {
             var servicesSelect = $('#service_id_scheduling');
@@ -309,31 +331,43 @@
                     url: '/getpriceservice/' + serviceSelecionado,
                     type: 'GET',
                     dataType: 'json',
-                    success: function(services) {
+                    success: function(price_service) {
+                        totalInput.val(""); // Limpar o conteúdo atual, se houver
 
-                        totalInput.empty();
-                        $.each(services, function(index, service) {
-                            totalInput.val($('<input>', {
-                                value: service.price,
-                                text: service.price
-                            }));
-                        });
-
-                        if (services.length > 0) {
-                            totalInput.prop('disabled', false);
+                        if (price_service) {
+                            var firstServicePrice = price_service.price;
+                            firstServicePrice.toLocaleString('pt-BR', {
+                                minimumFractionDigits: 2,
+                                maximumFractionDigits: 2
+                            });
+                            totalInput.val(firstServicePrice);
                         } else {
-                            totalInput.prop('disabled', true);
-                            totalInput.append($('<option>', {
-                                value: '',
-                                text: 'Não há serviços para essa categoria'
-                            }));
+                            totalInput.val("Nenhum serviço disponível para esta categoria");
                         }
+
+                        totalInput.prop('disabled', false);
                     },
-                    error: function(xhr, status, error) {}
+                    error: function(xhr, status, error) {
+                        // Trate erros, se necessário
+                    }
                 });
             });
 
             servicesSelect.trigger('change');
+        });
+    </script>
+
+    <script>
+        $(document).ready(function() {
+            $('#ModalStockEntryAndExit').on('show.bs.modal', function(event) {
+                var button = $(event.relatedTarget); // Botão que acionou o modal
+                var productId = button.data('product-id'); // Extrai o ID do produto do botão
+                var productName = button.data('product-name'); // Extrai o nome do produto do botão
+
+                // Atualiza os valores dos campos de entrada no modal
+                $('#productIdModal').val(productId);
+                $('#productName').text(productName);
+            });
         });
     </script>
 </body>

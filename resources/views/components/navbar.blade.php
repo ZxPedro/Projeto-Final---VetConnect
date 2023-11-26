@@ -13,12 +13,16 @@
                         </a>
                     </li>
                     <li>
-                        <a href="/cadastros/agendamento" class="nav-link px-0 align-middle">
-                        <i class="fa-regular fa-calendar pe-1"></i><span class="ms-1 d-none d-sm-inline"></i>Agendamento</span></a>
+                        <a href="{{route('agendamentos-list')}}" class="nav-link px-0 align-middle">
+                            <i class="fs-4 bi-table"></i> <span class="ms-1 d-none d-sm-inline"><i class="fa-regular fa-calendar pe-1"></i></i>Agendamento</span></a>
                     </li>
                     <li>
                         <a href="{{ route('customer-list') }}" class="nav-link px-0 align-middle">
                         <i class="fa-solid fa-person pe-1"></i> <span class="ms-1 d-none d-sm-inline"></i>Cliente</span></a>
+                    </li>
+                    <li>
+                        <a href="{{ route('products-list') }}" class="nav-link px-0 align-middle">
+                            <i class="fs-4 bi-table"></i> <span class="ms-1 d-none d-sm-inline"><i class="fa-solid fa-box pe-1"></i>Produtos</span></a>
                     </li>
                     <li>
                         <a href="#submenu2" data-bs-toggle="collapse" class="nav-link px-0 align-middle ">
@@ -39,23 +43,24 @@
                         </ul>
                     </li>
                     <li>
-                        <a href="#" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
-                            <i class="fs-4 bi-grid"></i> <span class="ms-1 d-none d-sm-inline">Outros</span> </a>
+                        <a href="#submenu3" data-bs-toggle="collapse" class="nav-link px-0 align-middle ">
+                            <i class="fs-4 bi-bootstrap"></i> <span class="ms-1 d-none d-sm-inline"><i class="fa-solid fa-file-excel pe-1"></i></i>Relatórios</span></a>
                         <ul class="collapse nav flex-column ms-1" id="submenu3" data-bs-parent="#menu">
                             <li class="w-100">
-                                <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline">Opção</span> 1</a>
+                                <a href="" class="nav-link px-3"> <span class="d-none d-sm-inline">Cadastro de Clientes</span></a>
                             </li>
                             <li>
-                                <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline">Opção</span> 2</a>
+                                <a href="" class="nav-link px-3"> <span class="d-none d-sm-inline">Atendimentos Finalizados</span></a>
                             </li>
                             <li>
-                                <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline">Opção</span> 3</a>
+                                <a href="" class="nav-link px-3"> <span class="d-none d-sm-inline">Estoque Negativo</span></a>
                             </li>
                             <li>
-                                <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline">Opção</span> 4</a>
+                                <a href="" class="nav-link px-3"> <span class="d-none d-sm-inline">Serviços</span></a>
                             </li>
                         </ul>
                     </li>
+
                 </ul>
                 <hr>
                 <div class="dropdown pb-4">
@@ -64,11 +69,6 @@
                         <span class="d-none d-sm-inline mx-1">{{ auth()->user()->name }}</span>
                     </a>
                     <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
-                        <!-- <li><a class="dropdown-item" href="#">Settings</a></li>
-                        <li><a class="dropdown-item" href="#">Profile</a></li>
-                        <li>
-                            <hr class="dropdown-divider">
-                        </li> -->
                         <li><a class="dropdown-item" href="{{ route('logout') }}">Sair</a></li>
                     </ul>
                 </div>
