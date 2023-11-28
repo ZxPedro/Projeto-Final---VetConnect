@@ -93,7 +93,7 @@ class ProductsController extends Controller
         return back()->withErrors(['success-delete' => 'Produto deletado com sucesso!']);
     }
 
-    public function updateStrock(Request $request)
+    public function updateStock(Request $request)
     {
 
         $validation = $this->validate($request, [

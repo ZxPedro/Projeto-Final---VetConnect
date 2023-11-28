@@ -126,10 +126,8 @@ Route::prefix('produto')->middleware('auth')->group(function () {
     Route::post('/edit/{id}', [ProductsController::class, 'updateProduct'])->name('product-update');
     Route::get('/delete/{id}', [ProductsController::class, 'deleteProduct'])->name('product-delete');
 
-    Route::post('/update', [ProductsController::class, 'updateStrock'])->name('product-stock');
+    Route::post('/update', [ProductsController::class, 'updateStock'])->name('product-stock');
 });
 
 
-Route::get('/cadastros/veterinario', function () {
-    return view('cadastros.professionals.professionals_create');
-});
+
