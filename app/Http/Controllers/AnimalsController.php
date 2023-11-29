@@ -109,7 +109,7 @@ class AnimalsController extends Controller
 
         isset($validate['flagidoso']) ?  $validate['flagidoso'] = 1 : $validate['flagidoso'] = '0';
 
-        //dd($validate['flagidoso']);
+
 
         isset($validate['flagcardiopata']) ?  $validate['flagcardiopata'] = 1 : $validate['flagcardiopata'] = 0;
         isset($validate['flagepiletico']) ?  $validate['flagepiletico'] = 1 : $validate['flagepiletico'] = 0;

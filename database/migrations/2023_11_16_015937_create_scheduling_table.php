@@ -21,7 +21,7 @@ class CreateSchedulingTable extends Migration
             $table->foreignId('professional_id')->references('id')->on('users')->cascadeOnDelete();
             $table->foreignId('service_id')->references('id')->on('services')->cascadeOnDelete();
             $table->foreignId('status_id')->references('id')->on('status')->cascadeOnDelete();
-            $table->decimal('total', 15, 4);
+            $table->decimal('total', 15, 2);
             $table->dateTime('data_agendamento');
             $table->boolean('flagfinalizado')->nullable();;
             $table->text('descricao')->nullable();

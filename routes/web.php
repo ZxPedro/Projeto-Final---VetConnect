@@ -6,6 +6,7 @@ use App\Http\Controllers\CategoriesController;
 use App\Http\Controllers\CustomersAddressController;
 use App\Http\Controllers\CustomersController;
 use App\Http\Controllers\CategoryUserController;
+use App\Http\Controllers\FinancialReleasesController;
 use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\UsersController;
 use App\Http\Controllers\ServicesController;
@@ -130,4 +131,8 @@ Route::prefix('produto')->middleware('auth')->group(function () {
 });
 
 
+Route::prefix('financeiro')->middleware('auth')->group(function () {
+    Route::get('/', [FinancialReleasesController::class, 'viewReleases'])->name('finance-list');
 
+    Route::post('/create', [FinancialReleasesController::class, 'postReleases'])->name('post-finance');
+});
