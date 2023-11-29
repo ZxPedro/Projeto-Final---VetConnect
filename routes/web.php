@@ -135,4 +135,5 @@ Route::prefix('financeiro')->middleware('auth')->group(function () {
     Route::get('/', [FinancialReleasesController::class, 'viewReleases'])->name('finance-list');
 
     Route::post('/create', [FinancialReleasesController::class, 'postReleases'])->name('post-finance');
+    Route::get('/delete/{id}', [FinancialReleasesController::class, 'deleteReleases'])->name('release-delete');
 });

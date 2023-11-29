@@ -18,10 +18,12 @@ class FinancialReleasesController extends Controller
         $total_despesas = FinancialRelease::where('type', 'D')->sum('price');
 
 
+
         $receitas = [];
 
         foreach ($creditos as $credito) {
             $receitas[] = [
+                'id' => $credito->id,
                 'name' => $credito->name,
                 'price' => $credito->price
             ];
@@ -29,10 +31,13 @@ class FinancialReleasesController extends Controller
 
         foreach ($atendimentos as $atendimento) {
             $receitas[] = [
+                'id' => null,
                 'name' => 'Atendimento #' . $atendimento->id,
                 'price' => $atendimento->total,
             ];
         }
+
+
 
         $total_receitas = array_sum(array_column($receitas, 'price'));
 
@@ -51,5 +56,19 @@ class FinancialReleasesController extends Controller
         FinancialRelease::create($validation);
 
         return back();
+    }
+
+    function deleteReleases($id)
+    {
+        $release = FinancialRelease::find($id);
+
+        if (!$release) {
+            return back()->withErrors(['invalid-release' => 'Lançamento não localizado']);
+        }
+
+
+        $release->delete();
+
+        return back()->withErrors(['success-delete' => 'Lançamento deletado com sucesso!']);
     }
 }

@@ -42,11 +42,10 @@
                                 <td>{{$receita['name']}}</td>
                                 <td>R$ {{$receita['price']}}</td>
                                 <td>
-                                    <a href="#" class="btn btn-success"><i class="fa-solid fa-eye"></i></a>
-                                    <form action="#" method="post">
-                                        @csrf
-                                        <button type="submit" class="btn btn-danger"><i class="fa-solid fa-ban"></i></button>
-                                    </form>
+                                    @if($receita['id'])
+                                    <a href="{{route('release-delete', $receita['id'])}}" class="btn btn-danger"><i class="fa-solid fa-trash"></i></a>
+
+                                    @endif
                                 </td>
                             </tr>
                             @endforeach
@@ -73,11 +72,7 @@
                                 <td>{{$despesa->name}}</td>
                                 <td>R$ -{{$despesa->price}}</td>
                                 <td>
-                                    <a href="#" class="btn btn-success"><i class="fa-solid fa-eye"></i></a>
-                                    <form action="#" method="post">
-                                        @csrf
-                                        <button type="submit" class="btn btn-danger"><i class="fa-solid fa-ban"></i></button>
-                                    </form>
+                                    <a href="{{route('release-delete', $despesa->id)}}" class="btn btn-danger"><i class="fa-solid fa-trash"></i></a>
                                 </td>
                             </tr>
                             @endforeach
