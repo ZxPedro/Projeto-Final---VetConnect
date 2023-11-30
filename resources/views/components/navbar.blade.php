@@ -19,18 +19,12 @@
                         <a href="{{ route('customer-list') }}" class="nav-link px-0 align-middle">
                             <i class="fs-4 bi-table"></i> <span class="ms-1 d-none d-sm-inline"><i class="fa-solid fa-person pe-1"></i>Cliente</span></a>
                     </li>
-                    <li>
-                        <a href="{{ route('products-list') }}" class="nav-link px-0 align-middle">
-                            <i class="fs-4 bi-table"></i> <span class="ms-1 d-none d-sm-inline"><i class="fa-solid fa-box pe-1"></i>Produtos</span></a>
-                    </li>
+
                     <li>
                         <a href="#submenu2" data-bs-toggle="collapse" class="nav-link px-0 align-middle ">
                             <i class="fs-4 bi-bootstrap"></i> <span class="ms-1 d-none d-sm-inline"><i class="fa-solid fa-gears pe-1"></i>Gestão</span></a>
                         <ul class="collapse nav flex-column ms-1" id="submenu2" data-bs-parent="#menu">
                             <li class="w-100">
-                                <a href="{{route('professionals-list')}}" class="nav-link px-3"> <span class="d-none d-sm-inline">Profissionais</span></a>
-                            </li>
-                            <li>
                                 <a href="{{ route('user-list') }}" class="nav-link px-3"> <span class="d-none d-sm-inline">Usuários</span></a>
                             </li>
                             <li>
@@ -39,7 +33,19 @@
                             <li>
                                 <a href="{{route('services-list')}}" class="nav-link px-3"> <span class="d-none d-sm-inline">Serviços</span></a>
                             </li>
+                            <li>
+                                <a href="{{route('professionals-list')}}" class="nav-link px-3"> <span class="d-none d-sm-inline">Profissionais</span></a>
+                            </li>
+
+
+                            <li>
+                                <a href="{{ route('products-list') }}" class="nav-link px-3"> <span class="d-none d-sm-inline">Produtos</span></a>
+                            </li>
                         </ul>
+                    </li>
+                    <li>
+                        <a href="{{ route('finance-list') }}" class="nav-link px-0 align-middle">
+                            <i class="fs-4 bi-table"></i> <span class="ms-1 d-none d-sm-inline"><i class="fa-solid fa-dollar-sign pe-1"></i>Financeiro</span></a>
                     </li>
                     <li>
                         <a href="#submenu3" data-bs-toggle="collapse" class="nav-link px-0 align-middle ">

@@ -211,7 +211,7 @@ class SchedulingController extends Controller
         $scheduling = Scheduling::find($id);
 
         if (!$scheduling) {
-            return redirect()->route('dashboard')->withErrors(['invalid-scheduling' => 'Agendamento não localizado']);
+            return back()->withErrors(['invalid-scheduling' => 'Agendamento não localizado']);
         }
 
         $request = [
@@ -220,6 +220,6 @@ class SchedulingController extends Controller
 
         $scheduling->update($request);
 
-        return redirect()->route('dashboard')->withErrors(['success-finish' => 'Agendamento #' . $id . ' cancelado com sucesso!']);
+        return back()->withErrors(['success-finish' => 'Agendamento #' . $id . ' cancelado com sucesso!']);
     }
 }

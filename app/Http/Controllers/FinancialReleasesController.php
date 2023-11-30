@@ -71,4 +71,11 @@ class FinancialReleasesController extends Controller
 
         return back()->withErrors(['success-delete' => 'Lançamento deletado com sucesso!']);
     }
+
+    function getRelease($id)
+    {
+        $release = FinancialRelease::find($id);
+
+        return response()->json($release);
+    }
 }

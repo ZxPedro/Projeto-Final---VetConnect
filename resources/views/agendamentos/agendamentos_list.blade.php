@@ -57,7 +57,7 @@
                             <td>
                                 <div class="btn-group">
                                     <a href="{{route('agendamento-view', $dashboard_scheduling['id'])}}" class="btn btn-success me-1"><i class="fa-solid fa-eye"></i></a>
-                                    @if($dashboard_scheduling['status_id'] != '4')
+                                    @if($dashboard_scheduling['status_id'] != '4' && $dashboard_scheduling['status_id'] != '6')
                                     <form action="{{route('cancelar-agendamento', $dashboard_scheduling['id'])}}" method="post">
                                         @csrf
                                         <button type="submit" class="btn btn-danger"><i class="fa-solid fa-ban"></i></button>

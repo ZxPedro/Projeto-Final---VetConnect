@@ -103,12 +103,6 @@ Route::prefix('cadastros/professionals')->middleware('auth')->group(function () 
 
 Route::get('/address/edit/{id}', [CustomersAddressController::class, 'searchAddress']);
 
-Route::get('/breeds/{id}', [AnimalsController::class, 'searchBreeds'])->middleware('auth');
-Route::get('/animalscustomer/{id}', [CustomersController::class, 'searchAnimalsCustomer'])->middleware('auth');
-Route::get('/professionalcategories/{id}', [UsersController::class, 'userCategories'])->middleware('auth');
-Route::get('/categoryservice/{id}', [CategoriesController::class, 'searchServicesCategory'])->middleware('auth');
-Route::get('/getpriceservice/{id}', [ServicesController::class, 'getPriceService'])->middleware('auth');
-
 Route::prefix('agendamento')->middleware('auth')->group(function () {
     Route::get('/', [SchedulingController::class, 'viewListScheduling'])->name('agendamentos-list');
     Route::get('/service/{id}', [SchedulingController::class, 'viewServiceById'])->name('agendamento-view');
@@ -133,7 +127,17 @@ Route::prefix('produto')->middleware('auth')->group(function () {
 
 Route::prefix('financeiro')->middleware('auth')->group(function () {
     Route::get('/', [FinancialReleasesController::class, 'viewReleases'])->name('finance-list');
-
     Route::post('/create', [FinancialReleasesController::class, 'postReleases'])->name('post-finance');
     Route::get('/delete/{id}', [FinancialReleasesController::class, 'deleteReleases'])->name('release-delete');
 });
+
+Route::prefix('relatorios')->middleware('auth')->group(function () {
+    Route::get('/estoque');
+});
+
+Route::get('/breeds/{id}', [AnimalsController::class, 'searchBreeds'])->middleware('auth');
+Route::get('/animalscustomer/{id}', [CustomersController::class, 'searchAnimalsCustomer'])->middleware('auth');
+Route::get('/professionalcategories/{id}', [UsersController::class, 'userCategories'])->middleware('auth');
+Route::get('/categoryservice/{id}', [CategoriesController::class, 'searchServicesCategory'])->middleware('auth');
+Route::get('/getpriceservice/{id}', [ServicesController::class, 'getPriceService'])->middleware('auth');
+Route::get('/getrelease/{id}', [FinancialReleasesController::class, 'getRelease'])->middleware('auth');

@@ -18,6 +18,13 @@
     </div>
     </div>
     </div>
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('input').attr('autocomplete', 'off');
+        });
+    </script>
+
     <!-- Buscar Cep -->
     <script type="text/javascript">
         function limpa_formulário_cep() {
@@ -363,12 +370,58 @@
                 var productId = button.data('product-id'); // Extrai o ID do produto do botão
                 var productName = button.data('product-name'); // Extrai o nome do produto do botão
 
-                // Atualiza os valores dos campos de entrada no modal
+
                 $('#productIdModal').val(productId);
                 $('#productName').text(productName);
             });
         });
     </script>
+
+    <script>
+        $(document).ready(function() {
+            $('.btn-get-release').on('click', function() {
+                var itemId = $(this).data('release-id');
+
+                $.ajax({
+                    type: 'GET',
+                    url: '/getrelease/' + itemId,
+                    success: function(data) {
+                        $('#name_release').val(data.name).prop('readonly', true);
+                        $('#descricao_release').val(data.descricao).prop('readonly', true);
+                        $('#price_release').val(data.price).prop('readonly', true);
+
+                        if (data.type === "C") {
+                            $('#optionEntrada').prop('checked', true);
+                        } else {
+                            $('#optionSaida').prop('checked', true);
+                        }
+
+                        $('#btnConcluir').hide();
+                        $('#release').modal('show');
+                    },
+                    error: function(error) {
+                        console.log('Erro ao obter dados do servidor: ', error);
+                    }
+                });
+            });
+        });
+    </script>
+
+    <script>
+        $(document).ready(function() {
+            $('#release').on('hidden.bs.modal', function() {
+
+                $('#name_release').val('').prop('readonly', false);
+                $('#descricao_release').val('').prop('readonly', false);
+                $('#price_release').val('').prop('readonly', false);
+                $('#btnConcluir').show();
+                $('#optionEntrada').prop('checked', false);
+                $('#optionSaida').prop('checked', false);
+            });
+        });
+    </script>
+
+
 </body>
 
 

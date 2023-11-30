@@ -43,6 +43,8 @@
                                 <td>R$ {{$receita['price']}}</td>
                                 <td>
                                     @if($receita['id'])
+                                    <a href="" class="btn btn-light btn-get-release" data-release-id="{{$receita['id'] }}" data-bs-toggle="modal" data-bs-target="#release"><i class="fa-solid fa-circle-info"></i></a>
+
                                     <a href="{{route('release-delete', $receita['id'])}}" class="btn btn-danger"><i class="fa-solid fa-trash"></i></a>
 
                                     @endif
@@ -72,6 +74,7 @@
                                 <td>{{$despesa->name}}</td>
                                 <td>R$ -{{$despesa->price}}</td>
                                 <td>
+                                    <a href="" class="btn btn-light btn-get-release" data-release-id="{{ $despesa->id }}" data-bs-toggle="modal" data-bs-target="#release"><i class="fa-solid fa-circle-info"></i></a>
                                     <a href="{{route('release-delete', $despesa->id)}}" class="btn btn-danger"><i class="fa-solid fa-trash"></i></a>
                                 </td>
                             </tr>
@@ -96,17 +99,17 @@
                         @csrf
                         <div class="mb-3">
                             <label for="name" class="form-label mt-4">Nome</label>
-                            <input type="text" class="form-control" name="name" id="name" placeholder="Digite o nome da categoria" value="">
+                            <input type="text" class="form-control" name="name" id="name_release" placeholder="Digite o nome" value="">
                         </div>
                         <div class="form-group">
                             <label for="observacao" class="form-label mt-4">Descrição</label>
-                            <textarea class="form-control" id="descricao" name="descricao" rows="3"></textarea>
+                            <textarea class="form-control" id="descricao_release" name="descricao" rows="3"></textarea>
                         </div>
                         <div class="form-group col-md-12">
                             <label for="price" class="form-label mt-4">Preço</label>
                             <div class="input-group mb-3">
                                 <span class="input-group-text">R$</span>
-                                <input type="text" class="form-control" name="price" id="price" value="">
+                                <input type="text" class="form-control" name="price" id="price_release" value="">
                             </div>
                         </div>
                         <fieldset class="form-group row mt-3 justify-content-center">
@@ -125,7 +128,7 @@
 
                         </fieldset>
                         <div class="text-end">
-                            <button type="submit" class="btn btn-primary ">Concluir</button>
+                            <button type="submit" class="btn btn-primary" id="btnConcluir">Concluir</button>
                         </div>
                     </form>
                 </div>
