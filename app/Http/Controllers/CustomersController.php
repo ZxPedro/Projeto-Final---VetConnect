@@ -3,11 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Models\Animal;
+use App\Models\AnimalBreed;
 use App\Models\Category;
 use App\Models\Customer;
 use App\Models\Service;
 use App\Models\Status;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 
@@ -19,6 +21,9 @@ class CustomersController extends Controller
 
         $customers = Customer::paginate(10);
 
+        foreach ($customers as $customer) {
+            $customer->data_nascimento = Carbon::parse($customer->data_nascimento)->format('d/m/Y');
+        }
 
         return view('customers.customers_list', compact('customers'));
     }
@@ -57,6 +62,13 @@ class CustomersController extends Controller
 
         $profile['pets'] = $profile->animais;
 
+
+        foreach ($profile['pets'] as $key => $pet) {
+            $pet->data_nascimento = Carbon::parse($pet->data_nascimento)->format('d/m/Y');
+            $profile['pets'][$key]['raca'] = AnimalBreed::find($pet->raca)->name;
+        }
+
+
         $profile['address'] = $profile->address;
 
         $schedules = $profile->scheduling;
@@ -80,7 +92,7 @@ class CustomersController extends Controller
                     'professional_name' =>  $user_scheduling->name,
                     'status_id' =>  $status_scheduling->id,
                     'status_name' =>  $status_scheduling->status_name,
-                    'date_scheduling' => $scheduling->data_agendamento
+                    'date_scheduling' => Carbon::parse($scheduling->data_agendamento)->format('d/m/Y H:i:s')
                 ];
             }
 

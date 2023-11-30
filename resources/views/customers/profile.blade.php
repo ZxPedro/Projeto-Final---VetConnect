@@ -36,7 +36,6 @@
                             @endif
 
                             @if($profile)
-                            <p>Criado em: {{ $profile->created_at}} | Editado em: {{ $profile->updated_at}}</p>
                             <form method="post" action="{{route('edit-profile', ['id' => $profile->id ]) }}">
                                 @csrf
                                 <div class="mb-3">
