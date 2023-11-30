@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ProductsController extends Controller
 {
@@ -117,5 +118,19 @@ class ProductsController extends Controller
 
 
         return back()->withErrors(['success-stock' => 'Estoque atualizado com sucesso!']);
+    }
+
+    function stockReport()
+    {
+
+        $products = Product::where('amount', '<', DB::raw('security_amount'))->get();
+
+        foreach ($products as $product) {
+            $category_product = Category::find($product['category_id']);
+
+            $product['category_name'] = $category_product->name;
+        }
+
+        return view('reports.stock_out', compact('products'));
     }
 }

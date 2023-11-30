@@ -132,7 +132,7 @@ Route::prefix('financeiro')->middleware('auth')->group(function () {
 });
 
 Route::prefix('relatorios')->middleware('auth')->group(function () {
-    Route::get('/estoque');
+    Route::get('/estoque', [ProductsController::class, 'stockReport'])->name('stock-report');
 });
 
 Route::get('/breeds/{id}', [AnimalsController::class, 'searchBreeds'])->middleware('auth');

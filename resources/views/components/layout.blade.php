@@ -421,7 +421,25 @@
         });
     </script>
 
+    <script>
+        function imprimirStockOut() {
+            var tabela = document.getElementById('stockOut');
+            var estiloTabela = getComputedStyle(tabela);
 
+            var janelaImpressao = window.open('', '_blank');
+            janelaImpressao.document.write('<html><head>  <link rel="stylesheet" href="https://bootswatch.com/5/minty/bootstrap.min.css"><title>Imprimir Tabela</title>');
+
+
+            janelaImpressao.document.write('<style>');
+            janelaImpressao.document.write(estiloTabela.cssText); // Inclui o estilo da tabela
+            janelaImpressao.document.write('</style></head><body>');
+            janelaImpressao.document.write('<h3">Relatório de Ruptura de Estoque</h3>');
+            janelaImpressao.document.write(tabela.outerHTML);
+            janelaImpressao.document.write('</body></html>');
+            janelaImpressao.document.close();
+            janelaImpressao.print();
+        }
+    </script>
 </body>
 
 

@@ -58,7 +58,7 @@
                                 <a href="" class="nav-link px-3"> <span class="d-none d-sm-inline">Atendimentos Finalizados</span></a>
                             </li>
                             <li>
-                                <a href="" class="nav-link px-3"> <span class="d-none d-sm-inline">Estoque Negativo</span></a>
+                                <a href="" class="nav-link px-3"> <span class="d-none d-sm-inline">Ruptura de Estoque</span></a>
                             </li>
                             <li>
                                 <a href="" class="nav-link px-3"> <span class="d-none d-sm-inline">Serviços</span></a>
