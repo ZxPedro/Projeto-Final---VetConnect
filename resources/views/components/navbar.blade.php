@@ -55,7 +55,7 @@
                                 <a href="" class="nav-link px-3"> <span class="d-none d-sm-inline">Cadastro de Clientes</span></a>
                             </li>
                             <li>
-                                <a href="" class="nav-link px-3"> <span class="d-none d-sm-inline">Atendimentos Finalizados</span></a>
+                                <a href="{{route('service-report')}}" class="nav-link px-3"> <span class="d-none d-sm-inline">Atendimentos Finalizados</span></a>
                             </li>
                             <li>
                                 <a href="{{route('stock_out-report')}}" class="nav-link px-3"> <span class="d-none d-sm-inline">Ruptura de Estoque</span></a>
