@@ -120,7 +120,7 @@ class ProductsController extends Controller
         return back()->withErrors(['success-stock' => 'Estoque atualizado com sucesso!']);
     }
 
-    function stockReport()
+    function stockOutReport()
     {
 
         $products = Product::where('amount', '<', DB::raw('security_amount'))->get();
@@ -132,5 +132,18 @@ class ProductsController extends Controller
         }
 
         return view('reports.stock_out', compact('products'));
+    }
+
+    function negativeStockReport()
+    {
+        $products = Product::where('amount', '<', '0')->get();
+
+        foreach ($products as $product) {
+            $category_product = Category::find($product['category_id']);
+
+            $product['category_name'] = $category_product->name;
+        }
+
+        return view('reports.negative_stock', compact('products'));
     }
 }

@@ -58,7 +58,10 @@
                                 <a href="" class="nav-link px-3"> <span class="d-none d-sm-inline">Atendimentos Finalizados</span></a>
                             </li>
                             <li>
-                                <a href="" class="nav-link px-3"> <span class="d-none d-sm-inline">Ruptura de Estoque</span></a>
+                                <a href="{{route('stock_out-report')}}" class="nav-link px-3"> <span class="d-none d-sm-inline">Ruptura de Estoque</span></a>
+                            </li>
+                            <li>
+                                <a href="{{route('negative_stock-report')}}" class="nav-link px-3"> <span class="d-none d-sm-inline">Estoque Negativo</span></a>
                             </li>
                             <li>
                                 <a href="" class="nav-link px-3"> <span class="d-none d-sm-inline">Serviços</span></a>
