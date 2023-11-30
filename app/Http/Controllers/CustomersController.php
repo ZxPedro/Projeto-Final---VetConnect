@@ -51,7 +51,7 @@ class CustomersController extends Controller
         return redirect('customer/');
     }
 
-    public function viewProfile(int $id)
+    public function viewProfile($id)
     {
 
         $profile = Customer::find($id);
@@ -170,5 +170,18 @@ class CustomersController extends Controller
         $customer_pet = $customer->animais;
 
         return response()->json($customer_pet);
+    }
+
+    public function searchCustomers(Request $request)
+    {
+        $query = $request->input('query');
+
+        $customers = Customer::where('name',  'like', "%" . $query . "%")->get();
+
+        foreach ($customers as $customer) {
+            $customer->data_nascimento = Carbon::parse($customer->data_nascimento)->format('d/m/Y');
+        }
+
+        return response()->json($customers);
     }
 }

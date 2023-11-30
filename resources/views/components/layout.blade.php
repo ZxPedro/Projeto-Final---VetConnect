@@ -481,6 +481,42 @@
         }
     </script>
 
+
+    <script>
+        $(document).ready(function() {
+            $('#searchCustomer').on('keyup', function() {
+                var query = $(this).val();
+
+                $.ajax({
+                    url: '/searchcustomer',
+                    type: 'GET',
+                    data: {
+                        query: query
+                    },
+                    success: function(data) {
+                        var tableBody = $('#resultTableCustomer tbody');
+                        tableBody.empty(); // Limpa o conteúdo atual da tabela
+                        $.each(data, function(index, customer) {
+                            var idteste =  customer.id ;
+                            var row = '<tr>' +
+                                '<td>' + customer.name + '</td>' +
+                                '<td>' + customer.email + '</td>' +
+                                '<td>' + customer.data_nascimento + '</td>' +
+                                '<td>' + customer.cpf + '</td>' +
+                                '<td>' + customer.telefone + '</td>' +
+                                '<td>' +
+                                // '<a href="" class="btn btn-success"><i class="fa-solid fa-eye"></i></a>' +
+                                // '<a href="{{ route("view-profile", '+idteste+') }}" class="btn btn-danger"><i class="fa-solid fa-trash"></i></a>' +
+                                '</td>' +
+                                '</tr>';
+                            tableBody.append(row); // Adiciona a linha à tabela
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+
 </body>
 
 

@@ -143,3 +143,6 @@ Route::get('/professionalcategories/{id}', [UsersController::class, 'userCategor
 Route::get('/categoryservice/{id}', [CategoriesController::class, 'searchServicesCategory'])->middleware('auth');
 Route::get('/getpriceservice/{id}', [ServicesController::class, 'getPriceService'])->middleware('auth');
 Route::get('/getrelease/{id}', [FinancialReleasesController::class, 'getRelease'])->middleware('auth');
+
+//Filtros
+route::get('/searchcustomer',  [CustomersController::class, 'searchCustomers'])->name('search-customers');
