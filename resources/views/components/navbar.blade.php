@@ -14,11 +14,11 @@
                     </li>
                     <li>
                         <a href="{{route('agendamentos-list')}}" class="nav-link px-0 align-middle">
-                            <i class="fs-4 bi-table"></i> <span class="ms-1 d-none d-sm-inline"><i class="fa-regular fa-calendar pe-1"></i></i>Agendamento</span></a>
+                        <i class="fa-regular fa-calendar pe-1"></i><span class="ms-1 d-none d-sm-inline"></i>Agendamento</span></a>
                     </li>
                     <li>
                         <a href="{{ route('customer-list') }}" class="nav-link px-0 align-middle">
-                        <i class="fa-solid fa-person pe-1"></i> <span class="ms-1 d-none d-sm-inline"></i>Cliente</span></a>
+                        <i class="fa-solid fa-person pe-1"></i><span class="ms-1 d-none d-sm-inline"></i>Cliente</span></a>
                     </li>
 
                     <li>
@@ -46,11 +46,11 @@
                     </li>
                     <li>
                         <a href="{{ route('finance-list') }}" class="nav-link px-0 align-middle">
-                            <i class="fs-4 bi-table"></i> <span class="ms-1 d-none d-sm-inline"><i class="fa-solid fa-dollar-sign pe-1"></i>Financeiro</span></a>
+                        <i class="fa-solid fa-dollar-sign pe-1"></i><span class="ms-1 d-none d-sm-inline"></i>Financeiro</span></a>
                     </li>
                     <li>
                         <a href="#submenu3" data-bs-toggle="collapse" class="nav-link px-0 align-middle ">
-                            <i class="fs-4 bi-bootstrap"></i> <span class="ms-1 d-none d-sm-inline"><i class="fa-solid fa-file-excel pe-1"></i></i>Relatórios</span></a>
+                        <i class="fa-solid fa-file-excel pe-1"></i><span class="ms-1 d-none d-sm-inline"></i>Relatórios</span></a>
                         <ul class="collapse nav flex-column ms-1" id="submenu3" data-bs-parent="#menu">
                             <li class="w-100">
                                 <a href="" class="nav-link px-3"> <span class="d-none d-sm-inline">Cadastro de Clientes</span></a>
