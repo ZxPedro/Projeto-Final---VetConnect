@@ -568,7 +568,7 @@
                             var row = '<tr>' +
                                 '<td>' + category.name + '</td>' +
                                 '<td>' +
-                                '<a href="/cadastros/categories/edit/' + category.id + '" class="btn btn-success"><i class="fa-solid fa-eye"></i></a>' +
+                                '<a href="/cadastros/categories/edit/' + category.id + '" class="btn btn-success me-1"><i class="fa-solid fa-eye"></i></a>' +
                                 '<a href="/cadastros/categories/delete/' + category.id + '"  class="btn btn-danger"><i class="fa-solid fa-trash"></i></a>' +
                                 '</td>' +
                                 '</tr>';
@@ -601,7 +601,7 @@
                                 '<td>' + service.category.name + '</td>' +
                                 '<td> R$' + service.price + '</td>' +
                                 '<td>' +
-                                '<a href="/cadastros/services/edit/' + service.id + '" class="btn btn-success"><i class="fa-solid fa-eye"></i></a>' +
+                                '<a href="/cadastros/services/edit/' + service.id + '" class="btn btn-success me-1"><i class="fa-solid fa-eye"></i></a>' +
                                 '<a href="/cadastros/services/delete/' + service.id + '"  class="btn btn-danger"><i class="fa-solid fa-trash"></i></a>' +
                                 '</td>' +
                                 '</tr>';
@@ -636,13 +636,105 @@
                                     '<td>' + professional.categories_user + ' Especialidade(s)</td>' +
                                     '<td>' + professional.working_days + ' Dia(s) </td>' +
                                     '<td>' +
-                                    '<a href="/cadastros/professionals/edit/' + professional.id + '" class="btn btn-success"><i class="fa-solid fa-eye"></i></a>' +
+                                    '<a href="/cadastros/professionals/edit/' + professional.id + '" class="btn btn-success me-1"><i class="fa-solid fa-eye"></i></a>' +
                                     '<a href="/cadastros/professionals/delete/' + professional.id + '"  class="btn btn-danger"><i class="fa-solid fa-trash"></i></a>' +
                                     '</td>' +
                                     '</tr>';
                                 tableBody.append(row); // Adiciona a linha à tabela
                             }
 
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+
+    <!-- Filtro Produto -->
+    <script>
+        $(document).ready(function() {
+            $('#searchProduct').on('keyup', function() {
+                var query = $(this).val();
+
+                $.ajax({
+                    url: '/searchproducts',
+                    type: 'GET',
+                    data: {
+                        query: query
+                    },
+                    success: function(data) {
+                        var tableBody = $('#resultTableProduct tbody');
+                        tableBody.empty(); // Limpa o conteúdo atual da tabela
+                        $.each(data, function(index, product) {
+
+                            if (product.amount <= product.security_amount) {
+                                var simbolo = '<i class="fa-solid fa-circle-check" style="color: #009919;"></i>'
+                            } else {
+                                var simbolo = '<i class="fa-solid fa-ban fa-beat" style="color: #eb0000;"></i>'
+
+                            }
+
+
+
+                            var row = '<tr>' +
+                                '<td>' + product.name + '</td>' +
+                                '<td>' + product.category_name + '</td>' +
+                                '<td>' + product.amount + '</td>' +
+                                '<td>' + simbolo + '</td>' +
+                                '<td>' +
+                                '<a href="produto/edit/' + product.id + '" class="btn btn-success"><i class="fa-solid fa-eye"></i></a>' +
+                                '<a href="produto/edit/' + product.id + '" class="btn btn-danger mx-1"><i class="fa-solid fa-trash"></i></a>' +
+                                '<a href="" class="btn btn-info" data-bs-toggle="modal" data-product-id="' + product.id + '" data-product-name="' + product.name + '" data-bs-target="#ModalStockEntryAndExit"><i class="fa-solid fa-bars"></i></a>' +
+                                '</td>' +
+                                '</tr>';
+                            tableBody.append(row); // Adiciona a linha à tabela
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+
+    <!-- Filtro agendamento -->
+    <script>
+        $(document).ready(function() {
+            $('#searchScheduling').on('keyup', function() {
+                var query = $(this).val();
+
+                $.ajax({
+                    url: '/searchscheduling',
+                    type: 'GET',
+                    data: {
+                        query: query
+                    },
+                    success: function(data) {
+                        var tableBody = $('#resultTableScheduling tbody');
+                        tableBody.empty(); // Limpa o conteúdo atual da tabela
+                        $.each(data, function(index, scheduling) {
+                            console.log(
+                                (scheduling.status_id != 4) && (scheduling.status_id != 6));
+                            if ((scheduling.status_id != 4) && (scheduling.status_id != 6)) {
+                                var btnCancel = '<button type="submit" class="btn btn-danger"><i class="fa-solid fa-ban"></i></button>'
+                            } else {
+                                var btnCancel = ''
+                            }
+
+                            var row = '<tr>' +
+                                '<td>' + scheduling.id + '</td>' +
+                                '<td>' + scheduling.customer_name + '</td>' +
+                                '<td>' + scheduling.pet_name + '</td>' +
+                                '<td>' + scheduling.service_name + '</td>' +
+                                '<td> R$' + scheduling.service_price + '</td>' +
+                                '<td>' + scheduling.professional_name + '</td>' +
+                                '<td>' + scheduling.date_scheduling + '</td>' +
+                                '<td>' + scheduling.status_name + '</td>' +
+                                '<td><div class="btn-group">' +
+                                '<a href="/agendamento/service/' + scheduling.id + '" class="btn btn-success me-1"><i class="fa-solid fa-eye"></i></a>' +
+                                '<form action="/agendamento/cancel/' + scheduling.id + '" method="post"> @csrf' +
+                                '' + btnCancel + '</form>' +
+                                '</div></td>' +
+                                '</tr>';
+                            tableBody.append(row); // Adiciona a linha à tabela
                         });
                     }
                 });

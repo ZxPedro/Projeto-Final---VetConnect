@@ -150,3 +150,5 @@ Route::get('/searchusers',  [UsersController::class, 'searchUsers'])->name('sear
 Route::get('/searchcategories',  [CategoriesController::class, 'searchCategories'])->name('search-categories');
 Route::get('/searchservices',  [ServicesController::class, 'searchServices'])->name('search-services');
 Route::get('/searchprofessionals',  [CategoryUserController::class, 'searchProfessionals'])->name('search-professionals');
+Route::get('/searchproducts', [ProductsController::class, 'searchProducts'])->name('search-products');
+Route::get('/searchscheduling', [SchedulingController::class, 'searchScheduling'])->name('search-scheduling');

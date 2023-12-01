@@ -146,4 +146,19 @@ class ProductsController extends Controller
 
         return view('reports.negative_stock', compact('products'));
     }
+
+    public function searchProducts(Request $request)
+    {
+        $query = $request->input('query');
+
+        $products = Product::where('name',  'like', "%" . $query . "%")->get();
+
+        foreach ($products as $product) {
+            $category_product = Category::find($product['category_id']);
+
+            $product['category_name'] = $category_product->name;
+        }
+
+        return response()->json($products);
+    }
 }

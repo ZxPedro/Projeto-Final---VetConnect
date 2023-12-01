@@ -11,7 +11,8 @@
         </div>
         <div class="col-4 text-center">
             <div class="input-group mb-3">
-                <input type="text" class="form-control" aria-describedby="button-addon2" hidden>
+                <input type="text" class="form-control" placeholder="Produto" id="searchScheduling" aria-describedby="button-addon2" id="">
+                <button class="btn btn-primary" type="button" id="button-addon2"><i class="fa-solid fa-magnifying-glass"></i></button>
             </div>
         </div>
         <div class="col-4 text-end">
@@ -29,7 +30,7 @@
     <div class="row">
         <div class="col-12">
             <div class="table-responsive">
-                <table class="table table-hover mt-3">
+                <table class="table table-hover mt-3" id="resultTableScheduling">
                     <thead>
                         <tr>
                             <th scope="col">#</th>
@@ -50,7 +51,7 @@
                             <td>{{$dashboard_scheduling['customer_name']}}</td>
                             <td>{{$dashboard_scheduling['pet_name']}}</td>
                             <td>{{$dashboard_scheduling['service_name']}}</td>
-                            <td>{{$dashboard_scheduling['service_price']}}</td>
+                            <td>R$ {{$dashboard_scheduling['service_price']}}</td>
                             <td>{{$dashboard_scheduling['professional_name']}}</td>
                             <td>{{$dashboard_scheduling['date_scheduling']}}</td>
                             <td>{{$dashboard_scheduling['status_name']}}</td>
