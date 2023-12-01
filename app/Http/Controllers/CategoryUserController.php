@@ -203,4 +203,37 @@ class CategoryUserController extends Controller
 
         return $days;
     }
+
+    public function searchProfessionals(Request $request)
+    {
+        $query = $request->input('query');
+
+        $users = User::where('name',  'like', "%" . $query . "%")->get();
+
+        foreach ($users as $user) {
+
+            $hasRelationship = $user->categories()->count();
+
+            if ($hasRelationship) {
+                $user['categories_user'] = count($user->categories);
+            }
+
+            $working_days = DB::table('category_user')
+                ->select('working_days')
+                ->where('user_id', $user->id)->limit(1)->get();
+
+
+            foreach ($working_days as $days) {
+                foreach ($days as $day) {
+
+                    $caracteres = ['"', ',', '[', ']', ' '];
+                    $day = str_replace($caracteres, '', explode(",", $day));
+
+                    $user['working_days'] = count($day);
+                }
+            }
+        }
+
+        return response()->json($users);
+    }
 }

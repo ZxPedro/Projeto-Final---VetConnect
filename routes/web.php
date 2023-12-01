@@ -145,4 +145,8 @@ Route::get('/getpriceservice/{id}', [ServicesController::class, 'getPriceService
 Route::get('/getrelease/{id}', [FinancialReleasesController::class, 'getRelease'])->middleware('auth');
 
 //Filtros
-route::get('/searchcustomer',  [CustomersController::class, 'searchCustomers'])->name('search-customers');
+Route::get('/searchcustomers',  [CustomersController::class, 'searchCustomers'])->name('search-customers');
+Route::get('/searchusers',  [UsersController::class, 'searchUsers'])->name('search-users');
+Route::get('/searchcategories',  [CategoriesController::class, 'searchCategories'])->name('search-categories');
+Route::get('/searchservices',  [ServicesController::class, 'searchServices'])->name('search-services');
+Route::get('/searchprofessionals',  [CategoryUserController::class, 'searchProfessionals'])->name('search-professionals');

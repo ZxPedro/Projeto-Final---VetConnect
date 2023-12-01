@@ -481,14 +481,14 @@
         }
     </script>
 
-
+    <!-- Filtro Clientes -->
     <script>
         $(document).ready(function() {
             $('#searchCustomer').on('keyup', function() {
                 var query = $(this).val();
 
                 $.ajax({
-                    url: '/searchcustomer',
+                    url: '/searchcustomers',
                     type: 'GET',
                     data: {
                         query: query
@@ -497,7 +497,6 @@
                         var tableBody = $('#resultTableCustomer tbody');
                         tableBody.empty(); // Limpa o conteúdo atual da tabela
                         $.each(data, function(index, customer) {
-                            var idteste =  customer.id ;
                             var row = '<tr>' +
                                 '<td>' + customer.name + '</td>' +
                                 '<td>' + customer.email + '</td>' +
@@ -505,8 +504,8 @@
                                 '<td>' + customer.cpf + '</td>' +
                                 '<td>' + customer.telefone + '</td>' +
                                 '<td>' +
-                                // '<a href="" class="btn btn-success"><i class="fa-solid fa-eye"></i></a>' +
-                                // '<a href="{{ route("view-profile", '+idteste+') }}" class="btn btn-danger"><i class="fa-solid fa-trash"></i></a>' +
+                                '<a href="/customer/profile/' + customer.id + '" class="btn btn-success"><i class="fa-solid fa-eye"></i></a>' +
+                                '<a href="/customer/delete/' + customer.id + '"  class="btn btn-danger"><i class="fa-solid fa-trash"></i></a>' +
                                 '</td>' +
                                 '</tr>';
                             tableBody.append(row); // Adiciona a linha à tabela
@@ -517,6 +516,139 @@
         });
     </script>
 
+    <!-- <script>
+        $(document).ready(function() {
+            $('#searchUser').on('keyup', function() {
+                var query = $(this).val();
+
+                $.ajax({
+                    url: '/searchusers',
+                    type: 'GET',
+                    data: {
+                        query: query
+                    },
+                    success: function(data) {
+                        var tableBody = $('#resultTableUser tbody');
+                        tableBody.empty(); // Limpa o conteúdo atual da tabela
+                        $.each(data, function(index, user) {
+                            var row = '<tr>' +
+                                '<td>' + user.name + '</td>' +
+                                '<td>' + user.email + '</td>' +
+                                '<td>' + user.created_at + '</td>' +
+                                '<td>' +
+                                '<a href="/users/edit/' + user.id + '" class="btn btn-success"><i class="fa-solid fa-eye"></i></a>' +
+                                '<a href="/users/delete/' + user.id + '"  class="btn btn-danger"><i class="fa-solid fa-trash"></i></a>' +
+                                '</td>' +
+                                '</tr>';
+                            tableBody.append(row); // Adiciona a linha à tabela
+                        });
+                    }
+                });
+            });
+        });
+    </script> -->
+
+
+    <!-- Filtro Categoria -->
+    <script>
+        $(document).ready(function() {
+            $('#searchCategory').on('keyup', function() {
+                var query = $(this).val();
+
+                $.ajax({
+                    url: '/searchcategories',
+                    type: 'GET',
+                    data: {
+                        query: query
+                    },
+                    success: function(data) {
+                        var tableBody = $('#resultTableCategory tbody');
+                        tableBody.empty(); // Limpa o conteúdo atual da tabela
+                        $.each(data, function(index, category) {
+                            var row = '<tr>' +
+                                '<td>' + category.name + '</td>' +
+                                '<td>' +
+                                '<a href="/cadastros/categories/edit/' + category.id + '" class="btn btn-success"><i class="fa-solid fa-eye"></i></a>' +
+                                '<a href="/cadastros/categories/delete/' + category.id + '"  class="btn btn-danger"><i class="fa-solid fa-trash"></i></a>' +
+                                '</td>' +
+                                '</tr>';
+                            tableBody.append(row); // Adiciona a linha à tabela
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+
+    <!-- Filtro Serviço -->
+    <script>
+        $(document).ready(function() {
+            $('#searchService').on('keyup', function() {
+                var query = $(this).val();
+
+                $.ajax({
+                    url: '/searchservices',
+                    type: 'GET',
+                    data: {
+                        query: query
+                    },
+                    success: function(data) {
+                        var tableBody = $('#resultTableService tbody');
+                        tableBody.empty(); // Limpa o conteúdo atual da tabela
+                        $.each(data, function(index, service) {
+                            var row = '<tr>' +
+                                '<td>' + service.name + '</td>' +
+                                '<td>' + service.category.name + '</td>' +
+                                '<td> R$' + service.price + '</td>' +
+                                '<td>' +
+                                '<a href="/cadastros/services/edit/' + service.id + '" class="btn btn-success"><i class="fa-solid fa-eye"></i></a>' +
+                                '<a href="/cadastros/services/delete/' + service.id + '"  class="btn btn-danger"><i class="fa-solid fa-trash"></i></a>' +
+                                '</td>' +
+                                '</tr>';
+                            tableBody.append(row); // Adiciona a linha à tabela
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+
+    <!-- Filtro Profissional -->
+    <script>
+        $(document).ready(function() {
+            $('#searchProfessional').on('keyup', function() {
+                var query = $(this).val();
+
+                $.ajax({
+                    url: '/searchprofessionals',
+                    type: 'GET',
+                    data: {
+                        query: query
+                    },
+                    success: function(data) {
+                        var tableBody = $('#resultTableProfessional tbody');
+                        tableBody.empty(); // Limpa o conteúdo atual da tabela
+                        $.each(data, function(index, professional) {
+
+                            if (professional.categories_user) {
+                                var row = '<tr>' +
+                                    '<td>' + professional.name + '</td>' +
+                                    '<td>' + professional.categories_user + ' Especialidade(s)</td>' +
+                                    '<td>' + professional.working_days + ' Dia(s) </td>' +
+                                    '<td>' +
+                                    '<a href="/cadastros/professionals/edit/' + professional.id + '" class="btn btn-success"><i class="fa-solid fa-eye"></i></a>' +
+                                    '<a href="/cadastros/professionals/delete/' + professional.id + '"  class="btn btn-danger"><i class="fa-solid fa-trash"></i></a>' +
+                                    '</td>' +
+                                    '</tr>';
+                                tableBody.append(row); // Adiciona a linha à tabela
+                            }
+
+                        });
+                    }
+                });
+            });
+        });
+    </script>
 </body>
 
 

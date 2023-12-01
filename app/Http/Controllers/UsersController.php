@@ -118,4 +118,18 @@ class UsersController extends Controller
 
         return response()->json($professional_categories);
     }
+
+    // public function searchUsers(Request $request){
+
+    //     $query = $request->input('query');
+
+    //     $users = User::where('name',  'like', "%" . $query . "%")->get();
+
+    //     foreach ($users as $user) {
+    //         $user->created_at = preg_replace('\/[a-zA-Z]/', '', $$user->created_at);
+    //     }
+
+    //     return response()->json($users);
+        
+    // }
 }

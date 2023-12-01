@@ -90,4 +90,14 @@ class CategoriesController extends Controller
         // dd($services_category);
         return response()->json($services_category);
     }
+
+
+    public function searchCategories(Request $request)
+    {
+        $query = $request->input('query');
+
+        $categories = Category::where('name',  'like', "%" . $query . "%")->get();
+
+        return response()->json($categories);
+    }
 }
