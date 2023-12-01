@@ -11,7 +11,7 @@
         </div>
         <div class="col-4 text-center">
             <div class="input-group mb-3">
-                <input type="text" class="form-control" placeholder="Cliente" aria-label=" Usuário" aria-describedby="button-addon2" id="searchCustomer">
+                <input type="text" class="form-control" placeholder="Cliente" saria-describedby="button-addon2" id="searchCustomer">
                 <button class="btn btn-primary" type="button" id="button-addon2"><i class="fa-solid fa-magnifying-glass"></i></button>
             </div>
         </div>

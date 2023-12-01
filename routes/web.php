@@ -6,6 +6,7 @@ use App\Http\Controllers\CategoriesController;
 use App\Http\Controllers\CustomersAddressController;
 use App\Http\Controllers\CustomersController;
 use App\Http\Controllers\CategoryUserController;
+use App\Http\Controllers\FinancialReleasesController;
 use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\UsersController;
 use App\Http\Controllers\ServicesController;
@@ -102,12 +103,6 @@ Route::prefix('cadastros/professionals')->middleware('auth')->group(function () 
 
 Route::get('/address/edit/{id}', [CustomersAddressController::class, 'searchAddress']);
 
-Route::get('/breeds/{id}', [AnimalsController::class, 'searchBreeds'])->middleware('auth');
-Route::get('/animalscustomer/{id}', [CustomersController::class, 'searchAnimalsCustomer'])->middleware('auth');
-Route::get('/professionalcategories/{id}', [UsersController::class, 'userCategories'])->middleware('auth');
-Route::get('/categoryservice/{id}', [CategoriesController::class, 'searchServicesCategory'])->middleware('auth');
-Route::get('/getpriceservice/{id}', [ServicesController::class, 'getPriceService'])->middleware('auth');
-
 Route::prefix('agendamento')->middleware('auth')->group(function () {
     Route::get('/', [SchedulingController::class, 'viewListScheduling'])->name('agendamentos-list');
     Route::get('/service/{id}', [SchedulingController::class, 'viewServiceById'])->name('agendamento-view');
@@ -126,10 +121,34 @@ Route::prefix('produto')->middleware('auth')->group(function () {
     Route::post('/edit/{id}', [ProductsController::class, 'updateProduct'])->name('product-update');
     Route::get('/delete/{id}', [ProductsController::class, 'deleteProduct'])->name('product-delete');
 
-    Route::post('/update', [ProductsController::class, 'updateStrock'])->name('product-stock');
+    Route::post('/update', [ProductsController::class, 'updateStock'])->name('product-stock');
 });
 
 
-Route::get('/cadastros/veterinario', function () {
-    return view('cadastros.professionals.professionals_create');
+Route::prefix('financeiro')->middleware('auth')->group(function () {
+    Route::get('/', [FinancialReleasesController::class, 'viewReleases'])->name('finance-list');
+    Route::post('/create', [FinancialReleasesController::class, 'postReleases'])->name('post-finance');
+    Route::get('/delete/{id}', [FinancialReleasesController::class, 'deleteReleases'])->name('release-delete');
 });
+
+Route::prefix('relatorios')->middleware('auth')->group(function () {
+    Route::get('/estoque/ruptura', [ProductsController::class, 'stockOutReport'])->name('stock_out-report');
+    Route::get('/estoque/negativo', [ProductsController::class, 'negativeStockReport'])->name('negative_stock-report');
+    Route::get('/atendimentos', [SchedulingController::class, 'serviceReport'])->name('service-report');
+});
+
+Route::get('/breeds/{id}', [AnimalsController::class, 'searchBreeds'])->middleware('auth');
+Route::get('/animalscustomer/{id}', [CustomersController::class, 'searchAnimalsCustomer'])->middleware('auth');
+Route::get('/professionalcategories/{id}', [UsersController::class, 'userCategories'])->middleware('auth');
+Route::get('/categoryservice/{id}', [CategoriesController::class, 'searchServicesCategory'])->middleware('auth');
+Route::get('/getpriceservice/{id}', [ServicesController::class, 'getPriceService'])->middleware('auth');
+Route::get('/getrelease/{id}', [FinancialReleasesController::class, 'getRelease'])->middleware('auth');
+
+//Filtros
+Route::get('/searchcustomers',  [CustomersController::class, 'searchCustomers'])->name('search-customers');
+Route::get('/searchusers',  [UsersController::class, 'searchUsers'])->name('search-users');
+Route::get('/searchcategories',  [CategoriesController::class, 'searchCategories'])->name('search-categories');
+Route::get('/searchservices',  [ServicesController::class, 'searchServices'])->name('search-services');
+Route::get('/searchprofessionals',  [CategoryUserController::class, 'searchProfessionals'])->name('search-professionals');
+Route::get('/searchproducts', [ProductsController::class, 'searchProducts'])->name('search-products');
+Route::get('/searchscheduling', [SchedulingController::class, 'searchScheduling'])->name('search-scheduling');

@@ -105,4 +105,19 @@ class ServicesController extends Controller
 
         return response()->json($service);
     }
+
+    public function searchServices(Request $request)
+    {
+        $query = $request->input('query');
+
+        $services = Service::where('name',  'like', "%" . $query . "%")->get();
+
+        foreach ($services as $key => $service) {
+            $services[$key]['category'] = $service->category;
+            $service['price'] = number_format($service['price'], 2, '.', '');
+        }
+
+
+        return response()->json($services);
+    }
 }

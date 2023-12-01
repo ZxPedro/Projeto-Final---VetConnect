@@ -11,7 +11,7 @@
         </div>
         <div class="col-4 text-center">
             <div class="input-group mb-3">
-                <input type="text" class="form-control" placeholder="Nome" aria-label="" aria-describedby="button-addon2" id="">
+                <input type="text" class="form-control" placeholder="Nome" id="searchProfessional" aria-describedby="button-addon2" id="">
                 <button class="btn btn-primary" type="button" id="button-addon2"><i class="fa-solid fa-magnifying-glass"></i></button>
             </div>
         </div>
@@ -31,7 +31,7 @@
         <div class="col-12">
 
 
-            <table class="table table-hover mt-3 text-center" id="">
+            <table class="table table-hover mt-3 text-center" id="resultTableProfessional">
                 <thead>
                     <tr>
                         <th scope="col">Nome</th>
@@ -45,7 +45,7 @@
                     <tr>
                         <td>{{$user->name}}</td>
                         <td>{{$user->categories_user}} Especialidade(s)</td>
-                        <td>{{$user->working_days}} Dias</td>
+                        <td>{{$user->working_days}} Dia(s)</td>
                         <td>
                             <a href="{{route('professionals-edit', $user->id)}}" class="btn btn-success"><i class="fa-solid fa-eye"></i></a>
                             <a href="{{route('professional-delete', $user->id)}}" class="btn btn-danger"><i class="fa-solid fa-trash"></i></a>

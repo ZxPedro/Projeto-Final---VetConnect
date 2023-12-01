@@ -20,18 +20,12 @@
                         <a href="{{ route('customer-list') }}" class="nav-link px-0 align-middle">
                         <i class="fa-solid fa-person pe-1"></i> <span class="ms-1 d-none d-sm-inline"></i>Cliente</span></a>
                     </li>
-                    <li>
-                        <a href="{{ route('products-list') }}" class="nav-link px-0 align-middle">
-                            <i class="fs-4 bi-table"></i> <span class="ms-1 d-none d-sm-inline"><i class="fa-solid fa-box pe-1"></i>Produtos</span></a>
-                    </li>
+
                     <li>
                         <a href="#submenu2" data-bs-toggle="collapse" class="nav-link px-0 align-middle ">
                         <i class="fa-solid fa-gears pe-1"></i> <span class="ms-1 d-none d-sm-inline">Gestão</span></a>
                         <ul class="collapse nav flex-column ms-1" id="submenu2" data-bs-parent="#menu">
                             <li class="w-100">
-                                <a href="{{route('professionals-list')}}" class="nav-link px-3"> <span class="d-none d-sm-inline">Profissionais</span></a>
-                            </li>
-                            <li>
                                 <a href="{{ route('user-list') }}" class="nav-link px-3"> <span class="d-none d-sm-inline">Usuários</span></a>
                             </li>
                             <li>
@@ -40,7 +34,19 @@
                             <li>
                                 <a href="{{route('services-list')}}" class="nav-link px-3"> <span class="d-none d-sm-inline">Serviços</span></a>
                             </li>
+                            <li>
+                                <a href="{{route('professionals-list')}}" class="nav-link px-3"> <span class="d-none d-sm-inline">Profissionais</span></a>
+                            </li>
+
+
+                            <li>
+                                <a href="{{ route('products-list') }}" class="nav-link px-3"> <span class="d-none d-sm-inline">Produtos</span></a>
+                            </li>
                         </ul>
+                    </li>
+                    <li>
+                        <a href="{{ route('finance-list') }}" class="nav-link px-0 align-middle">
+                            <i class="fs-4 bi-table"></i> <span class="ms-1 d-none d-sm-inline"><i class="fa-solid fa-dollar-sign pe-1"></i>Financeiro</span></a>
                     </li>
                     <li>
                         <a href="#submenu3" data-bs-toggle="collapse" class="nav-link px-0 align-middle ">
@@ -50,10 +56,13 @@
                                 <a href="" class="nav-link px-3"> <span class="d-none d-sm-inline">Cadastro de Clientes</span></a>
                             </li>
                             <li>
-                                <a href="" class="nav-link px-3"> <span class="d-none d-sm-inline">Atendimentos Finalizados</span></a>
+                                <a href="{{route('service-report')}}" class="nav-link px-3"> <span class="d-none d-sm-inline">Atendimentos Finalizados</span></a>
                             </li>
                             <li>
-                                <a href="" class="nav-link px-3"> <span class="d-none d-sm-inline">Estoque Negativo</span></a>
+                                <a href="{{route('stock_out-report')}}" class="nav-link px-3"> <span class="d-none d-sm-inline">Ruptura de Estoque</span></a>
+                            </li>
+                            <li>
+                                <a href="{{route('negative_stock-report')}}" class="nav-link px-3"> <span class="d-none d-sm-inline">Estoque Negativo</span></a>
                             </li>
                             <li>
                                 <a href="" class="nav-link px-3"> <span class="d-none d-sm-inline">Serviços</span></a>
@@ -65,7 +74,7 @@
                 <hr>
                 <div class="dropdown pb-4">
                     <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
-                        <img src="https://github.com/mdo.png" alt="hugenerd" width="30" height="30" class="rounded-circle">
+                        <i class="fa-solid fa-user"></i>
                         <span class="d-none d-sm-inline mx-1">{{ auth()->user()->name }}</span>
                     </a>
                     <ul class="dropdown-menu dropdown-menu-dark text-small shadow">

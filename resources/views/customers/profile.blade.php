@@ -36,7 +36,6 @@
                             @endif
 
                             @if($profile)
-                            <p>Criado em: {{ $profile->created_at}} | Editado em: {{ $profile->updated_at}}</p>
                             <form method="post" action="{{route('edit-profile', ['id' => $profile->id ]) }}">
                                 @csrf
                                 <div class="mb-3">
@@ -194,7 +193,7 @@
                                 <thead>
                                     <tr>
                                         <th scope="col">Nome</th>
-                                        <th scope="col">Espécie</th>
+                                        <th scope="col">Raça</th>
                                         <th scope="col">Data de Nascimento</th>
                                         <th scope="col">Ações</th>
                                     </tr>
@@ -203,7 +202,7 @@
                                     @foreach($profile['pets'] as $pet)
                                     <tr>
                                         <td>{{ $pet->name }}</td>
-                                        <td>{{ $pet->especie }}</td>
+                                        <td>{{ $pet->raca }}</td>
                                         <td>{{ $pet->data_nascimento }}</td>
                                         <td>
                                             <a href="{{ route('edit-pet', ['id' => $pet->id ]) }}" class=" btn btn-success"><i class="fa-solid fa-eye"></i></a>

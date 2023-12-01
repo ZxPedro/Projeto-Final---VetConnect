@@ -19,6 +19,13 @@
     </div>
     </div>
     </div>
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('input').attr('autocomplete', 'off');
+        });
+    </script>
+
     <!-- Buscar Cep -->
     <script type="text/javascript">
         function limpa_formulário_cep() {
@@ -364,9 +371,374 @@
                 var productId = button.data('product-id'); // Extrai o ID do produto do botão
                 var productName = button.data('product-name'); // Extrai o nome do produto do botão
 
-                // Atualiza os valores dos campos de entrada no modal
+
                 $('#productIdModal').val(productId);
                 $('#productName').text(productName);
+            });
+        });
+    </script>
+
+    <script>
+        $(document).ready(function() {
+            $('.btn-get-release').on('click', function() {
+                var itemId = $(this).data('release-id');
+
+                $.ajax({
+                    type: 'GET',
+                    url: '/getrelease/' + itemId,
+                    success: function(data) {
+                        $('#name_release').val(data.name).prop('readonly', true);
+                        $('#descricao_release').val(data.descricao).prop('readonly', true);
+                        $('#price_release').val(data.price).prop('readonly', true);
+
+                        if (data.type === "C") {
+                            $('#optionEntrada').prop('checked', true);
+                        } else {
+                            $('#optionSaida').prop('checked', true);
+                        }
+
+                        $('#btnConcluir').hide();
+                        $('#release').modal('show');
+                    },
+                    error: function(error) {
+                        console.log('Erro ao obter dados do servidor: ', error);
+                    }
+                });
+            });
+        });
+    </script>
+
+    <script>
+        $(document).ready(function() {
+            $('#release').on('hidden.bs.modal', function() {
+
+                $('#name_release').val('').prop('readonly', false);
+                $('#descricao_release').val('').prop('readonly', false);
+                $('#price_release').val('').prop('readonly', false);
+                $('#btnConcluir').show();
+                $('#optionEntrada').prop('checked', false);
+                $('#optionSaida').prop('checked', false);
+            });
+        });
+    </script>
+
+    <script>
+        function imprimirStockOut() {
+            var tabela = document.getElementById('stockOut');
+            var estiloTabela = getComputedStyle(tabela);
+
+            var janelaImpressao = window.open('', '_blank');
+            janelaImpressao.document.write('<html><head>  <link rel="stylesheet" href="https://bootswatch.com/5/minty/bootstrap.min.css"><title>Imprimir Tabela</title>');
+
+
+            janelaImpressao.document.write('<style>');
+            janelaImpressao.document.write(estiloTabela.cssText); // Inclui o estilo da tabela
+            janelaImpressao.document.write('</style></head><body>');
+            janelaImpressao.document.write('<h3">Relatório de Ruptura de Estoque</h3>');
+            janelaImpressao.document.write(tabela.outerHTML);
+            janelaImpressao.document.write('</body></html>');
+            janelaImpressao.document.close();
+            janelaImpressao.print();
+        }
+    </script>
+
+    <script>
+        function imprimirNegativeStock() {
+            var tabela = document.getElementById('negativeStock');
+            var estiloTabela = getComputedStyle(tabela);
+
+            var janelaImpressao = window.open('', '_blank');
+            janelaImpressao.document.write('<html><head>  <link rel="stylesheet" href="https://bootswatch.com/5/minty/bootstrap.min.css"><title>Imprimir Tabela</title>');
+
+
+            janelaImpressao.document.write('<style>');
+            janelaImpressao.document.write(estiloTabela.cssText); // Inclui o estilo da tabela
+            janelaImpressao.document.write('</style></head><body>');
+            janelaImpressao.document.write('<h3">Relatório de Estoque Negativo</h3>');
+            janelaImpressao.document.write(tabela.outerHTML);
+            janelaImpressao.document.write('</body></html>');
+            janelaImpressao.document.close();
+            janelaImpressao.print();
+        }
+    </script>
+
+    <script>
+        function imprimirServiceReport() {
+            var tabela = document.getElementById('tabelaServiceReport');
+            var estiloTabela = getComputedStyle(tabela);
+
+            var janelaImpressao = window.open('', '_blank');
+            janelaImpressao.document.write('<html><head>  <link rel="stylesheet" href="https://bootswatch.com/5/minty/bootstrap.min.css"><title>Imprimir Tabela</title>');
+
+
+            janelaImpressao.document.write('<style>');
+            janelaImpressao.document.write(estiloTabela.cssText); // Inclui o estilo da tabela
+            janelaImpressao.document.write('</style></head><body>');
+            janelaImpressao.document.write('<h3">Relatório de Atendimentos Finalizados</h3>');
+            janelaImpressao.document.write(tabela.outerHTML);
+            janelaImpressao.document.write('</body></html>');
+            janelaImpressao.document.close();
+            janelaImpressao.print();
+        }
+    </script>
+
+    <!-- Filtro Clientes -->
+    <script>
+        $(document).ready(function() {
+            $('#searchCustomer').on('keyup', function() {
+                var query = $(this).val();
+
+                $.ajax({
+                    url: '/searchcustomers',
+                    type: 'GET',
+                    data: {
+                        query: query
+                    },
+                    success: function(data) {
+                        var tableBody = $('#resultTableCustomer tbody');
+                        tableBody.empty(); // Limpa o conteúdo atual da tabela
+                        $.each(data, function(index, customer) {
+                            var row = '<tr>' +
+                                '<td>' + customer.name + '</td>' +
+                                '<td>' + customer.email + '</td>' +
+                                '<td>' + customer.data_nascimento + '</td>' +
+                                '<td>' + customer.cpf + '</td>' +
+                                '<td>' + customer.telefone + '</td>' +
+                                '<td>' +
+                                '<a href="/customer/profile/' + customer.id + '" class="btn btn-success"><i class="fa-solid fa-eye"></i></a>' +
+                                '<a href="/customer/delete/' + customer.id + '"  class="btn btn-danger"><i class="fa-solid fa-trash"></i></a>' +
+                                '</td>' +
+                                '</tr>';
+                            tableBody.append(row); // Adiciona a linha à tabela
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+
+    <!-- <script>
+        $(document).ready(function() {
+            $('#searchUser').on('keyup', function() {
+                var query = $(this).val();
+
+                $.ajax({
+                    url: '/searchusers',
+                    type: 'GET',
+                    data: {
+                        query: query
+                    },
+                    success: function(data) {
+                        var tableBody = $('#resultTableUser tbody');
+                        tableBody.empty(); // Limpa o conteúdo atual da tabela
+                        $.each(data, function(index, user) {
+                            var row = '<tr>' +
+                                '<td>' + user.name + '</td>' +
+                                '<td>' + user.email + '</td>' +
+                                '<td>' + user.created_at + '</td>' +
+                                '<td>' +
+                                '<a href="/users/edit/' + user.id + '" class="btn btn-success"><i class="fa-solid fa-eye"></i></a>' +
+                                '<a href="/users/delete/' + user.id + '"  class="btn btn-danger"><i class="fa-solid fa-trash"></i></a>' +
+                                '</td>' +
+                                '</tr>';
+                            tableBody.append(row); // Adiciona a linha à tabela
+                        });
+                    }
+                });
+            });
+        });
+    </script> -->
+
+
+    <!-- Filtro Categoria -->
+    <script>
+        $(document).ready(function() {
+            $('#searchCategory').on('keyup', function() {
+                var query = $(this).val();
+
+                $.ajax({
+                    url: '/searchcategories',
+                    type: 'GET',
+                    data: {
+                        query: query
+                    },
+                    success: function(data) {
+                        var tableBody = $('#resultTableCategory tbody');
+                        tableBody.empty(); // Limpa o conteúdo atual da tabela
+                        $.each(data, function(index, category) {
+                            var row = '<tr>' +
+                                '<td>' + category.name + '</td>' +
+                                '<td>' +
+                                '<a href="/cadastros/categories/edit/' + category.id + '" class="btn btn-success me-1"><i class="fa-solid fa-eye"></i></a>' +
+                                '<a href="/cadastros/categories/delete/' + category.id + '"  class="btn btn-danger"><i class="fa-solid fa-trash"></i></a>' +
+                                '</td>' +
+                                '</tr>';
+                            tableBody.append(row); // Adiciona a linha à tabela
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+
+    <!-- Filtro Serviço -->
+    <script>
+        $(document).ready(function() {
+            $('#searchService').on('keyup', function() {
+                var query = $(this).val();
+
+                $.ajax({
+                    url: '/searchservices',
+                    type: 'GET',
+                    data: {
+                        query: query
+                    },
+                    success: function(data) {
+                        var tableBody = $('#resultTableService tbody');
+                        tableBody.empty(); // Limpa o conteúdo atual da tabela
+                        $.each(data, function(index, service) {
+                            var row = '<tr>' +
+                                '<td>' + service.name + '</td>' +
+                                '<td>' + service.category.name + '</td>' +
+                                '<td> R$' + service.price + '</td>' +
+                                '<td>' +
+                                '<a href="/cadastros/services/edit/' + service.id + '" class="btn btn-success me-1"><i class="fa-solid fa-eye"></i></a>' +
+                                '<a href="/cadastros/services/delete/' + service.id + '"  class="btn btn-danger"><i class="fa-solid fa-trash"></i></a>' +
+                                '</td>' +
+                                '</tr>';
+                            tableBody.append(row); // Adiciona a linha à tabela
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+
+    <!-- Filtro Profissional -->
+    <script>
+        $(document).ready(function() {
+            $('#searchProfessional').on('keyup', function() {
+                var query = $(this).val();
+
+                $.ajax({
+                    url: '/searchprofessionals',
+                    type: 'GET',
+                    data: {
+                        query: query
+                    },
+                    success: function(data) {
+                        var tableBody = $('#resultTableProfessional tbody');
+                        tableBody.empty(); // Limpa o conteúdo atual da tabela
+                        $.each(data, function(index, professional) {
+
+                            if (professional.categories_user) {
+                                var row = '<tr>' +
+                                    '<td>' + professional.name + '</td>' +
+                                    '<td>' + professional.categories_user + ' Especialidade(s)</td>' +
+                                    '<td>' + professional.working_days + ' Dia(s) </td>' +
+                                    '<td>' +
+                                    '<a href="/cadastros/professionals/edit/' + professional.id + '" class="btn btn-success me-1"><i class="fa-solid fa-eye"></i></a>' +
+                                    '<a href="/cadastros/professionals/delete/' + professional.id + '"  class="btn btn-danger"><i class="fa-solid fa-trash"></i></a>' +
+                                    '</td>' +
+                                    '</tr>';
+                                tableBody.append(row); // Adiciona a linha à tabela
+                            }
+
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+
+    <!-- Filtro Produto -->
+    <script>
+        $(document).ready(function() {
+            $('#searchProduct').on('keyup', function() {
+                var query = $(this).val();
+
+                $.ajax({
+                    url: '/searchproducts',
+                    type: 'GET',
+                    data: {
+                        query: query
+                    },
+                    success: function(data) {
+                        var tableBody = $('#resultTableProduct tbody');
+                        tableBody.empty(); // Limpa o conteúdo atual da tabela
+                        $.each(data, function(index, product) {
+
+                            if (product.amount <= product.security_amount) {
+                                var simbolo = '<i class="fa-solid fa-circle-check" style="color: #009919;"></i>'
+                            } else {
+                                var simbolo = '<i class="fa-solid fa-ban fa-beat" style="color: #eb0000;"></i>'
+
+                            }
+
+
+
+                            var row = '<tr>' +
+                                '<td>' + product.name + '</td>' +
+                                '<td>' + product.category_name + '</td>' +
+                                '<td>' + product.amount + '</td>' +
+                                '<td>' + simbolo + '</td>' +
+                                '<td>' +
+                                '<a href="produto/edit/' + product.id + '" class="btn btn-success"><i class="fa-solid fa-eye"></i></a>' +
+                                '<a href="produto/edit/' + product.id + '" class="btn btn-danger mx-1"><i class="fa-solid fa-trash"></i></a>' +
+                                '<a href="" class="btn btn-info" data-bs-toggle="modal" data-product-id="' + product.id + '" data-product-name="' + product.name + '" data-bs-target="#ModalStockEntryAndExit"><i class="fa-solid fa-bars"></i></a>' +
+                                '</td>' +
+                                '</tr>';
+                            tableBody.append(row); // Adiciona a linha à tabela
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+
+    <!-- Filtro agendamento -->
+    <script>
+        $(document).ready(function() {
+            $('#searchScheduling').on('keyup', function() {
+                var query = $(this).val();
+
+                $.ajax({
+                    url: '/searchscheduling',
+                    type: 'GET',
+                    data: {
+                        query: query
+                    },
+                    success: function(data) {
+                        var tableBody = $('#resultTableScheduling tbody');
+                        tableBody.empty(); // Limpa o conteúdo atual da tabela
+                        $.each(data, function(index, scheduling) {
+                            console.log(
+                                (scheduling.status_id != 4) && (scheduling.status_id != 6));
+                            if ((scheduling.status_id != 4) && (scheduling.status_id != 6)) {
+                                var btnCancel = '<button type="submit" class="btn btn-danger"><i class="fa-solid fa-ban"></i></button>'
+                            } else {
+                                var btnCancel = ''
+                            }
+
+                            var row = '<tr>' +
+                                '<td>' + scheduling.id + '</td>' +
+                                '<td>' + scheduling.customer_name + '</td>' +
+                                '<td>' + scheduling.pet_name + '</td>' +
+                                '<td>' + scheduling.service_name + '</td>' +
+                                '<td> R$' + scheduling.service_price + '</td>' +
+                                '<td>' + scheduling.professional_name + '</td>' +
+                                '<td>' + scheduling.date_scheduling + '</td>' +
+                                '<td>' + scheduling.status_name + '</td>' +
+                                '<td><div class="btn-group">' +
+                                '<a href="/agendamento/service/' + scheduling.id + '" class="btn btn-success me-1"><i class="fa-solid fa-eye"></i></a>' +
+                                '<form action="/agendamento/cancel/' + scheduling.id + '" method="post"> @csrf' +
+                                '' + btnCancel + '</form>' +
+                                '</div></td>' +
+                                '</tr>';
+                            tableBody.append(row); // Adiciona a linha à tabela
+                        });
+                    }
+                });
             });
         });
     </script>
