@@ -9,6 +9,7 @@ use App\Models\Customer;
 use App\Models\Service;
 use App\Models\Status;
 use App\Models\User;
+use App\Rules\CPFValidationRule;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
@@ -39,7 +40,11 @@ class CustomersController extends Controller
         $validation = $this->validate($request, [
             'name' => 'required',
             'email' => 'required|email|unique:customers',
-            'cpf' => 'required|size:11|unique:customers',
+            'cpf' => [
+                'required',
+                'unique:customers',
+                new CPFValidationRule
+            ],
             'data_nascimento' => 'required',
             'telefone' => 'required',
             'genero' => 'required'

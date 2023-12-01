@@ -267,13 +267,9 @@ class SchedulingController extends Controller
 
         $query = $request->input('query');
 
-        $customers = Customer::where('name',  'like', "%" . $query . "%")->get();
+        if ($query == null) {
 
-        foreach ($customers as $customer) {
-
-            $schedules = Scheduling::where('customer_id', $customer->id)->get();
-
-
+            $schedules = Scheduling::all();
 
             if (count($schedules) > 0) {
                 foreach ($schedules as $scheduling) {
@@ -303,8 +299,45 @@ class SchedulingController extends Controller
             } else {
                 $dashboard_schedules = null;
             }
-        }
+            return response()->json($dashboard_schedules);
+        } else {
 
-        return response()->json($dashboard_schedules);
+            $customers = Customer::where('name',  'like', "%" . $query . "%")->get();
+
+            foreach ($customers as $customer) {
+
+                $schedules = Scheduling::where('customer_id', $customer->id)->get();
+
+                if (count($schedules) > 0) {
+                    foreach ($schedules as $scheduling) {
+
+                        $customer_scheduling = Customer::find($scheduling['customer_id']);
+                        $pet_scheduling = Animal::find($scheduling['animal_id']);
+                        $category_scheduling = Category::find($scheduling['category_id']);
+                        $user_scheduling = User::find($scheduling['professional_id']);
+                        $service_scheduling = Service::find($scheduling['service_id']);
+                        $status_scheduling = Status::find($scheduling['status_id']);
+
+                        $data = Carbon::parse($scheduling->data_agendamento);
+                        $data_agendamento = $data->format('d/m/Y H:i:s');
+
+                        $dashboard_schedules[] = [
+                            'id' => $scheduling->id,
+                            'customer_name' =>  $customer_scheduling->name,
+                            'pet_name' => $pet_scheduling->name,
+                            'service_name' =>  $service_scheduling->name,
+                            'service_price' => $service_scheduling->price,
+                            'professional_name' =>  $user_scheduling->name,
+                            'status_id' =>  $status_scheduling->id,
+                            'status_name' =>  $status_scheduling->status_name,
+                            'date_scheduling' => $data_agendamento
+                        ];
+                    }
+                } else {
+                    $dashboard_schedules = null;
+                }
+                return response()->json($dashboard_schedules);
+            }
+        }
     }
 }
