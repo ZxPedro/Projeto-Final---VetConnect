@@ -128,8 +128,8 @@ class CustomersController extends Controller
 
             'cpf' => [
                 'required',
-                'size:11',
                 Rule::unique('customers', 'cpf')->ignore($id),
+                new CPFValidationRule,
             ],
 
             'data_nascimento' => 'required',

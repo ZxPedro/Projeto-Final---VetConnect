@@ -7,7 +7,7 @@
 <div class="container mt-5">
     <div class="row mt-3">
         <div class="col-12 text-center">
-            <h4>Lançamentos Financeiros</h4>
+            <h4>Lançamentos Financeiro</h4>
         </div>
         <div class="col-12 text-end mt-3">
             <a href="" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#release"><i class="fa-solid fa-plus pe-2"></i>Novo Lançamento</a>

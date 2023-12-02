@@ -241,7 +241,7 @@
                                         <td>{{$scheduling['pet_name']}}</td>
                                         <td>{{$scheduling['category_name']}}</td>
                                         <td>{{$scheduling['service_name']}}</td>
-                                        <td>{{$scheduling['service_price']}}</td>
+                                        <td>R$ {{$scheduling['service_price']}}</td>
                                         <td>{{$scheduling['professional_name']}}</td>
                                         <td>{{$scheduling['date_scheduling']}}</td>
                                         <td>{{$scheduling['status_name']}}</td>

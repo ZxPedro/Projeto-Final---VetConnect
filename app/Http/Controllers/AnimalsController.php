@@ -52,7 +52,7 @@ class AnimalsController extends Controller
 
         Animal::create($validate);
 
-        return redirect()->route('view-profile', $customer_id);
+        return redirect()->route('view-profile', $customer_id)->withErrors(['success-pet' => 'Pet cadastrado com sucesso!']);;
     }
 
     public function searchBreeds($id)

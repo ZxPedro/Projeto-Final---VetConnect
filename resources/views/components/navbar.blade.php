@@ -51,9 +51,6 @@
                         <a href="#submenu3" data-bs-toggle="collapse" class="nav-link px-0 align-middle ">
                             <i class="fs-4 bi-bootstrap"></i> <span class="ms-1 d-none d-sm-inline"><i class="fa-solid fa-file-excel pe-1"></i></i>Relatórios</span></a>
                         <ul class="collapse nav flex-column ms-1" id="submenu3" data-bs-parent="#menu">
-                            <li class="w-100">
-                                <a href="" class="nav-link px-3"> <span class="d-none d-sm-inline">Cadastro de Clientes</span></a>
-                            </li>
                             <li>
                                 <a href="{{route('service-report')}}" class="nav-link px-3"> <span class="d-none d-sm-inline">Atendimentos Finalizados</span></a>
                             </li>
@@ -62,9 +59,6 @@
                             </li>
                             <li>
                                 <a href="{{route('negative_stock-report')}}" class="nav-link px-3"> <span class="d-none d-sm-inline">Estoque Negativo</span></a>
-                            </li>
-                            <li>
-                                <a href="" class="nav-link px-3"> <span class="d-none d-sm-inline">Serviços</span></a>
                             </li>
                         </ul>
                     </li>
