@@ -1,16 +1,24 @@
-## Sobre o VetCoonet
+# Sobre o VetCoonet :dog:
 
-Aqui vai ter uma mensagem bacana sobre o projeto
+Este projeto, apresentado como trabalho final para conclusão da graduação em Ciência da Computação, tem como objetivo o desenvolvimento de um sistema para auxiliar na gestão de agendamentos de uma clínica veterinária. Através deste projeto, foi possível colocar em prática alguns conhecimentos adquiridos consultando a documentação do Laravel. Pretendo adicionar/melhorar algumas funcionalidades de acordo com os estudo do framework.
 
-## Versões
-- Laravel: 8.83.27
-- PHP: 7.4.3
-- Composer: 1.10.1
+## Funcionalidades
+- Cadastros de Usuários
+- Cadastros de Clientes
+- Cadastros de Pets
+- Cadastros de Categorias
+- Cadastros de Serviços
+- Cadastros de Profissionais
+- Gestão de Insumos
+- Agendamentos de Serviços
+- Controle Financeiro
+  - Adicionar Créditos e Débitos 
+- Relatórios
+
+## Versões Utilizadas
+``Em breve`` 
 
 ## Como Rodar
 
-1. Utilize o comando ``composer install`` 
-    - Obs: É necessário ter o composer instalado
-2. Utilize o comando ``php artisan migrate:fresh --seed``
-3. Utilize o comando ``php artisan serve``
+``Em breve`` 
 
